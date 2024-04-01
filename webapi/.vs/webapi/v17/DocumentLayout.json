@@ -1,0 +1,71 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\pablo\\Documents\\repos\\carpooling\\webapi\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{7573457D-6AA2-4688-AE8A-4C0D2E4BAC7F}|webapi\\webapi.csproj|c:\\users\\pablo\\documents\\repos\\carpooling\\webapi\\webapi\\models\\plaza.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7573457D-6AA2-4688-AE8A-4C0D2E4BAC7F}|webapi\\webapi.csproj|solutionrelative:webapi\\models\\plaza.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7573457D-6AA2-4688-AE8A-4C0D2E4BAC7F}|webapi\\webapi.csproj|c:\\users\\pablo\\documents\\repos\\carpooling\\webapi\\webapi\\models\\nucleo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7573457D-6AA2-4688-AE8A-4C0D2E4BAC7F}|webapi\\webapi.csproj|solutionrelative:webapi\\models\\nucleo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7573457D-6AA2-4688-AE8A-4C0D2E4BAC7F}|webapi\\webapi.csproj|c:\\users\\pablo\\documents\\repos\\carpooling\\webapi\\webapi\\models\\municipio.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7573457D-6AA2-4688-AE8A-4C0D2E4BAC7F}|webapi\\webapi.csproj|solutionrelative:webapi\\models\\municipio.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Plaza.cs",
+              "DocumentMoniker": "C:\\Users\\pablo\\Documents\\repos\\carpooling\\webapi\\webapi\\Models\\Plaza.cs",
+              "RelativeDocumentMoniker": "webapi\\Models\\Plaza.cs",
+              "ToolTip": "C:\\Users\\pablo\\Documents\\repos\\carpooling\\webapi\\webapi\\Models\\Plaza.cs",
+              "RelativeToolTip": "webapi\\Models\\Plaza.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABkAAAA4AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-30T19:55:38.536Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Nucleo.cs",
+              "DocumentMoniker": "C:\\Users\\pablo\\Documents\\repos\\carpooling\\webapi\\webapi\\Models\\Nucleo.cs",
+              "RelativeDocumentMoniker": "webapi\\Models\\Nucleo.cs",
+              "ToolTip": "C:\\Users\\pablo\\Documents\\repos\\carpooling\\webapi\\webapi\\Models\\Nucleo.cs",
+              "RelativeToolTip": "webapi\\Models\\Nucleo.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA4AAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-30T19:52:25.288Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Municipio.cs",
+              "DocumentMoniker": "C:\\Users\\pablo\\Documents\\repos\\carpooling\\webapi\\webapi\\Models\\Municipio.cs",
+              "RelativeDocumentMoniker": "webapi\\Models\\Municipio.cs",
+              "ToolTip": "C:\\Users\\pablo\\Documents\\repos\\carpooling\\webapi\\webapi\\Models\\Municipio.cs",
+              "RelativeToolTip": "webapi\\Models\\Municipio.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABAAAAAwAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-30T19:49:03.311Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
