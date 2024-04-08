@@ -19,5 +19,8 @@ namespace webapi.Models
         [BsonElement("telefono")]
         public string Telefono { get; set; }
 
+        [BsonElement("valoraciones")]
+        public List<double> Valoraciones { get; set; }
+
     }
 }

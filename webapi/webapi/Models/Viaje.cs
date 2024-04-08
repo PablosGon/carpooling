@@ -22,6 +22,16 @@ namespace webapi.Models
         [BsonElement("comentarios")]
         public string Comentarios { get; set; }
 
+        [BsonElement("descripcionCoche")]
+        public string DescripcionCoche { get; set; }
+
+
+        [BsonElement("solicitudes")]
+        public List<Pasajero> Solicitudes { get; set; }
+
+        [BsonElement("plazas")]
+        public List<Pasajero> plazas { get; set; }
+
         [BsonElement("nucleo")]
         public string Nucleo { get; set; }
 
