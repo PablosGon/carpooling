@@ -9,6 +9,10 @@ namespace webapi.Models
         [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; } = String.Empty;
 
+        [BsonElement("conductor")]
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string ConductorId { get; set; } = String.Empty;
+
         [BsonElement("hora")]
         [BsonRepresentation(BsonType.DateTime)]
         public DateTime Hora { get; set; }
@@ -21,6 +25,16 @@ namespace webapi.Models
 
         [BsonElement("comentarios")]
         public string Comentarios { get; set; }
+
+        [BsonElement("descripcionCoche")]
+        public string DescripcionCoche { get; set; }
+
+
+        [BsonElement("solicitudes")]
+        public List<Pasajero> Solicitudes { get; set; }
+
+        [BsonElement("plazas")]
+        public List<Pasajero> plazas { get; set; }
 
         [BsonElement("nucleo")]
         public string Nucleo { get; set; }

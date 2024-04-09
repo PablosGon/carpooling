@@ -3,7 +3,7 @@ export interface Viaje {
     id: string;
     nucleo: string;
     centro: string;
-    hora: string;
+    hora: Date;
     isvuelta: boolean;
 
 }

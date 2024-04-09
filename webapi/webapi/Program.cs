@@ -26,6 +26,7 @@ builder.Services.AddSingleton<IMongoClient>(s => new MongoClient(builder.Configu
 builder.Services.AddScoped<IViajeService, ViajeService>();
 builder.Services.AddScoped<ICentroService, CentroService>();
 builder.Services.AddScoped<IUniversidadService, UniversidadService>();
+builder.Services.AddScoped<IUsuarioService, UsuarioService>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

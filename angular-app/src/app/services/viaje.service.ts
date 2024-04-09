@@ -23,7 +23,6 @@ export class ViajeService {
 
   public getViaje(id:string):Observable<Viaje> {
     return this.httpClient.get<Viaje>(this.url + 'viajes/' + id);
-
   }
 }
 
