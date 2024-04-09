@@ -2,20 +2,25 @@ import { Component } from '@angular/core';
 import { ViajeService } from '../services/viaje.service';
 import { toArray } from 'rxjs';
 import { Viaje } from '../entity/viaje';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'app-viajes',
   standalone: true,
-  imports: [],
+  imports: [RouterLink, RouterLinkActive],
   templateUrl: './viajes.component.html',
   styleUrl: './viajes.component.css'
 })
-export class ViajesComponent {
 
+export class ViajesComponent {
 
   constructor(private viajeService: ViajeService){ }
 
-  viajes: Viaje[] = this.viajeService.getViajes()
+  viajes?: Viaje[];
+
+  ngOnInit():void{
+    this.viajeService.getViajes().subscribe(data => {this.viajes = data})
+  }
 
 
 }

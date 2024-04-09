@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Viaje } from '../entity/viaje';
-import { first } from 'rxjs';
+import { first, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -17,19 +17,13 @@ export class ViajeService {
     'Access-Control-Allow-Origin': '*',
   })
 
-  public getViajes(): Viaje[] {
-    var res = this.httpClient.get<any>(this.url + 'viajes');
+  public getViajes():Observable<Viaje[]> {
+    return this.httpClient.get<Viaje[]>(this.url + 'viajes');
+  }
 
-    var out: Viaje[] = []
-    res.subscribe(viajes => {
-      viajes.forEach((viaje: Viaje) => {
-        out.push(viaje)
-      });
-    })
+  public getViaje(id:string):Observable<Viaje> {
+    return this.httpClient.get<Viaje>(this.url + 'viajes/' + id);
 
-    console.log(out)
-
-    return out;
   }
 }
 
