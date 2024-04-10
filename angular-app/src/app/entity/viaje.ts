@@ -1,9 +1,17 @@
+import { Pasajero } from "./pasajero";
+
 export interface Viaje {
 
-    id: string;
-    nucleo: string;
-    centro: string;
-    hora: Date;
-    isvuelta: boolean;
+    id: string,
+    conductorId: string,
+    hora: Date,
+    maxPlazas: number,
+    isvuelta: boolean,
+    comentarios: string,
+    descripcionCoche: string,
+    solicitudes: Pasajero[],
+    plazas: Pasajero[],
+    nucleo: string,
+    centro: string
 
 }

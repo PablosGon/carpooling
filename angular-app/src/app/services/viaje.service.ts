@@ -1,7 +1,7 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Viaje } from '../entity/viaje';
-import { first, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -12,17 +12,11 @@ export class ViajeService {
 
   url = 'https://localhost:7194/api/'
 
-  headers: HttpHeaders = new HttpHeaders({
-    'Content-Type': 'application/json',
-    'Access-Control-Allow-Origin': '*',
-  })
-
   public getViajes():Observable<Viaje[]> {
     return this.httpClient.get<Viaje[]>(this.url + 'viajes');
   }
 
-  public getViaje(id:string):Observable<Viaje> {
+  public async getViaje(id:string) {
     return this.httpClient.get<Viaje>(this.url + 'viajes/' + id);
   }
 }
-
