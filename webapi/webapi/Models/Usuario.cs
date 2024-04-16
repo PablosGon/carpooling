@@ -1,5 +1,6 @@
 ﻿using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 
 namespace webapi.Models
 {
@@ -21,6 +22,9 @@ namespace webapi.Models
 
         [BsonElement("valoraciones")]
         public List<double> Valoraciones { get; set; }
+
+        [BsonElement("imagen")]
+        public string ImagenURL { get; set; }
 
     }
 }

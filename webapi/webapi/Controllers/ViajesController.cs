@@ -1,5 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System.Web.Http.Cors;
+﻿using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Mvc;
 using webapi.Models;
 using webapi.Services;
 
@@ -9,7 +9,7 @@ namespace webapi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [EnableCors(origins: "http://localhost:4200", headers: "*", methods: "*")]
+
     public class ViajesController : ControllerBase
     {
         private readonly IViajeService _viajeService;
@@ -43,6 +43,7 @@ namespace webapi.Controllers
         [HttpPost]
         public ActionResult<Viaje> Post([FromBody] Viaje viaje)
         {
+            Console.WriteLine("mandangón");
             _viajeService.Create(viaje);
             return CreatedAtAction(nameof(Get), new {id = viaje.Id}, viaje);
         }

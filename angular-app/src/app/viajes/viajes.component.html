@@ -1,6 +1,0 @@
-<p>viajes works!</p>
-
-@for (viaje of viajes; track viaje.id) {
-    <a routerLink="{{'/viaje/' + viaje.id}}"  routerLinkActive="active" ariaCurrentWhenActive="page">Viaje de {{viaje.nucleo}} a {{viaje.centro}}</a>
-    <p>{{viaje.hora}}</p>
-}

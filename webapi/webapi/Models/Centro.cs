@@ -19,5 +19,8 @@ namespace webapi.Models
         [BsonElement("universidad")]
         [BsonRepresentation(BsonType.ObjectId)]
         public string UniversidadId { get; set; }
+
+        [BsonElement("imagen")]
+        public string ImagenURL { get; set; }
     }
 }

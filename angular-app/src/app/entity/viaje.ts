@@ -1,3 +1,5 @@
+import { Centro } from "./centro";
+import { Nucleo } from "./nucleo";
 import { Pasajero } from "./pasajero";
 
 export interface Viaje {
@@ -12,6 +14,7 @@ export interface Viaje {
     solicitudes: Pasajero[],
     plazas: Pasajero[],
     nucleo: string,
-    centro: string
+    centro: string,
+    precio: number
 
 }

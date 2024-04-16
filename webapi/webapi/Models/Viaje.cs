@@ -37,10 +37,15 @@ namespace webapi.Models
         public List<Pasajero> plazas { get; set; }
 
         [BsonElement("nucleo")]
+        [BsonRepresentation(BsonType.ObjectId)]
         public string Nucleo { get; set; }
 
         [BsonElement("centro")]
+        [BsonRepresentation(BsonType.ObjectId)]
         public string Centro { get; set; }
+
+        [BsonElement("precio")]
+        public double Precio { get; set; }
 
     }
 }

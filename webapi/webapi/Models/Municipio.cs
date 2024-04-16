@@ -8,12 +8,15 @@ namespace webapi.Models
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
-        public string Id { get; set; }
+        public string Id { get; set; } = String.Empty;
 
         [BsonElement("nombre")]
         public string Nombre { get; set; }
 
         [BsonElement("ubicación")]
         public Ubicacion Ubicacion { get; set; }
+
+        [BsonElement("imagen")]
+        public string ImagenURL { get; set; }
     }
 }
