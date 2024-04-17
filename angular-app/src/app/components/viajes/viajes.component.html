@@ -1,0 +1,8 @@
+<p>viajes works!</p>
+
+<p><a routerLink="/viajes/crear"  routerLinkActive="active" ariaCurrentWhenActive="page">Crear un viaje</a></p>
+
+@for (viaje of viajes; track viaje.id) {
+    <img src="{{getNucleo(viaje.nucleo)?.imagenURL}}" class="cropped"/> <img src="{{getCentro(viaje.centro)?.imagenURL}}" class="cropped"/><br/>
+    <a routerLink="{{'/viaje/' + viaje.id}}"  routerLinkActive="active" ariaCurrentWhenActive="page">Viaje de {{getNucleo(viaje.nucleo)?.nombre}} a {{getCentro(viaje.centro)?.nombre}} ({{viaje.hora}})</a><br/>
+}

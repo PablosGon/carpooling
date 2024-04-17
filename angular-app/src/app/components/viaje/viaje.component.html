@@ -1,0 +1,25 @@
+<p>viaje works!</p>
+<h1>Detalles del viaje</h1>
+<p>Origen: {{viaje.nucleo}}</p>
+<p>Destino: {{viaje.centro}}</p>
+<p>Hora: {{viaje.hora.getHours()}}:{{viaje.hora.getMinutes()}}</p>
+<p>Conductor: <a routerLink="{{'/usuario/' + conductor.id}}"  routerLinkActive="active" ariaCurrentWhenActive="page">{{conductor.nombre}} ({{getValoracionMedia()}} estrellas)</a></p>
+<p>Coche: {{viaje.descripcionCoche}}</p>
+
+@if (viaje.plazas.length < viaje.maxPlazas) {
+    <p><a routerLink="{{'/solicitud/' + viaje.id}}" routerLinkActive="false" ariaCurrentWhenActive="page">Solicitar plaza</a></p>
+} @else {
+    <p>No quedan plazas disponibles para este viaje</p>
+}
+
+<h2>Plazas</h2>
+
+@for (pasajero of viaje.plazas; track $index) {
+    <p>{{pasajero.nombre}}: "{{pasajero.comentarios}}"</p>
+}
+
+<h2>Solicitudes</h2>
+
+@for (pasajero of viaje.solicitudes; track $index) {
+    <p>{{pasajero.nombre}}: "{{pasajero.comentarios}}" - Aceptar - Rechazar</p>
+}
