@@ -1,26 +1,13 @@
-﻿using MongoDB.Bson;
-using MongoDB.Bson.Serialization.Attributes;
-
-namespace webapi.Models
+﻿namespace webapi.Models
 {
-    [BsonIgnoreExtraElements]
     public class Nucleo
     {
-        [BsonId]
-        [BsonRepresentation(BsonType.ObjectId)]
-        public string Id { get; set; } = String.Empty;
-
-        [BsonElement("nombre")]
+        public int Id { get; set; }
         public string Nombre { get; set; }
-
-        [BsonElement("ubicacion")]
-        public Ubicacion Ubicacion { get; set; }
-
-        [BsonElement("municipioId")]
-        [BsonRepresentation(BsonType.ObjectId)]
-        public string MunicipioId { get; set; }
-
-        [BsonElement("imagen")]
-        public string ImagenURL { get; set; }
+        public double Latitude { get; set; }
+        public double Longitude { get; set; }
+        public Municipio Municipio { get; set; }
+        public int MunicipioId { get; set; }
+        public ICollection<Viaje> Viajes { get; set; }
     }
 }

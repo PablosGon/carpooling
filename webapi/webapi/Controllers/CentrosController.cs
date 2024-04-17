@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using webapi.Models;
-using webapi.Services;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -10,87 +9,45 @@ namespace webapi.Controllers
     [ApiController]
     public class CentrosController : ControllerBase
     {
+        private readonly AppDbContext _context;
 
-        private readonly ICentroService _centroService;
-        private readonly IUniversidadService _universidadService;
-
-        public CentrosController(ICentroService centroService, IUniversidadService universidadService)
+        public CentrosController(AppDbContext context)
         {
-            _centroService = centroService;
-            _universidadService = universidadService;
+            _context = context;
         }
+
+
 
         // GET: api/<CentrosController>
         [HttpGet]
-        public ActionResult<List<Centro>> Get()
+        public IEnumerable<string> Get()
         {
-            return _centroService.Get();
+            return new string[] { "value1", "value2" };
         }
 
         // GET api/<CentrosController>/5
         [HttpGet("{id}")]
-        public ActionResult<Centro> Get(string id)
+        public string Get(int id)
         {
-            var res = _centroService.Get(id);
-
-            if(res == null)
-            {
-                return NotFound($"Centro con id = {id} no encontrado");
-            }
-
-            return res;
+            return "value";
         }
 
         // POST api/<CentrosController>
         [HttpPost]
-        public ActionResult<Centro> Post([FromBody] Centro centro)
+        public void Post([FromBody] string value)
         {
-            var universidad = _universidadService.Get(centro.UniversidadId);
-            if(universidad == null)
-            {
-                return NotFound($"Universidad con id = {centro.UniversidadId} no encontrada");
-            }
-            _centroService.Create(centro);
-            return CreatedAtAction(nameof(Get), new { id = centro.Id }, centro);
         }
 
         // PUT api/<CentrosController>/5
         [HttpPut("{id}")]
-        public ActionResult<Centro> Put(string id, [FromBody] Centro centro)
+        public void Put(int id, [FromBody] string value)
         {
-            var res = _centroService.Get(id);
-
-            if (res == null)
-            {
-                return NotFound($"Centro con id = {id} no encontrado");
-            }
-
-            var universidades = _universidadService.Get(centro.UniversidadId);
-
-            if (universidades == null)
-            {
-                return NotFound($"Universidad con id = {centro.UniversidadId} no encontrada");
-            }
-
-            _centroService.Update(id, centro);
-
-            return Ok();
         }
 
         // DELETE api/<CentrosController>/5
         [HttpDelete("{id}")]
-        public ActionResult<Centro> Delete(string id)
+        public void Delete(int id)
         {
-            var res = _centroService.Get(id);
-
-            if (res == null)
-            {
-                return NotFound($"Centro con id = {id} no encontrado");
-            }
-
-            _centroService.Delete(id);
-
-            return Ok();
         }
     }
 }

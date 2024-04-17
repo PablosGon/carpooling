@@ -1,36 +1,15 @@
-using Microsoft.Extensions.Options;
-using MongoDB.Driver;
+using Microsoft.EntityFrameworkCore;
 using webapi.Models;
-using webapi.Services;
-
-var MyAllowSpecificOrigins = "AngularApp";
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy(name: MyAllowSpecificOrigins, policy =>
-    {
-        policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
-    });
-});
-
 // Add services to the container.
 
-builder.Services.Configure<CarpoolingDatabaseSettings>(builder.Configuration.GetSection(nameof(CarpoolingDatabaseSettings))); // Map JSON settings to class
-
-builder.Services.AddSingleton<ICarpoolingDatabaseSettings>(sp => sp.GetRequiredService<IOptions<CarpoolingDatabaseSettings>>().Value); // Instantiate class whenever interface is needed
-
-builder.Services.AddSingleton<IMongoClient>(s => new MongoClient(builder.Configuration.GetValue<string>("CarpoolingDatabaseSettings:ConnectionString") + "?connect=replicaSet")); // Instantiate class whenever interface is needed
-
-builder.Services.AddScoped<IViajeService, ViajeService>();
-builder.Services.AddScoped<ICentroService, CentroService>();
-builder.Services.AddScoped<IUniversidadService, UniversidadService>();
-builder.Services.AddScoped<IUsuarioService, UsuarioService>();
-builder.Services.AddScoped<IMunicipioService, MunicipioService>();
-builder.Services.AddScoped<INucleoService, NucleoService>();
-
 builder.Services.AddControllers();
+builder.Services.AddDbContext<AppDbContext>(o =>
+{
+    o.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+});
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -45,8 +24,6 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
-app.UseCors(MyAllowSpecificOrigins);
 
 app.UseAuthorization();
 
