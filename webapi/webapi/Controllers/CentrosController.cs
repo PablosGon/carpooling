@@ -1,7 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using webapi.DTOs;
 using webapi.Models;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace webapi.Controllers
 {
@@ -16,38 +21,134 @@ namespace webapi.Controllers
             _context = context;
         }
 
-
-
-        // GET: api/<CentrosController>
+        // GET: api/Centros
         [HttpGet]
-        public IEnumerable<string> Get()
+        public async Task<ActionResult<IEnumerable<CentroDTO>>> GetCentros([FromQuery] int? universidadId)
         {
-            return new string[] { "value1", "value2" };
+            var res = await _context.Centros.ToListAsync();
+            List<CentroDTO> centroDTOs = new List<CentroDTO>();
+
+            if(universidadId != null)
+            {
+                foreach (Centro centro in res)
+                {
+                    if (centro.UniversidadId == universidadId) centroDTOs.Add(centro.ToDTO());
+                }
+
+            } else
+            {
+                foreach (Centro centro in res)
+                {
+                    centroDTOs.Add(centro.ToDTO());
+                }
+            }
+
+
+
+            return centroDTOs;
         }
 
-        // GET api/<CentrosController>/5
+        // GET: api/Centros/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public async Task<ActionResult<CentroDTO>> GetCentro(int id)
         {
-            return "value";
+            var centro = await _context.Centros.FindAsync(id);
+
+            if (centro == null)
+            {
+                return NotFound();
+            }
+
+            return centro.ToDTO();
         }
 
-        // POST api/<CentrosController>
-        [HttpPost]
-        public void Post([FromBody] string value)
-        {
-        }
-
-        // PUT api/<CentrosController>/5
+        // PUT: api/Centros/5
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public async Task<IActionResult> PutCentro(int id, CentroDTO centroDTO)
         {
+            var centro = new Centro
+            {
+                Id = id,
+                Nombre = centroDTO.Nombre,
+                UniversidadId = centroDTO.Universidad.Id
+            };
+
+            _context.Entry(centro).State = EntityState.Modified;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!CentroExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return NoContent();
         }
 
-        // DELETE api/<CentrosController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        // POST: api/Centros
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [HttpPost]
+        public async Task<ActionResult<CentroDTO>> PostCentro(CentroDTO centroDTO)
         {
+            var centro = new Centro
+            {
+                Id = centroDTO.Id,
+                Nombre = centroDTO.Nombre,
+                UniversidadId = centroDTO.Universidad.Id,
+            };
+
+            _context.Centros.Add(centro);
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateException)
+            {
+                if (CentroExists(centro.Id))
+                {
+                    return Conflict();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            centroDTO.Id = centro.Id;
+
+            return CreatedAtAction("GetCentro", new { id = centro.Id }, centroDTO);
         }
+
+        // DELETE: api/Centros/5
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteCentro(int id)
+        {
+            var centro = await _context.Centros.FindAsync(id);
+            if (centro == null)
+            {
+                return NotFound();
+            }
+
+            _context.Centros.Remove(centro);
+            await _context.SaveChangesAsync();
+
+            return NoContent();
+        }
+
+        private bool CentroExists(int id)
+        {
+            return _context.Centros.Any(e => e.Id == id);
+        }
+
     }
 }
