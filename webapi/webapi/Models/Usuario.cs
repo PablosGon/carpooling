@@ -24,6 +24,7 @@ namespace webapi.Models
         public ICollection<Valoracion> ValoracionesRecibidas { get; set; }
         public ICollection<Plaza> Plazas { get; set; }
         public ICollection<Viaje> ViajesCreados { get; set; }
+        public ICollection<Notificacion> Notificaciones { get; set; }
 
         public UsuarioDTO ToDTO()
         {

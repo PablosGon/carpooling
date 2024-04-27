@@ -23,11 +23,20 @@ namespace webapi.Controllers
 
         // GET: api/Plazas
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<PlazaDTO>>> GetPlazas()
+        public async Task<ActionResult<IEnumerable<PlazaDTO>>> GetPlazas([FromQuery] int? viajeId)
         {
-            var res = await _context.Plazas.ToListAsync();
+            List<Plaza> res;
 
             List<PlazaDTO> list = new List<PlazaDTO>();
+
+            if(viajeId != null)
+            {
+                res = await _context.Plazas.Where(x => x.ViajeId == viajeId).ToListAsync();
+            } 
+            else
+            {
+                res = await _context.Plazas.ToListAsync();
+            }
 
             foreach(Plaza p in res)
             {
@@ -69,8 +78,9 @@ namespace webapi.Controllers
                 LongitudeRecogida = plazaDTO.LongitudRecogida,
                 ComentariosConductor = plazaDTO.ComentariosConductor,
                 ComentariosPasajero = plazaDTO.ComentariosPasajero,
-                UsuarioId = plazaDTO.Usuario.Id,
-                ViajeId = plazaDTO.ViajeId
+                UsuarioId = plazaDTO.UsuarioId,
+                ViajeId = plazaDTO.ViajeId,
+                Aceptada = plazaDTO.Aceptada,
             };
 
             _context.Entry(plaza).State = EntityState.Modified;
@@ -108,8 +118,9 @@ namespace webapi.Controllers
                 LongitudeRecogida = plazaDTO.LongitudRecogida,
                 ComentariosConductor = plazaDTO.ComentariosConductor,
                 ComentariosPasajero = plazaDTO.ComentariosPasajero,
-                UsuarioId = plazaDTO.Usuario.Id,
-                ViajeId = plazaDTO.ViajeId
+                UsuarioId = plazaDTO.UsuarioId,
+                ViajeId = plazaDTO.ViajeId,
+                Aceptada = plazaDTO.Aceptada,
             };
 
             _context.Plazas.Add(plaza);

@@ -1,25 +1,36 @@
 <p>viaje works!</p>
 <h1>Detalles del viaje</h1>
-<p>Origen: {{viaje.nucleo}}</p>
-<p>Destino: {{viaje.centro}}</p>
-<p>Hora: {{viaje.hora.getHours()}}:{{viaje.hora.getMinutes()}}</p>
-<p>Conductor: <a routerLink="{{'/usuario/' + conductor.id}}"  routerLinkActive="active" ariaCurrentWhenActive="page">{{conductor.nombre}} ({{getValoracionMedia()}} estrellas)</a></p>
+<p>Origen: {{viaje.nucleo.nombre}}</p>
+<p>Destino: {{viaje.centro.nombre}}</p>
+<p>Hora: {{viaje.fechaYHora.getHours()}}:{{viaje.fechaYHora.getMinutes()}}</p>
+<p>Conductor: <a routerLink="{{'/usuario/' + viaje.conductor.id}}"  routerLinkActive="active" ariaCurrentWhenActive="page">{{viaje.conductor.nombre}} (5 estrellas)</a></p>
 <p>Coche: {{viaje.descripcionCoche}}</p>
 
-@if (viaje.plazas.length < viaje.maxPlazas) {
-    <p><a routerLink="{{'/solicitud/' + viaje.id}}" routerLinkActive="false" ariaCurrentWhenActive="page">Solicitar plaza</a></p>
-} @else {
-    <p>No quedan plazas disponibles para este viaje</p>
+@if(!isMyself()){
+    @if (plazas.length < viaje.maxPlazas) {
+        <p><a routerLink="{{'/viaje/' + viaje.id + '/solicitud'}}" routerLinkActive="false" ariaCurrentWhenActive="page">Solicitar plaza</a></p>
+    } @else {
+        <p>No quedan plazas disponibles para este viaje</p>
+    }
 }
 
 <h2>Plazas</h2>
 
-@for (pasajero of viaje.plazas; track $index) {
-    <p>{{pasajero.nombre}}: "{{pasajero.comentarios}}"</p>
+@for (plaza of plazas; track $index) {
+    <p>{{plaza.nombre}}
+        @if(isMyself()){
+            : "{{plaza.comentariosPasajero}}" <button (click)="handlePlaza(false, plaza.id, '')">Eliminar</button>
+        }
+    </p>
 }
 
-<h2>Solicitudes</h2>
+@if(isMyself()){
+    <h2>Solicitudes</h2>
 
-@for (pasajero of viaje.solicitudes; track $index) {
-    <p>{{pasajero.nombre}}: "{{pasajero.comentarios}}" - Aceptar - Rechazar</p>
+    @for (plaza of solicitudes; track $index) {
+        <p>{{plaza.nombre}}: "{{plaza.comentariosPasajero}}" - <button (click)="handlePlaza(true, plaza.id, '')">Aceptar</button> - <button (click)="handlePlaza(false, plaza.id, '')">Rechazar</button></p>
+    }
+
+    <button>Editar viaje</button>
+    <button>Borrar viaje</button>
 }

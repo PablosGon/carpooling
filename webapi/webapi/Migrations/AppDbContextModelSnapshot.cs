@@ -81,6 +81,36 @@ namespace webapi.Migrations
                     b.ToTable("Municipios");
                 });
 
+            modelBuilder.Entity("webapi.Models.Notificacion", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<bool>("Leida")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Mensaje")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("UsuarioId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ViajeId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UsuarioId");
+
+                    b.HasIndex("ViajeId");
+
+                    b.ToTable("Notificacion");
+                });
+
             modelBuilder.Entity("webapi.Models.Nucleo", b =>
                 {
                     b.Property<int>("Id")
@@ -295,6 +325,9 @@ namespace webapi.Migrations
                     b.Property<int>("NucleoId")
                         .HasColumnType("int");
 
+                    b.Property<double>("Precio")
+                        .HasColumnType("float");
+
                     b.HasKey("Id");
 
                     b.HasIndex("CentroId");
@@ -315,6 +348,25 @@ namespace webapi.Migrations
                         .IsRequired();
 
                     b.Navigation("Universidad");
+                });
+
+            modelBuilder.Entity("webapi.Models.Notificacion", b =>
+                {
+                    b.HasOne("webapi.Models.Usuario", "Usuario")
+                        .WithMany("Notificaciones")
+                        .HasForeignKey("UsuarioId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("webapi.Models.Viaje", "Viaje")
+                        .WithMany("Notificaciones")
+                        .HasForeignKey("ViajeId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Usuario");
+
+                    b.Navigation("Viaje");
                 });
 
             modelBuilder.Entity("webapi.Models.Nucleo", b =>
@@ -438,6 +490,8 @@ namespace webapi.Migrations
 
             modelBuilder.Entity("webapi.Models.Usuario", b =>
                 {
+                    b.Navigation("Notificaciones");
+
                     b.Navigation("Plazas");
 
                     b.Navigation("ValoracionesEnviadas");
@@ -449,6 +503,8 @@ namespace webapi.Migrations
 
             modelBuilder.Entity("webapi.Models.Viaje", b =>
                 {
+                    b.Navigation("Notificaciones");
+
                     b.Navigation("Plazas");
                 });
 #pragma warning restore 612, 618

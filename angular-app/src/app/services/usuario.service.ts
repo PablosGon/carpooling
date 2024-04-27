@@ -10,13 +10,17 @@ export class UsuarioService {
 
   constructor(private httpClient:HttpClient) { }
 
-  url = 'https://localhost:7194/api/'
+  url = 'https://localhost:7161/api/'
 
   public getUsuarios():Observable<Usuario[]>{
     return this.httpClient.get<Usuario[]>(this.url + "usuarios");
   }
 
-  public getUsuario(id:string):Observable<Usuario>{
+  public getUsuario(id:number):Observable<Usuario>{
     return this.httpClient.get<Usuario>(this.url + 'usuarios/' + id);
+  }
+
+  public createUsuario(usuario:Usuario):Observable<Usuario>{
+    return this.httpClient.post<Usuario>(this.url + 'usuarios', usuario);
   }
 }

@@ -9,6 +9,8 @@ namespace webapi.DTOs
         public int MaxPlazas { get; set; }
         public string Comentarios { get; set; } = String.Empty;
         public string DescripcionCoche { get; set; } = String.Empty;
+        public bool IsVuelta { get; set; }
+        public double Precio { get; set; }
         [AllowNull]
         public CentroDTO Centro { get; set; }
         [AllowNull]

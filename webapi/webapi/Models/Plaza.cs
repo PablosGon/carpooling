@@ -20,6 +20,11 @@ namespace webapi.Models
 
         public PlazaDTO ToDTO()
         {
+            var img = "";
+            if(Usuario != null)
+            {
+                img = Usuario.Imagen;
+            }
             return new PlazaDTO
             {
                 Id = Id,
@@ -29,7 +34,11 @@ namespace webapi.Models
                 LatitudRecogida = LatitudeRecogida,
                 LongitudRecogida = LongitudeRecogida,
                 ComentariosPasajero = ComentariosPasajero,
-                ComentariosConductor = ComentariosConductor
+                ComentariosConductor = ComentariosConductor,
+                Aceptada = Aceptada,
+                UsuarioId = UsuarioId,
+                Imagen = img,
+                ViajeId = ViajeId
             };
         }
     }

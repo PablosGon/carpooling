@@ -23,11 +23,20 @@ namespace webapi.Controllers
 
         // GET: api/Nucleos
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<NucleoDTO>>> GetNucleos()
+        public async Task<ActionResult<IEnumerable<NucleoDTO>>> GetNucleos([FromQuery] int? municipioId)
         {
-            var res = await _context.Nucleos.ToListAsync();
+            List<Nucleo> res;
 
             List<NucleoDTO> list = new List<NucleoDTO>();
+
+            if(municipioId != null)
+            {
+                res = await _context.Nucleos.Where(x => x.MunicipioId == municipioId).ToListAsync();
+            }
+            else
+            {
+                res = await _context.Nucleos.ToListAsync();
+            }
 
             foreach (Nucleo n in res)
             {
@@ -63,7 +72,8 @@ namespace webapi.Controllers
             {
                 Id = id,
                 Nombre = nucleoDTO.Nombre,
-                MunicipioId = nucleoDTO.Municipio.Id
+                MunicipioId = nucleoDTO.Municipio.Id,
+                Imagen = nucleoDTO.Imagen
             };
 
             _context.Entry(nucleo).State = EntityState.Modified;
@@ -95,7 +105,8 @@ namespace webapi.Controllers
             var nucleo = new Nucleo
             {
                 Nombre = nucleoDTO.Nombre,
-                MunicipioId = nucleoDTO.Municipio.Id
+                MunicipioId = nucleoDTO.Municipio.Id,
+                Imagen = nucleoDTO.Imagen
             };
 
             _context.Nucleos.Add(nucleo);

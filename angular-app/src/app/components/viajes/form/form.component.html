@@ -3,7 +3,7 @@
 <form>
 
     <label>Universidad</label>
-    <select type="text" [(ngModel)]="universidadId" id="universidadForm" name="universidadId" required>
+    <select type="text" [(ngModel)]="universidadId" id="universidadForm" name="universidadId" onchange="getCentrosByUniversidadId(universidadId)" required>
         <option>---</option>
         @for (uni of universidades; track $index) {
             <option value="{{uni.id}}">{{uni.nombre}}</option>
@@ -12,13 +12,13 @@
     <label>Centro</label>
     <select type="text" [(ngModel)]="viaje.centro" id="centroForm" name="viaje.centro" required><br/>
         <option>---</option>
-        @for (centro of getCentrosByUniversidadId(universidadId); track centro.id) {
+        @for (centro of centros; track centro.id) {
             <option value="{{centro.id}}">{{centro.nombre}}</option>
         }
     </select>
     <br/>
     <label>Municipio</label>
-    <select type="text" [(ngModel)]="municipioId" id="municipioForm" name="municipioId" required>
+    <select type="text" [(ngModel)]="municipioId" id="municipioForm" name="municipioId" onchange="getNucleosByMunicipioId(municipioId)" required>
         <option>---</option>
         @for (mun of municipios; track municipioId) {
             <option value="{{mun.id}}">{{mun.nombre}}</option>
@@ -29,13 +29,13 @@
     <label>Nucleo</label>
     <select type="text" [(ngModel)]="viaje.nucleo" id="nucleoForm" name="viaje.centro" required>
         <option>---</option>
-        @for (nucleo of getNucleosByMunicipioId(municipioId); track nucleo.id) {
+        @for (nucleo of nucleos; track nucleo.id) {
             <option value="{{nucleo.id}}">{{nucleo.nombre}}</option>
         }
     </select>
     <br/>
     <label>Fecha y Hora</label>
-    <input type="datetime" [(ngModel)]="viaje.hora" id="horaForm" name="viaje.hora" required><br/>
+    <input type="datetime" [(ngModel)]="viaje.fechaYHora" id="horaForm" name="viaje.fechaYHora" required><br/>
     <label>Número de plazas</label>
     <input type="number" [(ngModel)]="viaje.maxPlazas" id="maxPlazasForm" name="viaje.maxPlazas" required><br/>
     <label>Descripción del coche</label>

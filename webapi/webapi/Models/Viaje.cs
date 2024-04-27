@@ -10,6 +10,7 @@ namespace webapi.Models
         public bool IsVuelta { get; set; }
         public string Comentarios { get; set; } = String.Empty;
         public string DescripcionCoche { get; set; } = String.Empty;
+        public double Precio { get; set; }
         public Centro Centro { get; set; }
         public int CentroId { get; set; }
         public Nucleo Nucleo { get; set; }
@@ -17,6 +18,7 @@ namespace webapi.Models
         public Usuario Conductor { get; set; }
         public int ConductorId { get; set; }
         public ICollection<Plaza> Plazas { get; set; }
+        public ICollection<Notificacion> Notificaciones { get; set; }
 
         public ViajeDTO ToDTO()
         {

@@ -25,25 +25,23 @@ namespace webapi.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<CentroDTO>>> GetCentros([FromQuery] int? universidadId)
         {
-            var res = await _context.Centros.ToListAsync();
+            List<Centro> res;
             List<CentroDTO> centroDTOs = new List<CentroDTO>();
 
             if(universidadId != null)
             {
-                foreach (Centro centro in res)
-                {
-                    if (centro.UniversidadId == universidadId) centroDTOs.Add(centro.ToDTO());
-                }
-
-            } else
+                res = await _context.Centros.Where(x => x.UniversidadId == universidadId).ToListAsync();
+            }
+            else
             {
-                foreach (Centro centro in res)
-                {
-                    centroDTOs.Add(centro.ToDTO());
-                }
+                res = await _context.Centros.ToListAsync();
             }
 
-
+            foreach (Centro centro in res)
+            {
+                centro.Universidad = _context.Universidades.FindAsync(centro.Id).Result!;
+                centroDTOs.Add(centro.ToDTO());
+            }
 
             return centroDTOs;
         }
@@ -59,6 +57,7 @@ namespace webapi.Controllers
                 return NotFound();
             }
 
+            centro.Universidad = _context.Universidades.FindAsync(centro.UniversidadId).Result!;
             return centro.ToDTO();
         }
 
@@ -71,7 +70,8 @@ namespace webapi.Controllers
             {
                 Id = id,
                 Nombre = centroDTO.Nombre,
-                UniversidadId = centroDTO.Universidad.Id
+                UniversidadId = centroDTO.Universidad.Id,
+                Imagen = centroDTO.Imagen
             };
 
             _context.Entry(centro).State = EntityState.Modified;
@@ -105,6 +105,7 @@ namespace webapi.Controllers
                 Id = centroDTO.Id,
                 Nombre = centroDTO.Nombre,
                 UniversidadId = centroDTO.Universidad.Id,
+                Imagen = centroDTO.Imagen
             };
 
             _context.Centros.Add(centro);

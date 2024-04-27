@@ -1,0 +1,9 @@
+<p>notificaciones works!</p>
+
+@for(noti of notificaciones; track noti.id){
+    <p>
+    @if(!noti.leida){
+        ¡Nueva! 
+    }
+    {{noti.mensaje}} <button (click)="deleteNotification(noti.id)">Eliminar</button>
+}

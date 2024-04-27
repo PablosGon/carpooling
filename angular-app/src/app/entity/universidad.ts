@@ -1,7 +1,6 @@
 export interface Universidad {
     
-    id:string,
+    id:number,
     nombre:string,
-    imagenURL:string
 
 }

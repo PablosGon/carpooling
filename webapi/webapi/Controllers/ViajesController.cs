@@ -23,11 +23,37 @@ namespace webapi.Controllers
 
         // GET: api/Viajes
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ViajeDTO>>> GetViajes()
+        public async Task<ActionResult<IEnumerable<ViajeDTO>>> GetViajes([FromQuery] bool? isVuelta, [FromQuery] DateTime? fechaHora, [FromQuery] int? nucleoId, [FromQuery] int? centroId, [FromQuery] int? conductorId)
         {
-            var res = await _context.Viajes.ToListAsync();
+            List<Viaje> res = await _context.Viajes.OrderBy(x => x.FechaYHora).ToListAsync(); ;
 
             List<ViajeDTO> list = new List<ViajeDTO>();
+
+            if(isVuelta.HasValue)
+            {
+                res = res.Where(x => x.IsVuelta == isVuelta).ToList();
+            }
+
+            if (fechaHora.HasValue)
+            {
+                res = res.Where(x => x.FechaYHora.Date.Equals(fechaHora.Value.Date)).ToList();
+            }
+
+            if (nucleoId.HasValue)
+            {
+                res = res.Where(x => x.NucleoId == nucleoId).ToList();
+            }
+
+            if (centroId.HasValue)
+            {
+                res = res.Where(x => x.CentroId == centroId).ToList();
+            }
+
+            if(conductorId.HasValue)
+            {
+                res = res.Where(x => x.ConductorId == conductorId).ToList();
+            }
+
             foreach (Viaje viaje in res)
             {
                 viaje.Centro = _context.Centros.FindAsync(viaje.CentroId).Result!;
@@ -53,7 +79,9 @@ namespace webapi.Controllers
             }
 
             viaje.Centro = _context.Centros.FindAsync(viaje.CentroId).Result!;
+            viaje.Centro.Universidad = _context.Universidades.FindAsync(viaje.Centro.UniversidadId).Result!;
             viaje.Nucleo = _context.Nucleos.FindAsync(viaje.NucleoId).Result!;
+            viaje.Nucleo.Municipio = _context.Municipios.FindAsync(viaje.Nucleo.MunicipioId).Result!;
             viaje.Conductor = _context.Usuarios.FindAsync(viaje.ConductorId).Result!;
 
             return viaje.ToDTO();
@@ -73,7 +101,9 @@ namespace webapi.Controllers
                 DescripcionCoche = viajeDTO.DescripcionCoche,
                 CentroId = viajeDTO.Centro.Id,
                 NucleoId = viajeDTO.Nucleo.Id,
-                ConductorId = viajeDTO.Conductor.Id
+                ConductorId = viajeDTO.Conductor.Id,
+                IsVuelta = viajeDTO.IsVuelta,
+                Precio = viajeDTO.Precio,
             };
 
             _context.Entry(viaje).State = EntityState.Modified;
@@ -110,7 +140,9 @@ namespace webapi.Controllers
                 DescripcionCoche = viajeDTO.DescripcionCoche,
                 CentroId = viajeDTO.Centro.Id,
                 NucleoId = viajeDTO.Nucleo.Id,
-                ConductorId = viajeDTO.Conductor.Id
+                ConductorId = viajeDTO.Conductor.Id,
+                IsVuelta = viajeDTO.IsVuelta,
+                Precio = viajeDTO.Precio
             };
 
             _context.Viajes.Add(viaje);
@@ -140,6 +172,11 @@ namespace webapi.Controllers
         private bool ViajeExists(int id)
         {
             return _context.Viajes.Any(e => e.Id == id);
+        }
+
+        private double distanceFromTo(double latFrom, double lonFrom, double latTo, double lonTo)
+        {
+            return Math.Sqrt(Math.Abs(Math.Pow(latFrom - latTo, 2) - Math.Pow(lonFrom - lonTo, 2)));
         }
     }
 }

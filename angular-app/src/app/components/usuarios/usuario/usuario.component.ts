@@ -1,9 +1,9 @@
 import { Component, inject } from '@angular/core';
-import { Usuario } from '../../entity/usuario';
-import { UsuarioService } from '../../services/usuario.service';
+import { Usuario } from '../../../entity/usuario';
+import { UsuarioService } from '../../../services/usuario.service';
 import { ActivatedRoute, RouterLink, RouterLinkActive } from '@angular/router';
-import { ViajeService } from '../../services/viaje.service';
-import { Viaje } from '../../entity/viaje';
+import { ViajeService } from '../../../services/viaje.service';
+import { Viaje } from '../../../entity/viaje';
 
 @Component({
   selector: 'app-usuario',
@@ -18,31 +18,26 @@ export class UsuarioComponent {
 
   constructor(private usuarioService:UsuarioService, private viajeService:ViajeService){}
 
-  id = this.route.snapshot.paramMap.get('id');
+  id = parseInt(this.route.snapshot.paramMap.get('id')!);
 
   usuario:Usuario = {
-    id: '',
+    id: 0,
     nombre: '',
     correo: '',
     telefono: '',
-    valoraciones: [],
-    imagenURL: ''
+    grado: '',
+    imagen: '',
+    universidad: {
+      id: 0,
+      nombre: ''
+    },
+    municipio: {
+      id: 0,
+      nombre: ''
+    }
   }
 
   viajes:Viaje[] = [];
-
-  getValoracionMedia():string{
-
-    var out = 0;
-
-    this.usuario.valoraciones.forEach(v => {
-      out += v;
-    });
-
-    return (out / this.usuario.valoraciones.length).toFixed(1);
-  }
-
-
 
   ngOnInit():void{
     this.initializeData()
@@ -54,12 +49,11 @@ export class UsuarioComponent {
       this.usuario.nombre = data.nombre;
       this.usuario.correo = data.correo;
       this.usuario.telefono = data.telefono;
-      this.usuario.valoraciones = data.valoraciones;
-      this.usuario.imagenURL = data.imagenURL
+      this.usuario.imagen = data.imagen
     });
     this.viajeService.getViajes().subscribe(data => {
       data.forEach((viaje) => {
-        if(viaje.conductorId == this.id){
+        if(viaje.conductor.id == this.id){
           this.viajes.push(viaje);
         }
       })

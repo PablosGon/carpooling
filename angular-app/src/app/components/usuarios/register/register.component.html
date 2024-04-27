@@ -1,0 +1,29 @@
+<p>register works!</p>
+
+<form>
+    <label>Nombre</label><br/>
+    <input type="text" [(ngModel)]="usuario.nombre" name="usuario.nombre"/><br/>
+    <label>Correo</label><br/>
+    <input type="text" [(ngModel)]="usuario.correo" name="usuario.correo"/><br/>
+    <label>Teléfono</label><br/>
+    <input type="text" [(ngModel)]="usuario.telefono" name="usuario.telefono"/><br/>
+    <label>Grado</label><br/>
+    <input type="text" [(ngModel)]="usuario.grado" name="usuario.grado"/><br/>
+    <label>Imagen</label><br/>
+    <input type="text" [(ngModel)]="usuario.imagen" name="usuario.imagen"/><br/>
+    <label>Universidad</label><br/>
+    <select type="text" [(ngModel)]="usuario.universidad.id" name="usuario.universidad.id">
+        <option>---</option>
+        @for(universidad of universidades; track universidad.id){
+            <option value="{{universidad.id}}">{{universidad.nombre}}</option>
+        }
+    </select><br/>
+    <label>Municipio</label><br/>
+    <select type="text" [(ngModel)]="usuario.municipio.id" name="usuario.municipio.id">
+        <option>---</option>
+        @for(municipio of municipios; track municipio.id){
+            <option value="{{municipio.id}}">{{municipio.nombre}}</option>
+        }
+    </select><br/>
+    <button (click)="submitUsuario()">Registrarme</button>
+</form>

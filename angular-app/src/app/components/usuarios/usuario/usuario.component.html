@@ -1,0 +1,8 @@
+<p>usuario works!</p>
+
+<h1>{{usuario.nombre}} (5 estrella(s))</h1>
+
+<h2>Próximos viajes</h2>
+@for (viaje of viajes; track viaje.id) {
+    <a routerLink="{{'/viaje/' + viaje.id}}"  routerLinkActive="active" ariaCurrentWhenActive="page">Viaje de {{viaje.nucleo.nombre}} a {{viaje.centro.nombre}} ({{viaje.fechaYHora}})</a><br/>
+}

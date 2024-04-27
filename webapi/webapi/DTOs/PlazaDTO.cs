@@ -12,8 +12,9 @@ namespace webapi.DTOs
         public double LongitudRecogida { get; set; }
         public string ComentariosConductor { get; set; } = String.Empty;
         public string ComentariosPasajero { get; set; } = String.Empty;
-        [AllowNull]
-        public UsuarioDTO Usuario { get; set; }
+        public bool Aceptada { get; set; }
+        public string Imagen { get; set; } = String.Empty;
+        public int UsuarioId { get; set; }
         public int ViajeId { get; set; }
 
     }
