@@ -10,13 +10,13 @@ export class UniversidadService {
 
   constructor(private httpClient:HttpClient) { }
 
-  url = 'https://localhost:7194/api/'
+  url = 'https://localhost:7161/api/'
 
   public getUniversidades():Observable<Universidad[]>{
     return this.httpClient.get<Universidad[]>(this.url + "universidades");
   }
 
-  public getUniversidad(id:string):Observable<Universidad>{
+  public getUniversidad(id:number):Observable<Universidad>{
     return this.httpClient.get<Universidad>(this.url + 'universidades/' + id);
   }
 }

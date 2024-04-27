@@ -11,13 +11,17 @@ export class CentroService {
 
   constructor(private httpClient:HttpClient) { }
 
-  url = 'https://localhost:7194/api/'
+  url = 'https://localhost:7161/api/'
 
   public getCentros():Observable<Centro[]>{
     return this.httpClient.get<Centro[]>(this.url + "centros");
   }
 
-  public getCentro(id:string):Observable<Centro>{
+  public getCentro(id:number):Observable<Centro>{
     return this.httpClient.get<Centro>(this.url + 'centros/' + id);
+  }
+
+  public getCentrosByUniversidadID(id:number):Observable<Centro[]>{
+    return this.httpClient.get<Centro[]>(this.url + "centros?universidadId=" + id)
   }
 }

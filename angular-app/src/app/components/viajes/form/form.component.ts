@@ -30,17 +30,46 @@ export class FormComponent {
   municipioId = ""
 
   viaje:Viaje = {
-    id: '',
-    conductorId: '',
-    hora: new Date(),
+    id: 0,
+    conductor: {
+      id: 0,
+      nombre: '',
+      correo: '',
+      telefono: '',
+      grado: '',
+      imagen: '',
+      universidad: {
+        id: 0,
+        nombre: ''
+      },
+      municipio: {
+        id: 0,
+        nombre: ''
+      }
+    },
+    fechaYHora: new Date(),
     maxPlazas: 0,
-    isvuelta: false,
+    isVuelta: false,
     comentarios: '',
     descripcionCoche: '',
-    solicitudes: [],
-    plazas: [],
-    nucleo: '',
-    centro: '',
+    nucleo: {
+      id: 0,
+      nombre: '',
+      municipio: {
+        id: 0,
+        nombre: ''
+      },
+      imagen: ''
+    },
+    centro: {
+      id: 0,
+      nombre: '',
+      universidad: {
+        id: 0,
+        nombre: ''
+      },
+      imagen: ''
+    },
     precio: 0
   }
   
@@ -55,17 +84,21 @@ export class FormComponent {
 
   ngOnInit(){
     this.universidadService.getUniversidades().subscribe(data => this.universidades = data);
-    this.centroService.getCentros().subscribe(data => this.centros = data)
     this.municipioSerivice.getMunicipios().subscribe(data => this.municipios = data)
-    this.nucleoService.getNucleos().subscribe(data => this.nucleos = data)
   }
 
-  getCentrosByUniversidadId(id:string){
-    return this.centros.filter(centro => centro.universidadId == id)
+  getCentrosByUniversidadId(id:number){
+    return this.centroService.getCentrosByUniversidadID(id).subscribe(data => {
+      this.centros = [];
+      data.forEach(centro => this.centros.push(centro))
+    })
   }
 
-  getNucleosByMunicipioId(id:string){
-    return this.nucleos.filter(nucleo => nucleo.municipioId == id)
+  getNucleosByMunicipioId(id:number){
+    return this.nucleoService.getNucleosByMunicipioId(id).subscribe(data => {
+      this.nucleos = [];
+      data.forEach(nucleo => this.nucleos.push(nucleo))
+    })
   }
 
   consolelog(item:any){

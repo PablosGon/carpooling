@@ -1,12 +1,10 @@
-import { Ubicacion } from "./ubicacion";
 import { Universidad } from "./universidad";
 
 export interface Centro {
 
-    id:string,
+    id:number,
     nombre:string,
-    ubicacion:Ubicacion,
-    universidadId:string
-    imagenURL:string
+    universidad:Universidad,
+    imagen:string
 
 }

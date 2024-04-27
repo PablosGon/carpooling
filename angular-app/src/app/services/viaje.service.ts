@@ -10,7 +10,7 @@ export class ViajeService {
 
   constructor(private httpClient: HttpClient) { }
 
-  url = 'https://localhost:7194/api/'
+  url = 'https://localhost:7161/api/'
 
   // headers:HttpHeaders = new HttpHeaders({
   //   "Content-Type":"application/json",
@@ -29,16 +29,13 @@ export class ViajeService {
 
     this.httpClient.post<Viaje>(this.url + 'viajes', {
       conductorId : '66084b57a065e8396b4384a9',
-      hora : viaje.hora,
+      hora : viaje.fechaYHora,
       maxPlazas : viaje.maxPlazas,
       isVuelta : true,
       comentarios : viaje.comentarios,
       descripcionCoche : viaje.descripcionCoche,
-      solicitudes : [],
-      plazas : [],
       nucleo : viaje.nucleo,
       centro : viaje.centro,
-      precio : viaje.precio
     }).subscribe(data => console.log(data))
 
   }

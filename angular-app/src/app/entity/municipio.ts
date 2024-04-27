@@ -1,10 +1,6 @@
-import { Ubicacion } from "./ubicacion";
-
 export interface Municipio {
 
-    id:string,
+    id:number,
     nombre:string,
-    ubicacion:Ubicacion,
-    imagenURL:string
 
 }

@@ -1,20 +1,17 @@
 import { Centro } from "./centro";
 import { Nucleo } from "./nucleo";
-import { Pasajero } from "./pasajero";
+import { Usuario } from "./usuario";
 
 export interface Viaje {
 
-    id: string,
-    conductorId: string,
-    hora: Date,
+    id: number,
+    fechaYHora: Date,
     maxPlazas: number,
-    isvuelta: boolean,
     comentarios: string,
     descripcionCoche: string,
-    solicitudes: Pasajero[],
-    plazas: Pasajero[],
-    nucleo: string,
-    centro: string,
-    precio: number
-
+    isVuelta: boolean,
+    precio: number,
+    centro: Centro,
+    nucleo: Nucleo,
+    conductor: Usuario
 }

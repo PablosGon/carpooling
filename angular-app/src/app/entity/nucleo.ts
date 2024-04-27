@@ -1,11 +1,10 @@
-import { Ubicacion } from "./ubicacion";
+import { Municipio } from "./municipio";
 
 export interface Nucleo{
 
-    id:string,
+    id:number,
     nombre:string,
-    ubicacion:Ubicacion,
-    municipioId:string,
-    imagenURL:string
+    municipio:Municipio,
+    imagen:string
 
 }

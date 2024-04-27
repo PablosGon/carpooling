@@ -10,13 +10,13 @@ export class MunicipioService {
 
   constructor(private httpClient:HttpClient) { }
 
-  url = 'https://localhost:7194/api/'
+  url = 'https://localhost:7161/api/'
 
   public getMunicipios():Observable<Municipio[]>{
     return this.httpClient.get<Municipio[]>(this.url + "municipios");
   }
 
-  public getMunicipio(id:string):Observable<Municipio>{
+  public getMunicipio(id:number):Observable<Municipio>{
     return this.httpClient.get<Municipio>(this.url + 'municipios/' + id);
   }
 }

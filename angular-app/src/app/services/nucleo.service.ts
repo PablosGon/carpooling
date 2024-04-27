@@ -10,13 +10,17 @@ export class NucleoService {
 
   constructor(private httpClient:HttpClient) { }
 
-  url = 'https://localhost:7194/api/'
+  url = 'https://localhost:7161/api/'
 
   public getNucleos():Observable<Nucleo[]>{
     return this.httpClient.get<Nucleo[]>(this.url + "nucleos");
   }
 
-  public getNucleo(id:string):Observable<Nucleo>{
+  public getNucleo(id:number):Observable<Nucleo>{
     return this.httpClient.get<Nucleo>(this.url + 'nucleos/' + id);
+  }
+
+  public getNucleosByMunicipioId(id:number):Observable<Nucleo[]>{
+    return this.httpClient.get<Nucleo[]>(this.url + "nucleos?municipioId=" + id)
   }
 }
