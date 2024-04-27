@@ -3,56 +3,91 @@
   "WorkspaceRootPath": "C:\\Users\\pablo\\Documents\\repos\\carpooling\\webapi\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\pablo\\Documents\\repos\\carpooling\\webapi\\webapi\\Migrations\\20240417093858_carpooling.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:webapi\\Migrations\\20240417093858_carpooling.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B2887F71-C869-45A7-AF82-CED68CB7DC75}|webapi\\webapi.csproj|c:\\users\\pablo\\documents\\repos\\carpooling\\webapi\\webapi\\models\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B2887F71-C869-45A7-AF82-CED68CB7DC75}|webapi\\webapi.csproj|solutionrelative:webapi\\models\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B2887F71-C869-45A7-AF82-CED68CB7DC75}|webapi\\webapi.csproj|c:\\users\\pablo\\documents\\repos\\carpooling\\webapi\\webapi\\models\\valoracion.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B2887F71-C869-45A7-AF82-CED68CB7DC75}|webapi\\webapi.csproj|solutionrelative:webapi\\models\\valoracion.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B2887F71-C869-45A7-AF82-CED68CB7DC75}|webapi\\webapi.csproj|c:\\users\\pablo\\documents\\repos\\carpooling\\webapi\\webapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{B2887F71-C869-45A7-AF82-CED68CB7DC75}|webapi\\webapi.csproj|solutionrelative:webapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B2887F71-C869-45A7-AF82-CED68CB7DC75}|webapi\\webapi.csproj|c:\\users\\pablo\\documents\\repos\\carpooling\\webapi\\webapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B2887F71-C869-45A7-AF82-CED68CB7DC75}|webapi\\webapi.csproj|solutionrelative:webapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B2887F71-C869-45A7-AF82-CED68CB7DC75}|webapi\\webapi.csproj|c:\\users\\pablo\\documents\\repos\\carpooling\\webapi\\webapi\\controllers\\centroscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B2887F71-C869-45A7-AF82-CED68CB7DC75}|webapi\\webapi.csproj|solutionrelative:webapi\\controllers\\centroscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{B2887F71-C869-45A7-AF82-CED68CB7DC75}|webapi\\webapi.csproj|c:\\users\\pablo\\documents\\repos\\carpooling\\webapi\\webapi\\models\\centro.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B2887F71-C869-45A7-AF82-CED68CB7DC75}|webapi\\webapi.csproj|solutionrelative:webapi\\models\\centro.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{B2887F71-C869-45A7-AF82-CED68CB7DC75}|webapi\\webapi.csproj|c:\\users\\pablo\\documents\\repos\\carpooling\\webapi\\webapi\\models\\viaje.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B2887F71-C869-45A7-AF82-CED68CB7DC75}|webapi\\webapi.csproj|solutionrelative:webapi\\models\\viaje.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B2887F71-C869-45A7-AF82-CED68CB7DC75}|webapi\\webapi.csproj|c:\\users\\pablo\\documents\\repos\\carpooling\\webapi\\webapi\\models\\centro.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B2887F71-C869-45A7-AF82-CED68CB7DC75}|webapi\\webapi.csproj|solutionrelative:webapi\\models\\centro.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{B2887F71-C869-45A7-AF82-CED68CB7DC75}|webapi\\webapi.csproj|c:\\users\\pablo\\documents\\repos\\carpooling\\webapi\\webapi\\controllers\\viajescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B2887F71-C869-45A7-AF82-CED68CB7DC75}|webapi\\webapi.csproj|solutionrelative:webapi\\controllers\\viajescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B2887F71-C869-45A7-AF82-CED68CB7DC75}|webapi\\webapi.csproj|c:\\users\\pablo\\documents\\repos\\carpooling\\webapi\\webapi\\models\\universidad.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B2887F71-C869-45A7-AF82-CED68CB7DC75}|webapi\\webapi.csproj|solutionrelative:webapi\\models\\universidad.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B2887F71-C869-45A7-AF82-CED68CB7DC75}|webapi\\webapi.csproj|c:\\users\\pablo\\documents\\repos\\carpooling\\webapi\\webapi\\models\\municipio.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B2887F71-C869-45A7-AF82-CED68CB7DC75}|webapi\\webapi.csproj|solutionrelative:webapi\\models\\municipio.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/master/True/SqlTable/dbo.Viajes.sql||{0058A1F7-65F3-4DB9-B3D0-CA7E64DD73CD}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{B2887F71-C869-45A7-AF82-CED68CB7DC75}|webapi\\webapi.csproj|c:\\users\\pablo\\documents\\repos\\carpooling\\webapi\\webapi\\models\\nucleo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B2887F71-C869-45A7-AF82-CED68CB7DC75}|webapi\\webapi.csproj|solutionrelative:webapi\\models\\nucleo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{B2887F71-C869-45A7-AF82-CED68CB7DC75}|webapi\\webapi.csproj|c:\\users\\pablo\\documents\\repos\\carpooling\\webapi\\webapi\\controllers\\centroscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B2887F71-C869-45A7-AF82-CED68CB7DC75}|webapi\\webapi.csproj|solutionrelative:webapi\\controllers\\centroscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{B2887F71-C869-45A7-AF82-CED68CB7DC75}|webapi\\webapi.csproj|c:\\users\\pablo\\documents\\repos\\carpooling\\webapi\\webapi\\models\\usuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B2887F71-C869-45A7-AF82-CED68CB7DC75}|webapi\\webapi.csproj|solutionrelative:webapi\\models\\usuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{B2887F71-C869-45A7-AF82-CED68CB7DC75}|webapi\\webapi.csproj|c:\\users\\pablo\\documents\\repos\\carpooling\\webapi\\webapi\\dtos\\municipiodto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B2887F71-C869-45A7-AF82-CED68CB7DC75}|webapi\\webapi.csproj|solutionrelative:webapi\\dtos\\municipiodto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B2887F71-C869-45A7-AF82-CED68CB7DC75}|webapi\\webapi.csproj|c:\\users\\pablo\\documents\\repos\\carpooling\\webapi\\webapi\\models\\valoracion.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B2887F71-C869-45A7-AF82-CED68CB7DC75}|webapi\\webapi.csproj|solutionrelative:webapi\\models\\valoracion.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B2887F71-C869-45A7-AF82-CED68CB7DC75}|webapi\\webapi.csproj|c:\\users\\pablo\\documents\\repos\\carpooling\\webapi\\webapi\\models\\universidad.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B2887F71-C869-45A7-AF82-CED68CB7DC75}|webapi\\webapi.csproj|solutionrelative:webapi\\models\\universidad.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{B2887F71-C869-45A7-AF82-CED68CB7DC75}|webapi\\webapi.csproj|c:\\users\\pablo\\documents\\repos\\carpooling\\webapi\\webapi\\models\\plaza.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B2887F71-C869-45A7-AF82-CED68CB7DC75}|webapi\\webapi.csproj|solutionrelative:webapi\\models\\plaza.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B2887F71-C869-45A7-AF82-CED68CB7DC75}|webapi\\webapi.csproj|c:\\users\\pablo\\documents\\repos\\carpooling\\webapi\\webapi\\models\\municipio.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B2887F71-C869-45A7-AF82-CED68CB7DC75}|webapi\\webapi.csproj|solutionrelative:webapi\\models\\municipio.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B2887F71-C869-45A7-AF82-CED68CB7DC75}|webapi\\webapi.csproj|c:\\users\\pablo\\documents\\repos\\carpooling\\webapi\\webapi\\dtos\\centrodto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B2887F71-C869-45A7-AF82-CED68CB7DC75}|webapi\\webapi.csproj|solutionrelative:webapi\\dtos\\centrodto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B2887F71-C869-45A7-AF82-CED68CB7DC75}|webapi\\webapi.csproj|c:\\users\\pablo\\documents\\repos\\carpooling\\webapi\\webapi\\dtos\\usuariodto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B2887F71-C869-45A7-AF82-CED68CB7DC75}|webapi\\webapi.csproj|solutionrelative:webapi\\dtos\\usuariodto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B2887F71-C869-45A7-AF82-CED68CB7DC75}|webapi\\webapi.csproj|c:\\users\\pablo\\documents\\repos\\carpooling\\webapi\\webapi\\dtos\\valoraciondto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B2887F71-C869-45A7-AF82-CED68CB7DC75}|webapi\\webapi.csproj|solutionrelative:webapi\\dtos\\valoraciondto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B2887F71-C869-45A7-AF82-CED68CB7DC75}|webapi\\webapi.csproj|c:\\users\\pablo\\documents\\repos\\carpooling\\webapi\\webapi\\dtos\\viajedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B2887F71-C869-45A7-AF82-CED68CB7DC75}|webapi\\webapi.csproj|solutionrelative:webapi\\dtos\\viajedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B2887F71-C869-45A7-AF82-CED68CB7DC75}|webapi\\webapi.csproj|c:\\users\\pablo\\documents\\repos\\carpooling\\webapi\\webapi\\controllers\\plazascontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B2887F71-C869-45A7-AF82-CED68CB7DC75}|webapi\\webapi.csproj|solutionrelative:webapi\\controllers\\plazascontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B2887F71-C869-45A7-AF82-CED68CB7DC75}|webapi\\webapi.csproj|c:\\users\\pablo\\documents\\repos\\carpooling\\webapi\\webapi\\dtos\\plazadto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B2887F71-C869-45A7-AF82-CED68CB7DC75}|webapi\\webapi.csproj|solutionrelative:webapi\\dtos\\plazadto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B2887F71-C869-45A7-AF82-CED68CB7DC75}|webapi\\webapi.csproj|c:\\users\\pablo\\documents\\repos\\carpooling\\webapi\\webapi\\controllers\\usuarioscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B2887F71-C869-45A7-AF82-CED68CB7DC75}|webapi\\webapi.csproj|solutionrelative:webapi\\controllers\\usuarioscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B2887F71-C869-45A7-AF82-CED68CB7DC75}|webapi\\webapi.csproj|c:\\users\\pablo\\documents\\repos\\carpooling\\webapi\\webapi\\controllers\\nucleoscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B2887F71-C869-45A7-AF82-CED68CB7DC75}|webapi\\webapi.csproj|solutionrelative:webapi\\controllers\\nucleoscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B2887F71-C869-45A7-AF82-CED68CB7DC75}|webapi\\webapi.csproj|c:\\users\\pablo\\documents\\repos\\carpooling\\webapi\\webapi\\dtos\\nucleodto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B2887F71-C869-45A7-AF82-CED68CB7DC75}|webapi\\webapi.csproj|solutionrelative:webapi\\dtos\\nucleodto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B2887F71-C869-45A7-AF82-CED68CB7DC75}|webapi\\webapi.csproj|c:\\users\\pablo\\documents\\repos\\carpooling\\webapi\\webapi\\dtos\\universidaddto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B2887F71-C869-45A7-AF82-CED68CB7DC75}|webapi\\webapi.csproj|solutionrelative:webapi\\dtos\\universidaddto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -62,32 +97,120 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 8,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "20240417093858_carpooling.cs",
-              "DocumentMoniker": "C:\\Users\\pablo\\Documents\\repos\\carpooling\\webapi\\webapi\\Migrations\\20240417093858_carpooling.cs",
-              "RelativeDocumentMoniker": "webapi\\Migrations\\20240417093858_carpooling.cs",
-              "ToolTip": "C:\\Users\\pablo\\Documents\\repos\\carpooling\\webapi\\webapi\\Migrations\\20240417093858_carpooling.cs",
-              "RelativeToolTip": "webapi\\Migrations\\20240417093858_carpooling.cs",
-              "ViewState": "AQIAAKYAAAAAAAAAAAAgwMwAAAA8AAAA",
+              "DocumentIndex": 3,
+              "Title": "dbo.Viajes [Datos]",
+              "DocumentMoniker": "ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/master/True/SqlTable/dbo.Viajes.sql",
+              "ToolTip": "dbo.Viajes [Datos]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
+              "WhenOpened": "2024-04-22T10:31:13.508Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Viaje.cs",
+              "DocumentMoniker": "C:\\Users\\pablo\\Documents\\repos\\carpooling\\webapi\\webapi\\Models\\Viaje.cs",
+              "RelativeDocumentMoniker": "webapi\\Models\\Viaje.cs",
+              "ToolTip": "C:\\Users\\pablo\\Documents\\repos\\carpooling\\webapi\\webapi\\Models\\Viaje.cs",
+              "RelativeToolTip": "webapi\\Models\\Viaje.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAABEAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-17T09:38:58.909Z",
+              "WhenOpened": "2024-04-22T10:20:09.095Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Valoracion.cs",
+              "DocumentMoniker": "C:\\Users\\pablo\\Documents\\repos\\carpooling\\webapi\\webapi\\Models\\Valoracion.cs",
+              "RelativeDocumentMoniker": "webapi\\Models\\Valoracion.cs",
+              "ToolTip": "C:\\Users\\pablo\\Documents\\repos\\carpooling\\webapi\\webapi\\Models\\Valoracion.cs",
+              "RelativeToolTip": "webapi\\Models\\Valoracion.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAAeAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-22T10:20:01.692Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Usuario.cs",
+              "DocumentMoniker": "C:\\Users\\pablo\\Documents\\repos\\carpooling\\webapi\\webapi\\Models\\Usuario.cs",
+              "RelativeDocumentMoniker": "webapi\\Models\\Usuario.cs",
+              "ToolTip": "C:\\Users\\pablo\\Documents\\repos\\carpooling\\webapi\\webapi\\Models\\Usuario.cs",
+              "RelativeToolTip": "webapi\\Models\\Usuario.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABsAAAAbAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-22T10:19:51.276Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "Universidad.cs",
+              "DocumentMoniker": "C:\\Users\\pablo\\Documents\\repos\\carpooling\\webapi\\webapi\\Models\\Universidad.cs",
+              "RelativeDocumentMoniker": "webapi\\Models\\Universidad.cs",
+              "ToolTip": "C:\\Users\\pablo\\Documents\\repos\\carpooling\\webapi\\webapi\\Models\\Universidad.cs",
+              "RelativeToolTip": "webapi\\Models\\Universidad.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABAAAAAfAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-22T10:19:35.532Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "Plaza.cs",
+              "DocumentMoniker": "C:\\Users\\pablo\\Documents\\repos\\carpooling\\webapi\\webapi\\Models\\Plaza.cs",
+              "RelativeDocumentMoniker": "webapi\\Models\\Plaza.cs",
+              "ToolTip": "C:\\Users\\pablo\\Documents\\repos\\carpooling\\webapi\\webapi\\Models\\Plaza.cs",
+              "RelativeToolTip": "webapi\\Models\\Plaza.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABQAAAAZAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-22T10:18:48.263Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\pablo\\Documents\\repos\\carpooling\\webapi\\webapi\\Program.cs",
-              "RelativeDocumentMoniker": "webapi\\Program.cs",
-              "ToolTip": "C:\\Users\\pablo\\Documents\\repos\\carpooling\\webapi\\webapi\\Program.cs",
-              "RelativeToolTip": "webapi\\Program.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAMAAAAAAAAA",
+              "Title": "Nucleo.cs",
+              "DocumentMoniker": "C:\\Users\\pablo\\Documents\\repos\\carpooling\\webapi\\webapi\\Models\\Nucleo.cs",
+              "RelativeDocumentMoniker": "webapi\\Models\\Nucleo.cs",
+              "ToolTip": "C:\\Users\\pablo\\Documents\\repos\\carpooling\\webapi\\webapi\\Models\\Nucleo.cs",
+              "RelativeToolTip": "webapi\\Models\\Nucleo.cs",
+              "ViewState": "AQIAAAEAAAAAAAAAAAAkwBMAAAAMAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-17T08:54:20.476Z",
+              "WhenOpened": "2024-04-22T09:46:08.027Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "Municipio.cs",
+              "DocumentMoniker": "C:\\Users\\pablo\\Documents\\repos\\carpooling\\webapi\\webapi\\Models\\Municipio.cs",
+              "RelativeDocumentMoniker": "webapi\\Models\\Municipio.cs",
+              "ToolTip": "C:\\Users\\pablo\\Documents\\repos\\carpooling\\webapi\\webapi\\Models\\Municipio.cs",
+              "RelativeToolTip": "webapi\\Models\\Municipio.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABAAAAAdAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-22T10:18:32.564Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Centro.cs",
+              "DocumentMoniker": "C:\\Users\\pablo\\Documents\\repos\\carpooling\\webapi\\webapi\\Models\\Centro.cs",
+              "RelativeDocumentMoniker": "webapi\\Models\\Centro.cs",
+              "ToolTip": "C:\\Users\\pablo\\Documents\\repos\\carpooling\\webapi\\webapi\\Models\\Centro.cs",
+              "RelativeToolTip": "webapi\\Models\\Centro.cs",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAABwAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-22T10:17:54.207Z",
               "EditorCaption": ""
             },
             {
@@ -98,139 +221,165 @@
               "RelativeDocumentMoniker": "webapi\\Controllers\\CentrosController.cs",
               "ToolTip": "C:\\Users\\pablo\\Documents\\repos\\carpooling\\webapi\\webapi\\Controllers\\CentrosController.cs",
               "RelativeToolTip": "webapi\\Controllers\\CentrosController.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABUAAAARAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAB4AAAAlAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-17T08:53:23.42Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "appsettings.json",
-              "DocumentMoniker": "C:\\Users\\pablo\\Documents\\repos\\carpooling\\webapi\\webapi\\appsettings.json",
-              "RelativeDocumentMoniker": "webapi\\appsettings.json",
-              "ToolTip": "C:\\Users\\pablo\\Documents\\repos\\carpooling\\webapi\\webapi\\appsettings.json",
-              "RelativeToolTip": "webapi\\appsettings.json",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAADnAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2024-04-17T08:11:23.133Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "AppDbContext.cs",
-              "DocumentMoniker": "C:\\Users\\pablo\\Documents\\repos\\carpooling\\webapi\\webapi\\Models\\AppDbContext.cs",
-              "RelativeDocumentMoniker": "webapi\\Models\\AppDbContext.cs",
-              "ToolTip": "C:\\Users\\pablo\\Documents\\repos\\carpooling\\webapi\\webapi\\Models\\AppDbContext.cs",
-              "RelativeToolTip": "webapi\\Models\\AppDbContext.cs",
-              "ViewState": "AQIAACcAAAAAAAAAAAAAwDkAAAAPAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-17T08:08:50.96Z",
+              "WhenOpened": "2024-04-22T10:17:31.416Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "Valoracion.cs",
-              "DocumentMoniker": "C:\\Users\\pablo\\Documents\\repos\\carpooling\\webapi\\webapi\\Models\\Valoracion.cs",
-              "RelativeDocumentMoniker": "webapi\\Models\\Valoracion.cs",
-              "ToolTip": "C:\\Users\\pablo\\Documents\\repos\\carpooling\\webapi\\webapi\\Models\\Valoracion.cs",
-              "RelativeToolTip": "webapi\\Models\\Valoracion.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAAcAAAA",
+              "Title": "ViajesController.cs",
+              "DocumentMoniker": "C:\\Users\\pablo\\Documents\\repos\\carpooling\\webapi\\webapi\\Controllers\\ViajesController.cs",
+              "RelativeDocumentMoniker": "webapi\\Controllers\\ViajesController.cs",
+              "ToolTip": "C:\\Users\\pablo\\Documents\\repos\\carpooling\\webapi\\webapi\\Controllers\\ViajesController.cs",
+              "RelativeToolTip": "webapi\\Controllers\\ViajesController.cs",
+              "ViewState": "AQIAAAsAAAAAAAAAAAAQwCMAAABpAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-17T07:55:28.997Z",
+              "WhenOpened": "2024-04-22T09:51:01.576Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "PlazasController.cs",
+              "DocumentMoniker": "C:\\Users\\pablo\\Documents\\repos\\carpooling\\webapi\\webapi\\Controllers\\PlazasController.cs",
+              "RelativeDocumentMoniker": "webapi\\Controllers\\PlazasController.cs",
+              "ToolTip": "C:\\Users\\pablo\\Documents\\repos\\carpooling\\webapi\\webapi\\Controllers\\PlazasController.cs",
+              "RelativeToolTip": "webapi\\Controllers\\PlazasController.cs",
+              "ViewState": "AQIAAAkAAAAAAAAAAAAAACcAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-22T09:49:29.006Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "UsuariosController.cs",
+              "DocumentMoniker": "C:\\Users\\pablo\\Documents\\repos\\carpooling\\webapi\\webapi\\Controllers\\UsuariosController.cs",
+              "RelativeDocumentMoniker": "webapi\\Controllers\\UsuariosController.cs",
+              "ToolTip": "C:\\Users\\pablo\\Documents\\repos\\carpooling\\webapi\\webapi\\Controllers\\UsuariosController.cs",
+              "RelativeToolTip": "webapi\\Controllers\\UsuariosController.cs",
+              "ViewState": "AQIAAAkAAAAAAAAAAAAAADUAAABiAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-22T09:45:31.94Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "ViajeDTO.cs",
+              "DocumentMoniker": "C:\\Users\\pablo\\Documents\\repos\\carpooling\\webapi\\webapi\\DTOs\\ViajeDTO.cs",
+              "RelativeDocumentMoniker": "webapi\\DTOs\\ViajeDTO.cs",
+              "ToolTip": "C:\\Users\\pablo\\Documents\\repos\\carpooling\\webapi\\webapi\\DTOs\\ViajeDTO.cs",
+              "RelativeToolTip": "webapi\\DTOs\\ViajeDTO.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-22T09:44:13.333Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "ValoracionDTO.cs",
+              "DocumentMoniker": "C:\\Users\\pablo\\Documents\\repos\\carpooling\\webapi\\webapi\\DTOs\\ValoracionDTO.cs",
+              "RelativeDocumentMoniker": "webapi\\DTOs\\ValoracionDTO.cs",
+              "ToolTip": "C:\\Users\\pablo\\Documents\\repos\\carpooling\\webapi\\webapi\\DTOs\\ValoracionDTO.cs",
+              "RelativeToolTip": "webapi\\DTOs\\ValoracionDTO.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-22T09:44:11.12Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "UsuarioDTO.cs",
+              "DocumentMoniker": "C:\\Users\\pablo\\Documents\\repos\\carpooling\\webapi\\webapi\\DTOs\\UsuarioDTO.cs",
+              "RelativeDocumentMoniker": "webapi\\DTOs\\UsuarioDTO.cs",
+              "ToolTip": "C:\\Users\\pablo\\Documents\\repos\\carpooling\\webapi\\webapi\\DTOs\\UsuarioDTO.cs",
+              "RelativeToolTip": "webapi\\DTOs\\UsuarioDTO.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAA6AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-22T09:43:54.882Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "PlazaDTO.cs",
+              "DocumentMoniker": "C:\\Users\\pablo\\Documents\\repos\\carpooling\\webapi\\webapi\\DTOs\\PlazaDTO.cs",
+              "RelativeDocumentMoniker": "webapi\\DTOs\\PlazaDTO.cs",
+              "ToolTip": "C:\\Users\\pablo\\Documents\\repos\\carpooling\\webapi\\webapi\\DTOs\\PlazaDTO.cs",
+              "RelativeToolTip": "webapi\\DTOs\\PlazaDTO.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-22T09:43:25.524Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "NucleoDTO.cs",
+              "DocumentMoniker": "C:\\Users\\pablo\\Documents\\repos\\carpooling\\webapi\\webapi\\DTOs\\NucleoDTO.cs",
+              "RelativeDocumentMoniker": "webapi\\DTOs\\NucleoDTO.cs",
+              "ToolTip": "C:\\Users\\pablo\\Documents\\repos\\carpooling\\webapi\\webapi\\DTOs\\NucleoDTO.cs",
+              "RelativeToolTip": "webapi\\DTOs\\NucleoDTO.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-22T09:43:23.032Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 12,
-              "Title": "Plaza.cs",
-              "DocumentMoniker": "C:\\Users\\pablo\\Documents\\repos\\carpooling\\webapi\\webapi\\Models\\Plaza.cs",
-              "RelativeDocumentMoniker": "webapi\\Models\\Plaza.cs",
-              "ToolTip": "C:\\Users\\pablo\\Documents\\repos\\carpooling\\webapi\\webapi\\Models\\Plaza.cs",
-              "RelativeToolTip": "webapi\\Models\\Plaza.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABAAAAAkAAAA",
+              "Title": "CentroDTO.cs",
+              "DocumentMoniker": "C:\\Users\\pablo\\Documents\\repos\\carpooling\\webapi\\webapi\\DTOs\\CentroDTO.cs",
+              "RelativeDocumentMoniker": "webapi\\DTOs\\CentroDTO.cs",
+              "ToolTip": "C:\\Users\\pablo\\Documents\\repos\\carpooling\\webapi\\webapi\\DTOs\\CentroDTO.cs",
+              "RelativeToolTip": "webapi\\DTOs\\CentroDTO.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAASAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-17T07:49:36.754Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "Usuario.cs",
-              "DocumentMoniker": "C:\\Users\\pablo\\Documents\\repos\\carpooling\\webapi\\webapi\\Models\\Usuario.cs",
-              "RelativeDocumentMoniker": "webapi\\Models\\Usuario.cs",
-              "ToolTip": "C:\\Users\\pablo\\Documents\\repos\\carpooling\\webapi\\webapi\\Models\\Usuario.cs",
-              "RelativeToolTip": "webapi\\Models\\Usuario.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAApAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-17T07:42:43.568Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "Nucleo.cs",
-              "DocumentMoniker": "C:\\Users\\pablo\\Documents\\repos\\carpooling\\webapi\\webapi\\Models\\Nucleo.cs",
-              "RelativeDocumentMoniker": "webapi\\Models\\Nucleo.cs",
-              "ToolTip": "C:\\Users\\pablo\\Documents\\repos\\carpooling\\webapi\\webapi\\Models\\Nucleo.cs",
-              "RelativeToolTip": "webapi\\Models\\Nucleo.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAA2AAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-17T07:27:51.443Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "Municipio.cs",
-              "DocumentMoniker": "C:\\Users\\pablo\\Documents\\repos\\carpooling\\webapi\\webapi\\Models\\Municipio.cs",
-              "RelativeDocumentMoniker": "webapi\\Models\\Municipio.cs",
-              "ToolTip": "C:\\Users\\pablo\\Documents\\repos\\carpooling\\webapi\\webapi\\Models\\Municipio.cs",
-              "RelativeToolTip": "webapi\\Models\\Municipio.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAA6AAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-17T07:25:54.363Z",
+              "WhenOpened": "2024-04-22T09:43:15.699Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 7,
-              "Title": "Centro.cs",
-              "DocumentMoniker": "C:\\Users\\pablo\\Documents\\repos\\carpooling\\webapi\\webapi\\Models\\Centro.cs",
-              "RelativeDocumentMoniker": "webapi\\Models\\Centro.cs",
-              "ToolTip": "C:\\Users\\pablo\\Documents\\repos\\carpooling\\webapi\\webapi\\Models\\Centro.cs",
-              "RelativeToolTip": "webapi\\Models\\Centro.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAPAAAA",
+              "Title": "MunicipioDTO.cs",
+              "DocumentMoniker": "C:\\Users\\pablo\\Documents\\repos\\carpooling\\webapi\\webapi\\DTOs\\MunicipioDTO.cs",
+              "RelativeDocumentMoniker": "webapi\\DTOs\\MunicipioDTO.cs",
+              "ToolTip": "C:\\Users\\pablo\\Documents\\repos\\carpooling\\webapi\\webapi\\DTOs\\MunicipioDTO.cs",
+              "RelativeToolTip": "webapi\\DTOs\\MunicipioDTO.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-17T07:07:59.703Z",
+              "WhenOpened": "2024-04-22T09:43:01.205Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "Universidad.cs",
-              "DocumentMoniker": "C:\\Users\\pablo\\Documents\\repos\\carpooling\\webapi\\webapi\\Models\\Universidad.cs",
-              "RelativeDocumentMoniker": "webapi\\Models\\Universidad.cs",
-              "ToolTip": "C:\\Users\\pablo\\Documents\\repos\\carpooling\\webapi\\webapi\\Models\\Universidad.cs",
-              "RelativeToolTip": "webapi\\Models\\Universidad.cs",
+              "DocumentIndex": 21,
+              "Title": "UniversidadDTO.cs",
+              "DocumentMoniker": "C:\\Users\\pablo\\Documents\\repos\\carpooling\\webapi\\webapi\\DTOs\\UniversidadDTO.cs",
+              "RelativeDocumentMoniker": "webapi\\DTOs\\UniversidadDTO.cs",
+              "ToolTip": "C:\\Users\\pablo\\Documents\\repos\\carpooling\\webapi\\webapi\\DTOs\\UniversidadDTO.cs",
+              "RelativeToolTip": "webapi\\DTOs\\UniversidadDTO.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAA6AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-17T07:07:22.221Z",
+              "WhenOpened": "2024-04-22T09:42:15.301Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "Viaje.cs",
-              "DocumentMoniker": "C:\\Users\\pablo\\Documents\\repos\\carpooling\\webapi\\webapi\\Models\\Viaje.cs",
-              "RelativeDocumentMoniker": "webapi\\Models\\Viaje.cs",
-              "ToolTip": "C:\\Users\\pablo\\Documents\\repos\\carpooling\\webapi\\webapi\\Models\\Viaje.cs",
-              "RelativeToolTip": "webapi\\Models\\Viaje.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABAAAAAPAAAA",
+              "DocumentIndex": 19,
+              "Title": "NucleosController.cs",
+              "DocumentMoniker": "C:\\Users\\pablo\\Documents\\repos\\carpooling\\webapi\\webapi\\Controllers\\NucleosController.cs",
+              "RelativeDocumentMoniker": "webapi\\Controllers\\NucleosController.cs",
+              "ToolTip": "C:\\Users\\pablo\\Documents\\repos\\carpooling\\webapi\\webapi\\Controllers\\NucleosController.cs",
+              "RelativeToolTip": "webapi\\Controllers\\NucleosController.cs",
+              "ViewState": "AQIAACQAAAAAAAAAAAAowD8AAAAYAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-17T07:05:57.828Z",
+              "WhenOpened": "2024-04-22T09:31:46.113Z",
               "EditorCaption": ""
             }
           ]
