@@ -14,5 +14,6 @@ namespace webapi.DTOs
         public MunicipioDTO? Municipio { get; set; }
         public double ValoracionMedia { get; set; } = 0;
         public int NumValoraciones { get; set; } = 0;
+        public int NotificacionesNoLeidas { get; set; } = 0;
     }
 }

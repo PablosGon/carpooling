@@ -65,7 +65,8 @@ export class ViajeComponent {
         nombre: ''
       },
       valoracionMedia: 0,
-      numValoraciones: 0
+      numValoraciones: 0,
+      notificacionesNoLeidas: 0
     }
   };
 
@@ -119,5 +120,4 @@ export class ViajeComponent {
     this.viajeService.deleteViaje(this.viaje.id).subscribe()
     //window.location.href="/viajes"
   }
-
 }

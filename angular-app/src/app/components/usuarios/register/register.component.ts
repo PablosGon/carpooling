@@ -34,7 +34,8 @@ export class RegisterComponent {
       nombre: ''
     },
     valoracionMedia: 0,
-    numValoraciones: 0
+    numValoraciones: 0,
+    notificacionesNoLeidas: 0
   }
 
   universidades:Universidad[] = []

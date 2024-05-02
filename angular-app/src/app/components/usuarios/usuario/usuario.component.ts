@@ -40,7 +40,8 @@ export class UsuarioComponent {
       nombre: ''
     },
     valoracionMedia: 0,
-    numValoraciones: 0
+    numValoraciones: 0,
+    notificacionesNoLeidas: 0
   }
 
   viajes:Viaje[] = [];

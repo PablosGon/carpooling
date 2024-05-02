@@ -11,7 +11,7 @@ export interface Plaza {
     comentariosConductor : string,
     comentariosPasajero : string,
     aceptada : boolean,
-    usuarioId : number,
+    usuarioId : number | null,
     imagen : string,
     viajeId : number
 }

@@ -24,9 +24,6 @@ namespace webapi.Models
 
         public UsuarioDTO ToDTO()
         {
-            var mun = this.Municipio != null ? Municipio.ToDTO() : null;
-            var uni = this.Universidad != null ? Universidad.ToDTO() : null;
-
             return new UsuarioDTO
             {
                 Id = Id,
@@ -35,10 +32,11 @@ namespace webapi.Models
                 Telefono = Telefono,
                 Grado = Grado,
                 Imagen = Imagen,
-                Municipio = mun,
-                Universidad = uni,
+                Municipio = this.Municipio != null ? Municipio.ToDTO() : null,
+                Universidad = this.Universidad != null ? Universidad.ToDTO() : null,
                 NumValoraciones = ValoracionesRecibidas.Count(),
-                ValoracionMedia = getValoracionMedia()
+                ValoracionMedia = getValoracionMedia(),
+                NotificacionesNoLeidas = Notificaciones != null ? Notificaciones.Where(x => !x.Leida).Count() : 0,
             };
         }
 

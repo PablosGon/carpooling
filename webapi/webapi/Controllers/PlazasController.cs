@@ -125,6 +125,12 @@ namespace webapi.Controllers
                 Aceptada = plazaDTO.Aceptada,
             };
 
+            if(plaza.UsuarioId != null)
+            {
+                var viaje = _context.Viajes.FindAsync(plaza.ViajeId).Result!;
+                sendNotification("Alguien ha solicitado plaza para tu viaje", viaje.ConductorId, plaza.ViajeId);
+            }
+
             _context.Plazas.Add(plaza);
             await _context.SaveChangesAsync();
 
@@ -141,6 +147,11 @@ namespace webapi.Controllers
             if (plaza == null)
             {
                 return NotFound();
+            }
+
+            if (plaza.Aceptada && plaza.UsuarioId != null)
+            {
+                sendNotification("Tu plaza para un viaje ha sido ELIMINADA", plaza.UsuarioId!.Value, plaza.ViajeId);
             }
 
             _context.Plazas.Remove(plaza);
@@ -166,15 +177,10 @@ namespace webapi.Controllers
 
             solicitud.Aceptada = true;
 
-            var notificacion = new Notificacion
+            if(solicitud.UsuarioId.HasValue)
             {
-                Mensaje = NOTIFICATION_ACCEPTED,
-                ViajeId = solicitud.ViajeId,
-                UsuarioId = solicitud.UsuarioId!.Value,
-                Leida = false
-            };
-
-            _context.Notificaciones.Add(notificacion);
+                sendNotification(NOTIFICATION_ACCEPTED, solicitud.UsuarioId!.Value, solicitud.ViajeId);
+            }
 
             await _context.SaveChangesAsync();
 
@@ -184,6 +190,20 @@ namespace webapi.Controllers
         private bool PlazaExists(int id)
         {
             return _context.Plazas.Any(e => e.Id == id);
+        }
+
+        private void sendNotification(string text, int userId, int? viajeId)
+        {
+            var notificacion = new Notificacion
+            {
+                Mensaje = text,
+                UsuarioId = userId
+            };
+            if (viajeId.HasValue) notificacion.ViajeId = viajeId;
+            _context.Notificaciones.Add(notificacion);
+                
+            
+
         }
 
     }

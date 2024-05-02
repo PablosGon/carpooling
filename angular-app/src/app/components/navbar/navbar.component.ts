@@ -28,7 +28,8 @@ export class NavbarComponent {
       nombre: ''
     },
     valoracionMedia: 0,
-    numValoraciones: 0
+    numValoraciones: 0,
+    notificacionesNoLeidas: 0
   }
 
   usuarioId = sessionStorage.getItem('usuarioId')
@@ -39,9 +40,7 @@ export class NavbarComponent {
     console.log(this.usuarioId)
     if(this.usuarioId){
       this.usuarioService.getUsuario(parseInt(this.usuarioId)).subscribe(data => {
-        this.usuario.id = data.id;
-        this.usuario.nombre = data.nombre;
-        this.usuario.imagen = data.imagen
+        this.usuario = data
       })
     }
   }

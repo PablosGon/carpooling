@@ -51,7 +51,8 @@ export class EditComponent {
         nombre: ''
       },
       valoracionMedia: 0,
-      numValoraciones: 0
+      numValoraciones: 0,
+      notificacionesNoLeidas: 0
     },
     fechaYHora: new Date(),
     maxPlazas: 0,

@@ -23,5 +23,6 @@ namespace webapi.Models
                 ViajeId = ViajeId
             };
         }
+
     }
 }

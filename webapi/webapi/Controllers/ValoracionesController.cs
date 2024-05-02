@@ -106,6 +106,8 @@ namespace webapi.Controllers
                 Estrellas = valoracionDTO.Estrellas
             };
 
+            sendNotification("Un usuario te ha valorado con " + valoracionDTO.Estrellas + " estrellas", valoracion.ConductorId, null);
+
             _context.Valoraciones.Add(valoracion);
             try
             {
@@ -142,6 +144,20 @@ namespace webapi.Controllers
             await _context.SaveChangesAsync();
 
             return NoContent();
+        }
+
+        private void sendNotification(string text, int userId, int? viajeId)
+        {
+            var notificacion = new Notificacion
+            {
+                Mensaje = text,
+                UsuarioId = userId
+            };
+            if (viajeId.HasValue) notificacion.ViajeId = viajeId;
+            _context.Notificaciones.Add(notificacion);
+
+
+
         }
 
         private bool ValoracionExists(int id)

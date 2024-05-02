@@ -12,5 +12,6 @@ export interface Usuario{
     universidad : Universidad,
     municipio : Municipio
     valoracionMedia: number,
-    numValoraciones: number
+    numValoraciones: number,
+    notificacionesNoLeidas: number
 }

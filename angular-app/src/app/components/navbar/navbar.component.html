@@ -4,7 +4,7 @@
 
 @if(usuarioId){
     <p><a routerLink="{{'/usuario/' + usuarioId}}"  routerLinkActive="active" ariaCurrentWhenActive="page">Perfil de {{usuario.nombre}}</a></p>
-    <p><a routerLink="{{'/usuario/' + usuarioId + '/notificaciones'}}"  routerLinkActive="active" ariaCurrentWhenActive="page">Notificaciones</a></p>
+    <p><a routerLink="{{'/usuario/' + usuarioId + '/notificaciones'}}"  routerLinkActive="active" ariaCurrentWhenActive="page">Notificaciones ({{usuario.notificacionesNoLeidas}})</a></p>
     <button (click)="logout()">Cerrar sesión</button>
 } @else {
     <button (click)="login()">Iniciar sesión</button>

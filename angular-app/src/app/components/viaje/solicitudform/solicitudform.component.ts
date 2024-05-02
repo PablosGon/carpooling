@@ -31,7 +31,7 @@ export class SolicitudformComponent {
     comentariosConductor: '',
     comentariosPasajero: '',
     aceptada: false,
-    usuarioId: 0,
+    usuarioId: null,
     imagen: '',
     viajeId: parseInt(this.viajeId!)
   }
@@ -48,7 +48,6 @@ export class SolicitudformComponent {
   }
 
   submitSolicitud(){
-    console.log(this.plaza)
     this.plazaService.createPlaza(this.plaza).subscribe()
     window.location.href="http://localhost:4200/viaje/" + this.viajeId
   }
