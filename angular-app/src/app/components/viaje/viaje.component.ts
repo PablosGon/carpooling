@@ -19,7 +19,7 @@ export class ViajeComponent {
 
   constructor(private viajeService: ViajeService, private plazaService: PlazaService){ }
 
-  id = this.route.snapshot.paramMap.get('id');
+  id = parseInt(this.route.snapshot.paramMap.get('id')!);
 
   usuarioId = sessionStorage.getItem('usuarioId')
 
@@ -63,11 +63,16 @@ export class ViajeComponent {
       municipio: {
         id: 0,
         nombre: ''
-      }
+      },
+      valoracionMedia: 0,
+      numValoraciones: 0
     }
   };
+
   plazas:Plaza[] = []
   solicitudes:Plaza[] = []
+
+  addComments:boolean = false
 
   ngOnInit(){
     this.initializeData();
@@ -76,19 +81,8 @@ export class ViajeComponent {
   async initializeData(){
     (await this.viajeService.getViaje(this.id!)).subscribe(data => {
       console.log(data)
-      this.viaje.id = data.id;
-      this.viaje.conductor.id = data.conductor.id;
-      this.viaje.fechaYHora = new Date(data.fechaYHora);
-      this.viaje.maxPlazas = data.maxPlazas;
-      this.viaje.isVuelta = data.isVuelta;
-      this.viaje.comentarios = data.comentarios;
-      this.viaje.descripcionCoche = data.descripcionCoche;
-      this.viaje.nucleo = data.nucleo;
-      this.viaje.centro = data.centro;
-      this.viaje.conductor.id = data.conductor.id;
-      this.viaje.conductor.nombre = data.conductor.nombre;
-      this.viaje.conductor.correo = data.conductor.correo;
-      this.viaje.conductor.telefono = data.conductor.telefono;
+      this.viaje = data
+      this.viaje.fechaYHora = new Date()
       this.plazaService.getPlazasByViajeId(this.viaje.id).subscribe(data => {
         console.log(data)
         data.forEach(plaza => {
@@ -113,13 +107,17 @@ export class ViajeComponent {
 
   handlePlaza(aceptada:boolean, id:number, comentarios:string){
     if(aceptada){
-      let plaza = this.solicitudes.find(x => x.id == id)
-      plaza!.aceptada = true
-      plaza!.comentariosConductor = comentarios
-      this.plazaService.updatePlaza(id, plaza!).subscribe()
+      this.plazaService.acceptPlaza(id).subscribe()
     } else {
       this.plazaService.deletePlaza(id).subscribe()
     }
+
+    window.location.reload()
+  }
+
+  deleteViaje(){
+    this.viajeService.deleteViaje(this.viaje.id).subscribe()
+    //window.location.href="/viajes"
   }
 
 }

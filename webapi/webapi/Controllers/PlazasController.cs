@@ -16,6 +16,8 @@ namespace webapi.Controllers
     {
         private readonly AppDbContext _context;
 
+        private const string NOTIFICATION_ACCEPTED = "Se ha aceptado tu solicitud de plaza.";
+
         public PlazasController(AppDbContext context)
         {
             _context = context;
@@ -147,9 +149,42 @@ namespace webapi.Controllers
             return NoContent();
         }
 
+        [HttpPut("{id}/aceptar")]
+        public async Task<IActionResult> AcceptRequest(int id)
+        {
+            var solicitud = _context.Plazas.Find(id);
+            
+            if(solicitud == null)
+            {
+                return NotFound();
+            }
+
+            if (solicitud.Aceptada)
+            {
+                return BadRequest("Esta solicitud ya se aceptó");
+            }
+
+            solicitud.Aceptada = true;
+
+            var notificacion = new Notificacion
+            {
+                Mensaje = NOTIFICATION_ACCEPTED,
+                ViajeId = solicitud.ViajeId,
+                UsuarioId = solicitud.UsuarioId!.Value,
+                Leida = false
+            };
+
+            _context.Notificaciones.Add(notificacion);
+
+            await _context.SaveChangesAsync();
+
+            return Ok();
+        }
+
         private bool PlazaExists(int id)
         {
             return _context.Plazas.Any(e => e.Id == id);
         }
+
     }
 }

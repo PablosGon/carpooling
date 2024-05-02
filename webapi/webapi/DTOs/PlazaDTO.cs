@@ -14,7 +14,7 @@ namespace webapi.DTOs
         public string ComentariosPasajero { get; set; } = String.Empty;
         public bool Aceptada { get; set; }
         public string Imagen { get; set; } = String.Empty;
-        public int UsuarioId { get; set; }
+        public int? UsuarioId { get; set; }
         public int ViajeId { get; set; }
 
     }

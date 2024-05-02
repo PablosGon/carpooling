@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using webapi.Models;
 
 namespace webapi.Models
 {
@@ -51,7 +50,7 @@ namespace webapi.Models
             {
                 entity.HasKey(p => p.Id);
                 entity.HasOne(p => p.Usuario).WithMany(u => u.Plazas).HasForeignKey(p => p.UsuarioId);
-                entity.HasOne(p => p.Viaje).WithMany(v => v.Plazas).HasForeignKey(p => p.ViajeId).OnDelete(DeleteBehavior.NoAction);
+                entity.HasOne(p => p.Viaje).WithMany(v => v.Plazas).HasForeignKey(p => p.ViajeId).OnDelete(DeleteBehavior.Cascade);
             });
 
             modelBuilder.Entity<Universidad>(entity =>
@@ -81,6 +80,6 @@ namespace webapi.Models
                 entity.HasOne(v => v.Nucleo).WithMany(n => n.Viajes).HasForeignKey(v => v.NucleoId);
             });
         }
-        public DbSet<webapi.Models.Notificacion> Notificacion { get; set; } = default!;
+        public DbSet<Notificacion> Notificaciones { get; set; } = default!;
     }
 }

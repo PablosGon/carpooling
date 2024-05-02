@@ -10,7 +10,7 @@ namespace webapi.Models
         public Usuario Usuario { get; set; }
         public int UsuarioId { get; set; }
         public Viaje Viaje { get; set; }
-        public int ViajeId { get; set; }
+        public int? ViajeId { get; set; }
 
         public NotificacionDTO ToDTO()
         {

@@ -10,9 +10,9 @@ namespace webapi.DTOs
         public string Telefono { get; set; } = String.Empty;
         public string Grado { get; set; } = String.Empty;
         public string Imagen { get; set; } = String.Empty;
-        [AllowNull]
-        public UniversidadDTO Universidad { get; set; }
-        [AllowNull]
-        public MunicipioDTO Municipio { get; set; }
+        public UniversidadDTO? Universidad { get; set; }
+        public MunicipioDTO? Municipio { get; set; }
+        public double ValoracionMedia { get; set; } = 0;
+        public int NumValoraciones { get; set; } = 0;
     }
 }

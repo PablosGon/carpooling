@@ -23,9 +23,19 @@ namespace webapi.Controllers
 
         // GET: api/Valoraciones
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ValoracionDTO>>> GetValoraciones()
+        public async Task<ActionResult<IEnumerable<ValoracionDTO>>> GetValoraciones([FromQuery] int? conductorId, [FromQuery] int? pasajeroId)
         {
-            var res = await _context.Valoraciones.ToListAsync();
+            var res = new List<Valoracion>();
+
+            if(conductorId != null && pasajeroId != null)
+            {
+                res = await _context.Valoraciones.Where(x => x.ConductorId == conductorId && x.PasajeroId == pasajeroId).ToListAsync();
+            } else
+            {
+                res = await _context.Valoraciones.ToListAsync();
+            }
+
+            
 
             List<ValoracionDTO> list = new List<ValoracionDTO>();
             foreach (Valoracion v in res)

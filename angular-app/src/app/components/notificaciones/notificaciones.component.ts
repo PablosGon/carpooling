@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { NotificacionesService } from '../../services/notificaciones.service';
 import { Notificacion } from '../../entity/notificacion';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import { UsuarioService } from '../../services/usuario.service';
 
 @Component({
   selector: 'app-notificaciones',
@@ -14,7 +15,7 @@ export class NotificacionesComponent {
 
   private route = inject(ActivatedRoute);
 
-  constructor(private notificacionService:NotificacionesService, private router:Router){ }
+  constructor(private notificacionService:NotificacionesService, private router:Router, private usuarioService:UsuarioService){ }
 
   usuarioId : number = parseInt(this.route.snapshot.paramMap.get('id')!);
   notificaciones : Notificacion[] = []
@@ -22,7 +23,7 @@ export class NotificacionesComponent {
   ngOnInit(){
     this.notificacionService.getNotificacionesByUsuarioId(this.usuarioId).subscribe(data => {
       data.forEach(noti => this.notificaciones.push(noti));
-      this.notificacionService.setAllNotificationsToRead(this.usuarioId).subscribe()
+      this.usuarioService.readAllNotifications(this.usuarioId).subscribe()
     })
   }
 

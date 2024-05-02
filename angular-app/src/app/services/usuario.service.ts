@@ -23,4 +23,8 @@ export class UsuarioService {
   public createUsuario(usuario:Usuario):Observable<Usuario>{
     return this.httpClient.post<Usuario>(this.url + 'usuarios', usuario);
   }
+
+  public readAllNotifications(id:number):Observable<Usuario>{
+    return this.httpClient.put<Usuario>(this.url + 'usuarios/' + id + '/readNotifications', {})
+  }
 }

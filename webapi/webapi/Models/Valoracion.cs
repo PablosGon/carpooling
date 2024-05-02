@@ -15,6 +15,7 @@ namespace webapi.Models
         {
             return new ValoracionDTO
             {
+                Id = Id,
                 Estrellas = Estrellas,
                 ConductorId = ConductorId,
                 PasajeroId = PasajeroId

@@ -11,4 +11,6 @@ export interface Usuario{
     imagen : string
     universidad : Universidad,
     municipio : Municipio
+    valoracionMedia: number,
+    numValoraciones: number
 }
