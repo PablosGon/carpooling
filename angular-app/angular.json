@@ -88,6 +88,14 @@
             ],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "@netlify-builder/deploy:deploy",
+          "options": {
+            "outputPath": "dist/angular-app",
+            "netlifyToken": "",
+            "siteId": ""
+          }
         }
       }
     }
