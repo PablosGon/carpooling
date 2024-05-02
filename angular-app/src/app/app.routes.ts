@@ -7,6 +7,7 @@ import { NotificacionesComponent } from './components/notificaciones/notificacio
 import { SolicitudformComponent } from './components/viaje/solicitudform/solicitudform.component';
 import { LoginComponent } from './components/usuarios/login/login.component';
 import { RegisterComponent } from './components/usuarios/register/register.component';
+import { EditComponent } from './components/viajes/edit/edit.component';
 
 export const routes: Routes = [
     {
@@ -40,5 +41,9 @@ export const routes: Routes = [
     {
         path:'register',
         component:RegisterComponent
+    },
+    {
+        path:'viaje/:id/editar',
+        component:EditComponent
     }
 ];

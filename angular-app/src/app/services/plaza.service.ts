@@ -29,8 +29,11 @@ export class PlazaService {
   }
 
   public updatePlaza(id:number, plaza:Plaza):Observable<Plaza>{
-    console.log(plaza)
     return this.httpClient.put<Plaza>(this.url + 'plazas/' + id, plaza)
+  }
+
+  public acceptPlaza(id:number):Observable<Plaza>{
+    return this.httpClient.put<Plaza>(this.url + 'plazas/' + id + '/aceptar', {})
   }
 
   public deletePlaza(id:number):Observable<Plaza>{

@@ -10,6 +10,7 @@ import { CentroService } from '../../../services/centro.service';
 import { MunicipioService } from '../../../services/municipio.service';
 import { NucleoService } from '../../../services/nucleo.service';
 import { ViajeService } from '../../../services/viaje.service';
+import { UsuarioService } from '../../../services/usuario.service';
 
 @Component({
   selector: 'app-form',
@@ -26,8 +27,10 @@ export class FormComponent {
   municipios: Municipio[] = []
   nucleos: Nucleo[] = []
 
-  universidadId = ""
-  municipioId = ""
+  universidadId = 0
+  municipioId = 0
+
+  usuarioId = sessionStorage.getItem('usuarioId')
 
   viaje:Viaje = {
     id: 0,
@@ -45,7 +48,9 @@ export class FormComponent {
       municipio: {
         id: 0,
         nombre: ''
-      }
+      },
+      valoracionMedia: 0,
+      numValoraciones: 0
     },
     fechaYHora: new Date(),
     maxPlazas: 0,
@@ -88,6 +93,7 @@ export class FormComponent {
   }
 
   getCentrosByUniversidadId(id:number){
+    console.log(id)
     return this.centroService.getCentrosByUniversidadID(id).subscribe(data => {
       this.centros = [];
       data.forEach(centro => this.centros.push(centro))
@@ -106,9 +112,12 @@ export class FormComponent {
   }
 
   newViaje(){
-    console.log("Creando viaje...")
-    this.viajeService.postViaje(this.viaje)
-    console.log("Viaje creado!")
+    this.viaje.conductor.id = parseInt(this.usuarioId!)
+    console.log(this.viaje)
+    this.viajeService.postViaje(this.viaje).subscribe(data => {
+      window.location.href='/viaje/' + data.id
+    })
+
   }
 
 }

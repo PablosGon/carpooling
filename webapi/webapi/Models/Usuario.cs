@@ -10,16 +10,12 @@ namespace webapi.Models
         public string Nombre { get; set; } = String.Empty;
         public string Correo { get; set; } = String.Empty;
         public string Telefono { get; set; } = String.Empty;
-        [AllowNull]
         public string Imagen { get; set; } = String.Empty;
-        [AllowNull]
         public string Grado { get; set; } = String.Empty;
-        public Universidad Universidad { get; set; }
-        [AllowNull]
-        public int UniversidadId { get; set; }
-        public Municipio Municipio { get; set; }
-        [AllowNull]
-        public int MunicipioId { get; set; }
+        public Universidad? Universidad { get; set; }
+        public int? UniversidadId { get; set; }
+        public Municipio? Municipio { get; set; }
+        public int? MunicipioId { get; set; }
         public ICollection<Valoracion> ValoracionesEnviadas { get; set; }
         public ICollection<Valoracion> ValoracionesRecibidas { get; set; }
         public ICollection<Plaza> Plazas { get; set; }
@@ -28,6 +24,9 @@ namespace webapi.Models
 
         public UsuarioDTO ToDTO()
         {
+            var mun = this.Municipio != null ? Municipio.ToDTO() : null;
+            var uni = this.Universidad != null ? Universidad.ToDTO() : null;
+
             return new UsuarioDTO
             {
                 Id = Id,
@@ -36,9 +35,27 @@ namespace webapi.Models
                 Telefono = Telefono,
                 Grado = Grado,
                 Imagen = Imagen,
-                Municipio = Municipio.ToDTO(),
-                Universidad = Universidad.ToDTO()
+                Municipio = mun,
+                Universidad = uni,
+                NumValoraciones = ValoracionesRecibidas.Count(),
+                ValoracionMedia = getValoracionMedia()
             };
+        }
+
+        private double getValoracionMedia()
+        {
+            if(ValoracionesRecibidas.Count() <= 0)
+            {
+                return 0;
+            }
+
+            double res = 0;
+            foreach(var v in ValoracionesRecibidas)
+            {
+                res += v.Estrellas;
+            }
+            res /= ValoracionesRecibidas.Count();
+            return res;
         }
     }
 }

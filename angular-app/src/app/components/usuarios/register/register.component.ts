@@ -32,7 +32,9 @@ export class RegisterComponent {
     municipio: {
       id: 0,
       nombre: ''
-    }
+    },
+    valoracionMedia: 0,
+    numValoraciones: 0
   }
 
   universidades:Universidad[] = []

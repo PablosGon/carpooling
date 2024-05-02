@@ -26,7 +26,9 @@ export class NavbarComponent {
     municipio: {
       id: 0,
       nombre: ''
-    }
+    },
+    valoracionMedia: 0,
+    numValoraciones: 0
   }
 
   usuarioId = sessionStorage.getItem('usuarioId')

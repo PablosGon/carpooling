@@ -5,5 +5,5 @@
     @if(!noti.leida){
         ¡Nueva! 
     }
-    {{noti.mensaje}} <button (click)="deleteNotification(noti.id)">Eliminar</button>
+    <a href="{{'/viaje/' + noti.viajeId}}">{{noti.mensaje}}</a>  <button (click)="deleteNotification(noti.id)">Eliminar</button>
 }

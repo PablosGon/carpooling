@@ -1,6 +1,19 @@
 <p>usuario works!</p>
 
-<h1>{{usuario.nombre}} (5 estrella(s))</h1>
+<h1>{{usuario.nombre}}</h1>
+
+<h2>{{usuario.valoracionMedia}} estrellas ({{usuario.numValoraciones}} valoraciones)</h2>
+
+@if(!isMyself()){
+
+    @if (!this.userId) {
+        <p>Inicia sesión para añadir una valoración</p>
+    } @else if (prevRated) {
+        Tu valoración: <input type="number" [(ngModel)]="valoracion.estrellas" [max]="5" [min]="0"/> <button (click)="updateValoracion()">Modificar</button><button (click)="deleteValoracion()">Borrar valoración</button>
+    } @else {
+        Valorar: <input type="number" [(ngModel)]="valoracion.estrellas" [max]="5" [min]="0"/> <button (click)="createValoracion()">Enviar</button>
+    }
+}
 
 <h2>Próximos viajes</h2>
 @for (viaje of viajes; track viaje.id) {

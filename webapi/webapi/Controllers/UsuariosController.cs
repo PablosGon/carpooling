@@ -33,6 +33,7 @@ namespace webapi.Controllers
             {
                 u.Municipio = _context.Municipios.FindAsync(u.MunicipioId).Result!;
                 u.Universidad = _context.Universidades.FindAsync(u.UniversidadId).Result!;
+                u.ValoracionesRecibidas = _context.Valoraciones.Where(x => x.ConductorId == u.Id).ToList();
                 list.Add(u.ToDTO());
             }
 
@@ -52,6 +53,7 @@ namespace webapi.Controllers
 
             usuario.Municipio = _context.Municipios.FindAsync(usuario.MunicipioId).Result!;
             usuario.Universidad = _context.Universidades.FindAsync(usuario.UniversidadId).Result!;
+            usuario.ValoracionesRecibidas = _context.Valoraciones.Where(x => x.ConductorId == id).ToList();
 
             return usuario.ToDTO();
         }
@@ -70,7 +72,7 @@ namespace webapi.Controllers
                 Grado = usuarioDTO.Grado,
                 Imagen = usuarioDTO.Imagen,
                 UniversidadId = usuarioDTO.Universidad.Id,
-                MunicipioId = usuarioDTO.Municipio.Id
+                MunicipioId = usuarioDTO.Municipio.Id,
             };
 
             _context.Entry(usuario).State = EntityState.Modified;
@@ -106,8 +108,8 @@ namespace webapi.Controllers
                 Telefono = usuarioDTO.Telefono,
                 Grado = usuarioDTO.Grado,
                 Imagen = usuarioDTO.Imagen,
-                UniversidadId = usuarioDTO.Universidad.Id,
-                MunicipioId = usuarioDTO.Municipio.Id
+                UniversidadId = usuarioDTO.Universidad != null ? usuarioDTO.Universidad.Id : null,
+                MunicipioId = usuarioDTO.Municipio != null ? usuarioDTO.Municipio.Id : null,
             };
 
             _context.Usuarios.Add(usuario);
@@ -132,6 +134,27 @@ namespace webapi.Controllers
             await _context.SaveChangesAsync();
 
             return NoContent();
+        }
+
+        [HttpPut("{id}/readNotifications")]
+        public async Task<IActionResult> ReadNotifications(int id)
+        {
+            var usuario = await _context.Usuarios.FindAsync(id);
+
+            if (usuario == null)
+            {
+                return NotFound();
+            }
+
+            var notificaciones = _context.Notificaciones.Where(x => x.UsuarioId == id && !x.Leida);
+
+            foreach(var n in notificaciones)
+            {
+                n.Leida = true;
+            }
+
+            await _context.SaveChangesAsync();
+            return Ok();
         }
 
         private bool UsuarioExists(int id)

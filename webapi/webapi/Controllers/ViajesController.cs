@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -61,6 +62,7 @@ namespace webapi.Controllers
                 viaje.Nucleo = _context.Nucleos.FindAsync(viaje.NucleoId).Result!;
                 viaje.Nucleo.Municipio = _context.Municipios.FindAsync(viaje.Nucleo.MunicipioId).Result!;
                 viaje.Conductor = _context.Usuarios.FindAsync(viaje.ConductorId).Result!;
+                viaje.Conductor.ValoracionesRecibidas = _context.Valoraciones.Where(x => x.ConductorId == viaje.ConductorId).ToList();
                 list.Add(viaje.ToDTO());
             }
 
@@ -83,6 +85,7 @@ namespace webapi.Controllers
             viaje.Nucleo = _context.Nucleos.FindAsync(viaje.NucleoId).Result!;
             viaje.Nucleo.Municipio = _context.Municipios.FindAsync(viaje.Nucleo.MunicipioId).Result!;
             viaje.Conductor = _context.Usuarios.FindAsync(viaje.ConductorId).Result!;
+            viaje.Conductor.ValoracionesRecibidas = _context.Valoraciones.Where(x => x.ConductorId == viaje.ConductorId).ToList();
 
             return viaje.ToDTO();
         }
@@ -107,6 +110,8 @@ namespace webapi.Controllers
             };
 
             _context.Entry(viaje).State = EntityState.Modified;
+
+            sendNotifications("Un viaje en el que tenías plaza ha sido MODIFICADO (click para ver)", id, true);
 
             try
             {
@@ -163,7 +168,11 @@ namespace webapi.Controllers
                 return NotFound();
             }
 
+
+            sendNotifications("Un viaje en el que tenías plaza ha sido ELIMINADO", id, false);
+
             _context.Viajes.Remove(viaje);
+
             await _context.SaveChangesAsync();
 
             return NoContent();
@@ -172,6 +181,26 @@ namespace webapi.Controllers
         private bool ViajeExists(int id)
         {
             return _context.Viajes.Any(e => e.Id == id);
+        }
+
+        private void sendNotifications(string text, int id, bool includeViaje)
+        {
+            var pasajeros = _context.Plazas.Where(x => x.ViajeId == id && x.Aceptada);
+
+            foreach (var p in pasajeros)
+            {
+                if (p.UsuarioId != null)
+                {
+                    var notificacion = new Notificacion
+                    {
+                        Mensaje = text,
+                        UsuarioId = p.UsuarioId.Value
+                    };
+                    if (includeViaje) notificacion.ViajeId = id;
+                    _context.Notificaciones.Add(notificacion);
+                }
+            }
+
         }
 
         private double distanceFromTo(double latFrom, double lonFrom, double latTo, double lonTo)

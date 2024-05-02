@@ -16,7 +16,7 @@ namespace webapi.Models
         public Viaje Viaje { get; set; }
         public int ViajeId { get; set; }
         public Usuario Usuario { get; set; }
-        public int UsuarioId { get; set; }
+        public int? UsuarioId { get; set; }
 
         public PlazaDTO ToDTO()
         {

@@ -25,7 +25,7 @@ namespace webapi.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<NotificacionDTO>>> GetNotificacion([FromQuery] int? usuarioId)
         {
-            var res = await _context.Notificacion.ToListAsync();
+            var res = await _context.Notificaciones.ToListAsync();
             List<NotificacionDTO> list = new List<NotificacionDTO>();
 
             if (usuarioId.HasValue)
@@ -45,7 +45,7 @@ namespace webapi.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<NotificacionDTO>> GetNotificacion(int id)
         {
-            var notificacion = await _context.Notificacion.FindAsync(id);
+            var notificacion = await _context.Notificaciones.FindAsync(id);
 
             if (notificacion == null)
             {
@@ -103,7 +103,7 @@ namespace webapi.Controllers
                 ViajeId = notificacionDTO.ViajeId
             };
 
-            _context.Notificacion.Add(notificacion);
+            _context.Notificaciones.Add(notificacion);
             await _context.SaveChangesAsync();
 
             notificacionDTO.Id = notificacion.Id;
@@ -115,36 +115,21 @@ namespace webapi.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteNotificacion(int id)
         {
-            var notificacion = await _context.Notificacion.FindAsync(id);
+            var notificacion = await _context.Notificaciones.FindAsync(id);
             if (notificacion == null)
             {
                 return NotFound();
             }
 
-            _context.Notificacion.Remove(notificacion);
+            _context.Notificaciones.Remove(notificacion);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        [HttpPut("/markAsRead")]
-        public async Task<IActionResult> SetAllNotificationsToRead([FromQuery] int usuarioId)
-        {
-            var res = await _context.Notificacion.Where(x => x.UsuarioId == usuarioId).ToListAsync();
-
-            foreach (Notificacion n in res)
-            {
-                _context.Entry(n).State = EntityState.Modified;
-                n.Leida = true;
-            }
-
-            await _context.SaveChangesAsync();
-            return Ok();
-        }
-
         private bool NotificacionExists(int id)
         {
-            return _context.Notificacion.Any(e => e.Id == id);
+            return _context.Notificaciones.Any(e => e.Id == id);
         }
     }
 }

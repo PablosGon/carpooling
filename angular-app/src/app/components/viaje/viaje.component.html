@@ -31,6 +31,6 @@
         <p>{{plaza.nombre}}: "{{plaza.comentariosPasajero}}" - <button (click)="handlePlaza(true, plaza.id, '')">Aceptar</button> - <button (click)="handlePlaza(false, plaza.id, '')">Rechazar</button></p>
     }
 
-    <button>Editar viaje</button>
-    <button>Borrar viaje</button>
+    <a href="{{'/viaje/' + viaje.id + '/editar'}}">Editar viaje</a>
+    <button (click)="deleteViaje()">Borrar viaje</button>
 }

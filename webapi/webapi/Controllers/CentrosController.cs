@@ -39,7 +39,7 @@ namespace webapi.Controllers
 
             foreach (Centro centro in res)
             {
-                centro.Universidad = _context.Universidades.FindAsync(centro.Id).Result!;
+                centro.Universidad = _context.Universidades.FindAsync(centro.UniversidadId).Result!;
                 centroDTOs.Add(centro.ToDTO());
             }
 
