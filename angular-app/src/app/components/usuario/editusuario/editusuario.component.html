@@ -1,4 +1,4 @@
-<p>register works!</p>
+<p>editusuario works!</p>
 
 <form>
     <label>Nombre</label><br/>
@@ -12,7 +12,7 @@
     <label>Grado</label><br/>
     <input type="text" [(ngModel)]="usuario.grado" name="usuario.grado"/><br/>
     <label>Imagen</label><br/>
-    <input type="text" [(ngModel)]="usuario.imagen" name="usuario.imagen"/><br/>
+    <input type="file" [(ngModel)]="usuario.imagen" name="usuario.imagen"/><br/>
     <label>Universidad</label><br/>
     <select type="text" [(ngModel)]="usuario.universidad.id" name="usuario.universidad.id">
         <option>---</option>
@@ -27,5 +27,5 @@
             <option value="{{municipio.id}}">{{municipio.nombre}}</option>
         }
     </select><br/>
-    <button (click)="submitUsuario()">Registrarme</button>
+    <button (click)="updateUsuario()">Guardar</button>
 </form>

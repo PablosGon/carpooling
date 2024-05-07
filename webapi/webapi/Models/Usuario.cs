@@ -9,6 +9,7 @@ namespace webapi.Models
         public int Id { get; set; }
         public string Nombre { get; set; } = String.Empty;
         public string Correo { get; set; } = String.Empty;
+        public string Pass { get; set; } = String.Empty;
         public string Telefono { get; set; } = String.Empty;
         public string Imagen { get; set; } = String.Empty;
         public string Grado { get; set; } = String.Empty;
@@ -29,6 +30,7 @@ namespace webapi.Models
                 Id = Id,
                 Nombre = Nombre,
                 Correo = Correo,
+                Pass = Pass,
                 Telefono = Telefono,
                 Grado = Grado,
                 Imagen = Imagen,

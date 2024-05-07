@@ -66,7 +66,8 @@ export class ViajeComponent {
       },
       valoracionMedia: 0,
       numValoraciones: 0,
-      notificacionesNoLeidas: 0
+      notificacionesNoLeidas: 0,
+      pass: ''
     }
   };
 

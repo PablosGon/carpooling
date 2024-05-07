@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 import { ViajesComponent } from './components/viajes/viajes.component';
-import { UsuarioComponent } from './components/usuarios/usuario/usuario.component';
+import { UsuarioComponent } from './components/usuario/usuario.component';
 import { ViajeComponent } from './components/viaje/viaje.component';
 import { CreateComponent } from './components/viajes/create/create.component';
 import { NotificacionesComponent } from './components/notificaciones/notificaciones.component';
@@ -8,6 +8,7 @@ import { SolicitudformComponent } from './components/viaje/solicitudform/solicit
 import { LoginComponent } from './components/usuarios/login/login.component';
 import { RegisterComponent } from './components/usuarios/register/register.component';
 import { EditComponent } from './components/viajes/edit/edit.component';
+import { EditusuarioComponent } from './components/usuario/editusuario/editusuario.component';
 
 export const routes: Routes = [
     {
@@ -45,5 +46,9 @@ export const routes: Routes = [
     {
         path:'viaje/:id/editar',
         component:EditComponent
+    },
+    {
+        path:'usuario/:id/editar',
+        component:EditusuarioComponent
     }
 ];

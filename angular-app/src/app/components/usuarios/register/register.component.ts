@@ -6,11 +6,13 @@ import { MunicipioService } from '../../../services/municipio.service';
 import { FormsModule } from '@angular/forms';
 import { Universidad } from '../../../entity/universidad';
 import { Municipio } from '../../../entity/municipio';
+import { CloudinaryModule } from '@cloudinary/ng';
+import { Cloudinary } from '@cloudinary/url-gen';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, CloudinaryModule],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css'
 })
@@ -35,13 +37,15 @@ export class RegisterComponent {
     },
     valoracionMedia: 0,
     numValoraciones: 0,
-    notificacionesNoLeidas: 0
+    notificacionesNoLeidas: 0,
+    pass: ''
   }
 
   universidades:Universidad[] = []
   municipios:Municipio[] = []
 
   ngOnInit(){
+    const cld = new Cloudinary({cloud: {cloudName: 'dilfzvvw4'}});
     this.municipioService.getMunicipios().subscribe(data => {
       data.forEach(m => this.municipios.push(m))
     })
@@ -53,7 +57,7 @@ export class RegisterComponent {
   submitUsuario(){
     console.log(this.usuario)
     this.usuarioService.createUsuario(this.usuario).subscribe();
-    //window.location.href="/viajes"
+    window.location.href="/viajes"
   }
 
 }

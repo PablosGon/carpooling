@@ -23,9 +23,19 @@ namespace webapi.Controllers
 
         // GET: api/Usuarios
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<UsuarioDTO>>> GetUsuarios()
+        public async Task<ActionResult<IEnumerable<UsuarioDTO>>> GetUsuarios([FromQuery] string? correo, [FromQuery] string? pass)
         {
-            var res = await _context.Usuarios.ToListAsync();
+            var res = new List<Usuario>();
+
+            if(correo != null && pass != null)
+            {
+                res = await _context.Usuarios.Where(x => x.Correo == correo && x.Pass == pass).ToListAsync();
+            }
+            else
+            {
+                res = await _context.Usuarios.ToListAsync();
+            }
+
 
             List<UsuarioDTO> list = new List<UsuarioDTO>();
 
@@ -69,6 +79,7 @@ namespace webapi.Controllers
                 Id = id,
                 Nombre = usuarioDTO.Nombre,
                 Correo = usuarioDTO.Correo,
+                Pass = usuarioDTO.Pass,
                 Telefono = usuarioDTO.Telefono,
                 Grado = usuarioDTO.Grado,
                 Imagen = usuarioDTO.Imagen,
@@ -102,10 +113,18 @@ namespace webapi.Controllers
         [HttpPost]
         public async Task<ActionResult<UsuarioDTO>> PostUsuario(UsuarioDTO usuarioDTO)
         {
+            var res = await _context.Usuarios.Where(x => x.Correo == usuarioDTO.Correo || x.Telefono == usuarioDTO.Telefono).ToListAsync();
+
+            if (res.Count() > 0)
+            {
+                return BadRequest();
+            }
+
             var usuario = new Usuario
             {
                 Nombre = usuarioDTO.Nombre,
                 Correo = usuarioDTO.Correo,
+                Pass = usuarioDTO.Pass,
                 Telefono = usuarioDTO.Telefono,
                 Grado = usuarioDTO.Grado,
                 Imagen = usuarioDTO.Imagen,
