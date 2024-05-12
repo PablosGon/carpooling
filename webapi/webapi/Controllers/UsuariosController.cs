@@ -83,6 +83,7 @@ namespace webapi.Controllers
                 Telefono = usuarioDTO.Telefono,
                 Grado = usuarioDTO.Grado,
                 Imagen = usuarioDTO.Imagen,
+                IsAdmin = usuarioDTO.IsAdmin,
                 UniversidadId = usuarioDTO.Universidad != null ? usuarioDTO.Universidad.Id : null,
                 MunicipioId = usuarioDTO.Municipio != null ? usuarioDTO.Municipio.Id : null,
             };
@@ -128,6 +129,7 @@ namespace webapi.Controllers
                 Telefono = usuarioDTO.Telefono,
                 Grado = usuarioDTO.Grado,
                 Imagen = usuarioDTO.Imagen,
+                IsAdmin = usuarioDTO.IsAdmin,
                 UniversidadId = usuarioDTO.Universidad != null ? usuarioDTO.Universidad.Id : null,
                 MunicipioId = usuarioDTO.Municipio != null ? usuarioDTO.Municipio.Id : null,
             };

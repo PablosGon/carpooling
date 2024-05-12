@@ -52,7 +52,8 @@ export class FormComponent {
       valoracionMedia: 0,
       numValoraciones: 0,
       notificacionesNoLeidas: 0,
-      pass: ''
+      pass: '',
+      isAdmin: false
     },
     fechaYHora: new Date(),
     maxPlazas: 0,

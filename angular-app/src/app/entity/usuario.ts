@@ -10,6 +10,7 @@ export interface Usuario{
     telefono : string,
     grado : string,
     imagen : string,
+    isAdmin : boolean,
     universidad : Universidad,
     municipio : Municipio
     valoracionMedia: number,

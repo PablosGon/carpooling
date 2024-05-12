@@ -7,6 +7,7 @@ import { UniversidadService } from '../../../services/universidad.service';
 import { MunicipioService } from '../../../services/municipio.service';
 import { Universidad } from '../../../entity/universidad';
 import { Municipio } from '../../../entity/municipio';
+import { ImageService } from '../../../services/image.service';
 
 @Component({
   selector: 'app-editusuario',
@@ -20,10 +21,12 @@ export class EditusuarioComponent {
   private route = inject(ActivatedRoute);
   id = parseInt(this.route.snapshot.paramMap.get('id')!);
 
-  constructor(private usuarioService:UsuarioService, private universidadService:UniversidadService, private municipioService:MunicipioService){}
+  constructor(private usuarioService:UsuarioService, private universidadService:UniversidadService, private municipioService:MunicipioService, private imageService:ImageService){}
 
   universidades:Universidad[] = []
   municipios:Municipio[] = []
+
+  filename:File|null = null
 
   usuario:Usuario = {
     id: 0,
@@ -43,7 +46,8 @@ export class EditusuarioComponent {
     },
     valoracionMedia: 0,
     numValoraciones: 0,
-    notificacionesNoLeidas: 0
+    notificacionesNoLeidas: 0,
+    isAdmin: false
   }
 
   ngOnInit(){
@@ -59,8 +63,18 @@ export class EditusuarioComponent {
   }
 
   updateUsuario(){
+    console.log(this.filename)
+
+    let fr = new FileReader()
+
+    fr.readAsDataURL(this.filename!);
+
+    this.imageService.uploadImage(fr.result!.toString()).subscribe(data => {
+
+      console.log(data)
+    });
     this.usuarioService.updateUsuario(this.id, this.usuario).subscribe()
-    window.location.href='usuario/' + this.id
+    //window.location.href='usuario/' + this.id
   }
 
 }

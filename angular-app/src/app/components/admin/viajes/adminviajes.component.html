@@ -1,0 +1,33 @@
+<p>adminviajes works!</p>
+
+<table border="1">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Fecha y hora</th>
+            <th>Plazas Máximas</th>
+            <th>Comentarios</th>
+            <th>Descripción del Coche</th>
+            <th>Salida</th>
+            <th>Destino</th>
+            <th>Precio</th>
+            <th>Conductor</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (viaje of viajes; track viaje.id) {
+            <tr>
+                <td>{{viaje.id}}</td>
+                <td><input type="datetime" value="{{viaje.fechaYHora}}" [(ngModel)]="viaje.id"/></td>
+                <td><input type="number" value="{{viaje.maxPlazas}}" [(ngModel)]="viaje.maxPlazas"/></td>
+                <td><input type="text" value="{{viaje.comentarios}}" [(ngModel)]="viaje.comentarios"/></td>
+                <td>{{getSalida(viaje.id)}}"</td>
+                <td>{{getDestino(viaje.id)}}</td>
+                <td><input type="number" value="{{viaje.precio}}"/></td>
+                <td><a href="{{'usuario/' + viaje.conductor.id}}"> {{viaje.conductor.nombre}}</a></td>
+                <td><button (click)="updateViaje(viaje.id, viaje)">Editar</button></td>
+                <td><button (click)="deleteViaje(viaje.id)">Eliminar</button></td>
+            </tr>
+        }
+    </tbody>
+</table>

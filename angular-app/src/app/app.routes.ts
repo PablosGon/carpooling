@@ -9,6 +9,7 @@ import { LoginComponent } from './components/usuarios/login/login.component';
 import { RegisterComponent } from './components/usuarios/register/register.component';
 import { EditComponent } from './components/viajes/edit/edit.component';
 import { EditusuarioComponent } from './components/usuario/editusuario/editusuario.component';
+import { AdminloginComponent } from './components/admin/login/adminlogin.component';
 
 export const routes: Routes = [
     {
@@ -50,5 +51,9 @@ export const routes: Routes = [
     {
         path:'usuario/:id/editar',
         component:EditusuarioComponent
+    },
+    {
+        path:'admin/login',
+        component:AdminloginComponent
     }
 ];

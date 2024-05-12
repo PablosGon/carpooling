@@ -1,0 +1,12 @@
+<p>adminlogin works!</p>
+
+<form>
+    @if (notFound) {
+        <p style="color: red;">Correo o contraseña incorrectos</p>
+    }
+    <label>Correo</label><br/>
+    <input type="text" [(ngModel)]="correo" name="correo"/><br/>
+    <label>Contraseña</label><br/>
+    <input type="password" [(ngModel)]="pass" name="pass"/><br/>
+    <button (click)="login()">Iniciar Sesión</button>
+</form>

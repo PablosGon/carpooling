@@ -1,16 +1,15 @@
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { UsuarioService } from '../../../services/usuario.service';
-import { Usuario } from '../../../entity/usuario';
+import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-login',
+  selector: 'app-adminlogin',
   standalone: true,
   imports: [FormsModule],
-  templateUrl: './login.component.html',
-  styleUrl: './login.component.css'
+  templateUrl: './adminlogin.component.html',
+  styleUrl: './adminlogin.component.css'
 })
-export class LoginComponent {
+export class AdminloginComponent {
 
   constructor(private usuarioService:UsuarioService){}
 
@@ -20,8 +19,8 @@ export class LoginComponent {
 
   login(){
     this.usuarioService.getUsuarios(this.correo, this.pass).subscribe(data => {
-      if(data.length > 0 && data[0].isAdmin){
-        sessionStorage.setItem('adminId', data[0].id.toString())
+      if(data.length > 0){
+        sessionStorage.setItem('usuarioId', data[0].id.toString())
         window.location.href="/viajes"
       } else {
         this.notFound = true
