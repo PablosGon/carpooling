@@ -10,6 +10,8 @@ import { RegisterComponent } from './components/usuarios/register/register.compo
 import { EditComponent } from './components/viajes/edit/edit.component';
 import { EditusuarioComponent } from './components/usuario/editusuario/editusuario.component';
 import { AdminloginComponent } from './components/admin/login/adminlogin.component';
+import { AdminComponent } from './components/admin/admin.component';
+import { AdminviajesComponent } from './components/admin/viajes/adminviajes.component';
 
 export const routes: Routes = [
     {
@@ -55,5 +57,13 @@ export const routes: Routes = [
     {
         path:'admin/login',
         component:AdminloginComponent
+    },
+    {
+        path:'admin',
+        component:AdminComponent
+    },
+    {
+        path:'admin/viajes',
+        component:AdminviajesComponent
     }
 ];

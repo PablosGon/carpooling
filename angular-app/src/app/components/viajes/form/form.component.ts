@@ -87,12 +87,12 @@ export class FormComponent {
     private viajeService:ViajeService,
     private universidadService:UniversidadService,
     private centroService:CentroService,
-    private municipioSerivice:MunicipioService,
+    private municipioService:MunicipioService,
     private nucleoService:NucleoService) {}
 
   ngOnInit(){
     this.universidadService.getUniversidades().subscribe(data => this.universidades = data);
-    this.municipioSerivice.getMunicipios().subscribe(data => this.municipios = data)
+    this.municipioService.getMunicipios().subscribe(data => this.municipios = data)
   }
 
   getCentrosByUniversidadId(id:number){
