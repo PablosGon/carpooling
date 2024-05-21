@@ -1,0 +1,42 @@
+<p>adminuniversidades works!</p>
+
+<table border="1">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>ID</th>
+            <th>Nombre</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (universidad of universidades; track universidad.id) {
+            <tr>
+                <td>{{universidad.id}}</td>
+                <td><input type="text" [(ngModel)]="universidad.nombre" name="universidad.nombre"/>
+                <button (click)="updateUniversidad(universidad.id, universidad)">Editar</button>
+                <button (click)="deleteUniversidad(universidad.id)">Eliminar</button></td>
+                <td>
+                    @for (centro of getCentros(universidad.id); track centro.id) {
+                        {{centro.id}}<br/>
+                    }
+                    <br/>
+                </td>
+                <td>
+                    @for (centro of getCentros(universidad.id); track centro.id) {
+                        <input type="text" [(ngModel)]="centro.nombre" name="centro.nombre"/>
+                        <button (click)="updateCentro(centro.id, centro)">Editar</button>
+                        <button (click)="deleteCentro(centro.id)">Eliminar</button><br/>
+                    }
+                    <input type="text" [(ngModel)]="newCentro.nombre" name="newCentro.nombre"/>
+                    <button (click)="createCentro(universidad.id)">Crear</button>
+                </td>
+            </tr>
+        }
+        <tr>
+            <td></td>
+            <td><input type="text" [(ngModel)]="newUniversidad.nombre" name="newUniversidad.nombre"/>
+                <button (click)="createUniversidad()">Crear</button></td>
+        </tr>
+    </tbody>
+</table>
