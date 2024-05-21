@@ -19,9 +19,9 @@ export class AdminloginComponent {
 
   login(){
     this.usuarioService.getUsuarios(this.correo, this.pass).subscribe(data => {
-      if(data.length > 0){
+      if(data.length > 0 && data[0].isAdmin){
         sessionStorage.setItem('usuarioId', data[0].id.toString())
-        window.location.href="/admin/usuarios"
+        window.location.href="/admin"
       } else {
         this.notFound = true
       }

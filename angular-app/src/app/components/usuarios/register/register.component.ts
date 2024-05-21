@@ -9,10 +9,11 @@ import { Municipio } from '../../../entity/municipio';
 import { CloudinaryModule } from '@cloudinary/ng';
 import { Cloudinary, CloudinaryImage } from '@cloudinary/url-gen';
 
+
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [FormsModule, CloudinaryModule],
+  imports: [FormsModule],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css'
 })
@@ -46,7 +47,7 @@ export class RegisterComponent {
   municipios:Municipio[] = []
 
   ngOnInit(){
-    const cld = new Cloudinary({cloud: {cloudName: 'dilfzvvw4'}});
+    // const cld = new Cloudinary({cloud: {cloudName: 'dilfzvvw4'}});
     this.municipioService.getMunicipios().subscribe(data => {
       data.forEach(m => this.municipios.push(m))
     })

@@ -20,8 +20,9 @@ export class LoginComponent {
 
   login(){
     this.usuarioService.getUsuarios(this.correo, this.pass).subscribe(data => {
-      if(data.length > 0 && data[0].isAdmin){
-        sessionStorage.setItem('adminId', data[0].id.toString())
+      console.log(data)
+      if(data.length > 0){
+        sessionStorage.setItem('usuarioId', data[0].id.toString())
         window.location.href="/viajes"
       } else {
         this.notFound = true

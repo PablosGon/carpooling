@@ -14,6 +14,7 @@ import { AdminviajesComponent } from './components/admin/viajes/adminviajes.comp
 import { AdminusuariosComponent } from './components/admin/usuarios/adminusuarios.component';
 import { AdminmunicipiosComponent } from './components/admin/municipios/adminmunicipios.component';
 import { AdminuniversidadesComponent } from './components/admin/universidades/adminuniversidades.component';
+import { AdminComponent } from './components/admin/admin.component';
 
 export const routes: Routes = [
     {
@@ -59,6 +60,10 @@ export const routes: Routes = [
     {
         path:'admin/login',
         component:AdminloginComponent
+    },
+    {
+        path:'admin',
+        component:AdminComponent
     },
     {
         path:'admin/viajes',
