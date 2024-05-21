@@ -7,7 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { Universidad } from '../../../entity/universidad';
 import { Municipio } from '../../../entity/municipio';
 import { CloudinaryModule } from '@cloudinary/ng';
-import { Cloudinary } from '@cloudinary/url-gen';
+import { Cloudinary, CloudinaryImage } from '@cloudinary/url-gen';
 
 @Component({
   selector: 'app-register',

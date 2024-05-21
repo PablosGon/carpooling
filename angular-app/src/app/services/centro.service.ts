@@ -24,4 +24,16 @@ export class CentroService {
   public getCentrosByUniversidadID(id:number):Observable<Centro[]>{
     return this.httpClient.get<Centro[]>(this.url + "centros?universidadId=" + id)
   }
+
+  public createCentro(centro:Centro):Observable<Centro>{
+    return this.httpClient.post<Centro>(this.url + 'centros', centro)
+  }
+
+  public updateCentro(id:number, centro:Centro):Observable<Centro>{
+    return this.httpClient.put<Centro>(this.url + 'centros/' + id, centro)
+  }
+
+  public deleteCentro(id:number):Observable<Centro>{
+    return this.httpClient.delete<Centro>(this.url + 'centros/' + id)
+  }
 }

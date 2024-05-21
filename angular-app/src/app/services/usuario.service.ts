@@ -12,7 +12,7 @@ export class UsuarioService {
 
   url = 'https://localhost:7161/api/'
 
-  public getUsuarios(correo:string, pass:string):Observable<Usuario[]>{
+  public getUsuarios(correo?:string, pass?:string):Observable<Usuario[]>{
     if(correo && pass){
       return this.httpClient.get<Usuario[]>(this.url + "usuarios?correo=" + correo + "&pass=" + pass);
     } else {
@@ -34,5 +34,9 @@ export class UsuarioService {
 
   public readAllNotifications(id:number):Observable<Usuario>{
     return this.httpClient.put<Usuario>(this.url + 'usuarios/' + id + '/readNotifications', {})
+  }
+
+  public deleteUsuario(id:number):Observable<Usuario>{
+    return this.httpClient.delete<Usuario>(this.url + 'usuarios/' + id)
   }
 }
