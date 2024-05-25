@@ -43,6 +43,8 @@ export class NavbarComponent {
     if(this.usuarioId){
       this.usuarioService.getUsuario(parseInt(this.usuarioId)).subscribe(data => {
         this.usuario = data
+        console.log(this.usuario)
+
       })
     }
   }

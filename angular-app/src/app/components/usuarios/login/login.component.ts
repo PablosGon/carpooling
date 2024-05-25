@@ -21,7 +21,7 @@ export class LoginComponent {
   login(){
     this.usuarioService.getUsuarios(this.correo, this.pass).subscribe(data => {
       console.log(data)
-      if(data.length > 0){
+      if(data.length == 1){
         sessionStorage.setItem('usuarioId', data[0].id.toString())
         window.location.href="/viajes"
       } else {
