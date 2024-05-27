@@ -27,6 +27,20 @@ export class AdminusuariosComponent {
   ngOnInit(){
     this.usuarioService.getUsuarios().subscribe(data => {
       this.usuarios = data
+      this.usuarios.forEach(usuario => {
+        if(!usuario.universidad){
+          usuario.universidad = {
+            id:0,
+            nombre:''
+          }
+        }
+        if(!usuario.municipio){
+          usuario.municipio = {
+            id:0,
+            nombre:''
+          }
+        }
+      });
     })
     this.municipioService.getMunicipios().subscribe(data => {
       this.municipios = data
@@ -41,8 +55,7 @@ export class AdminusuariosComponent {
   }
 
   deleteUsuario(id:number){
-    this.usuarioService.deleteUsuario(id).subscribe()
-    window.location.reload()
+    this.usuarioService.deleteUsuario(id).subscribe(data => window.location.reload())
   }
 
   isAdmin(){

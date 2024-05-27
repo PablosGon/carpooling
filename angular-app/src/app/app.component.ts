@@ -11,4 +11,10 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 })
 export class AppComponent {
   title = 'angular-app';
+
+  usuarioId = sessionStorage.getItem("usuarioId")
+
+  ngOnInit(){
+
+  }
 }

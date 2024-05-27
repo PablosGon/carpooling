@@ -7,7 +7,7 @@ import { UniversidadService } from '../../../services/universidad.service';
 import { MunicipioService } from '../../../services/municipio.service';
 import { Universidad } from '../../../entity/universidad';
 import { Municipio } from '../../../entity/municipio';
-import { ImageService } from '../../../services/image.service';
+import { Buffer } from 'buffer';
 
 @Component({
   selector: 'app-editusuario',
@@ -21,12 +21,12 @@ export class EditusuarioComponent {
   private route = inject(ActivatedRoute);
   id = parseInt(this.route.snapshot.paramMap.get('id')!);
 
-  constructor(private usuarioService:UsuarioService, private universidadService:UniversidadService, private municipioService:MunicipioService, private imageService:ImageService){}
+  constructor(private usuarioService:UsuarioService, private universidadService:UniversidadService, private municipioService:MunicipioService){}
 
   universidades:Universidad[] = []
   municipios:Municipio[] = []
 
-  filename:File|null = null
+  file : File | null = null
 
   usuario:Usuario = {
     id: 0,
@@ -62,19 +62,26 @@ export class EditusuarioComponent {
     })
   }
 
-  updateUsuario(){
-    console.log(this.filename)
+  async updateUsuario(){
+    if(this.file){
+      var f = await this.getBase64(this.file)
+      this.usuario.imagen = f
+    }
+    this.usuarioService.updateUsuario(this.id, this.usuario).subscribe(data => window.location.href='usuario/' + this.id)
+  }
 
-    let fr = new FileReader()
+  async getBase64(file:File){
+    const arrayBuffer = await file.arrayBuffer();
+    const b = Buffer.from(arrayBuffer);
+    return "data:image/jpeg;base64," + b.toString('base64')
+  }
 
-    fr.readAsDataURL(this.filename!);
-
-    this.imageService.uploadImage(fr.result!.toString()).subscribe(data => {
-
-      console.log(data)
-    });
-    this.usuarioService.updateUsuario(this.id, this.usuario).subscribe()
-    //window.location.href='usuario/' + this.id
+  readFile(){
+    var inputFile = (<HTMLInputElement> document.getElementById("img")).files?.item(0)
+    if(inputFile){
+      this.file = inputFile
+    }
+    console.log(this.file)
   }
 
 }

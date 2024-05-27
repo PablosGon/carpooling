@@ -15,6 +15,8 @@ export class UsuarioService {
   public getUsuarios(correo?:string, pass?:string):Observable<Usuario[]>{
     if(correo && pass){
       return this.httpClient.get<Usuario[]>(this.url + "usuarios?correo=" + correo + "&pass=" + pass);
+    } else if (correo) {
+      return this.httpClient.get<Usuario[]>(this.url + "usuarios?correo=" + correo);
     } else {
       return this.httpClient.get<Usuario[]>(this.url + "usuarios");
     }

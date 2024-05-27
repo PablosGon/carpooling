@@ -26,7 +26,7 @@
                     <td><input type="checkbox" value="{{usuario.isAdmin}}" [(ngModel)]="usuario.isAdmin"/></td>
                     <td>
                         <select type="number" [(ngModel)]="usuario.universidad.id">
-                            <option value="{{null}}">---</option>
+                            <option value="0">---</option>
                             @for (universidad of universidades; track universidad.id) {
                                 <option value="{{universidad.id}}">{{universidad.nombre}}</option>
                             }

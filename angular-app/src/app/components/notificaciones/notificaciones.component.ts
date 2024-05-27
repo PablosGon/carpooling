@@ -17,13 +17,13 @@ export class NotificacionesComponent {
 
   constructor(private notificacionService:NotificacionesService, private router:Router, private usuarioService:UsuarioService){ }
 
-  usuarioId : number = parseInt(this.route.snapshot.paramMap.get('id')!);
+  usuarioId = sessionStorage.getItem("usuarioId")
   notificaciones : Notificacion[] = []
 
   ngOnInit(){
-    this.notificacionService.getNotificacionesByUsuarioId(this.usuarioId).subscribe(data => {
+    this.notificacionService.getNotificacionesByUsuarioId(parseInt(this.usuarioId!)).subscribe(data => {
       data.forEach(noti => this.notificaciones.push(noti));
-      this.usuarioService.readAllNotifications(this.usuarioId).subscribe()
+      this.usuarioService.readAllNotifications(parseInt(this.usuarioId!)).subscribe()
     })
   }
 

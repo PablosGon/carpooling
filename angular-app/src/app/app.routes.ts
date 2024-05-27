@@ -34,7 +34,7 @@ export const routes: Routes = [
         component:CreateComponent
     },
     {
-        path:'usuario/:id/notificaciones',
+        path:'notificaciones',
         component:NotificacionesComponent
     },
     {

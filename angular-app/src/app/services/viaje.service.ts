@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Viaje } from '../entity/viaje';
 import { Observable } from 'rxjs';
@@ -20,6 +20,7 @@ export class ViajeService {
   public getViajes(centroId?:number, nucleoId?:number, isVuelta?:boolean, fecha?:Date):Observable<Viaje[]> {
 
     let url = this.url + 'viajes'
+    let params = {}
 
     console.log(centroId, nucleoId)
 
@@ -32,7 +33,7 @@ export class ViajeService {
       url = url + '&fechaHora=' + fecha
     }
 
-    return this.httpClient.get<Viaje[]>(url);
+    return this.httpClient.get<Viaje[]>(url, );
   }
 
   public getViaje(id:number):Observable<Viaje> {

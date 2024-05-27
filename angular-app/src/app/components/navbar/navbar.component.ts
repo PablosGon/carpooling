@@ -36,7 +36,7 @@ export class NavbarComponent {
 
   usuarioId = sessionStorage.getItem('usuarioId')
 
-  constructor(private router : Router, private usuarioService : UsuarioService){}
+  constructor(private usuarioService : UsuarioService){}
 
   ngOnInit(){
     console.log(this.usuarioId)

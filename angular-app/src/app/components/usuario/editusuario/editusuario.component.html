@@ -12,7 +12,7 @@
     <label>Grado</label><br/>
     <input type="text" [(ngModel)]="usuario.grado" name="usuario.grado"/><br/>
     <label>Imagen</label><br/>
-    <input type="file" [(ngModel)]="filename" name="usuario.imagen"/><br/>
+    <input type="file" name="usuario.imagen" (change)="readFile()" id="img"/><br/>
     <label>Universidad</label><br/>
     <select type="text" [(ngModel)]="usuario.universidad.id" name="usuario.universidad.id">
         <option>---</option>

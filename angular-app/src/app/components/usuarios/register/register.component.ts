@@ -6,9 +6,7 @@ import { MunicipioService } from '../../../services/municipio.service';
 import { FormsModule } from '@angular/forms';
 import { Universidad } from '../../../entity/universidad';
 import { Municipio } from '../../../entity/municipio';
-import { CloudinaryModule } from '@cloudinary/ng';
-import { Cloudinary, CloudinaryImage } from '@cloudinary/url-gen';
-
+import { Buffer } from 'buffer';
 
 @Component({
   selector: 'app-register',
@@ -43,11 +41,14 @@ export class RegisterComponent {
     isAdmin: false
   }
 
+  file : File | null = null
+
   universidades:Universidad[] = []
   municipios:Municipio[] = []
 
+  error = ''
+
   ngOnInit(){
-    // const cld = new Cloudinary({cloud: {cloudName: 'dilfzvvw4'}});
     this.municipioService.getMunicipios().subscribe(data => {
       data.forEach(m => this.municipios.push(m))
     })
@@ -56,10 +57,41 @@ export class RegisterComponent {
     })
   }
 
-  submitUsuario(){
-    console.log(this.usuario)
-    this.usuarioService.createUsuario(this.usuario).subscribe();
-    window.location.href="/viajes"
+  async submitUsuario(){
+    if(this.usuario.correo && this.usuario.pass && this.usuario.telefono && this.usuario.nombre){
+      this.createUsuario()
+    } else {
+      this.error = "Faltan campos obligatorios"
+    }
+  }
+
+  async createUsuario(){
+
+    if(this.file){
+      var f = await this.getBase64(this.file)
+      this.usuario.imagen = f
+    }
+
+    this.usuarioService.createUsuario(this.usuario).subscribe(data => {
+      sessionStorage.setItem("usuarioId", data.id.toString())
+      window.location.href="/viajes"
+    }, error => {
+      this.error = error.error
+    });
+    
+  }
+
+  async getBase64(file:File){
+    const arrayBuffer = await file.arrayBuffer();
+    const b = Buffer.from(arrayBuffer);
+    return "data:image/jpeg;base64," + b.toString('base64')
+  }
+
+  readFile(){
+    var inputFile = (<HTMLInputElement> document.getElementById("img")).files?.item(0)
+    if(inputFile){
+      this.file = inputFile
+    }
   }
 
 }

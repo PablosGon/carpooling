@@ -7,6 +7,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using webapi.DTOs;
 using webapi.Models;
+using CloudinaryDotNet;
+using CloudinaryDotNet.Actions;
+using Microsoft.Extensions.Options;
+using webapi.Settings;
 
 namespace webapi.Controllers
 {
@@ -15,10 +19,14 @@ namespace webapi.Controllers
     public class UsuariosController : ControllerBase
     {
         private readonly AppDbContext _context;
+        private readonly Cloudinary _cloudinary;
 
-        public UsuariosController(AppDbContext context)
+        public UsuariosController(AppDbContext context, IOptions<CloudinarySettings> config)
         {
             _context = context;
+
+            var account = new Account(config.Value.CloudName, config.Value.ApiKey, config.Value.ApiSecret);
+            _cloudinary = new Cloudinary(account);
         }
 
         // GET: api/Usuarios
@@ -114,11 +122,24 @@ namespace webapi.Controllers
         [HttpPost]
         public async Task<ActionResult<UsuarioDTO>> PostUsuario(UsuarioDTO usuarioDTO)
         {
-            var res = await _context.Usuarios.Where(x => x.Correo == usuarioDTO.Correo || x.Telefono == usuarioDTO.Telefono).ToListAsync();
+            var res = await _context.Usuarios.Where(x => x.Correo == usuarioDTO.Correo).ToListAsync();
 
             if (res.Count() > 0)
             {
-                return BadRequest();
+                return BadRequest("Ya existe un usuario con ese correo");
+            }
+
+            if(usuarioDTO.Imagen != null)
+            {
+                var uploadParams = new ImageUploadParams
+                {
+                    File = new FileDescription(filePath: usuarioDTO.Imagen),
+                    Transformation = new Transformation().Height(500).Width(500).Crop("fill")
+                };
+
+                var uploadResult = await _cloudinary.UploadAsync(uploadParams);
+
+                usuarioDTO.Imagen = uploadResult.PublicId;
             }
 
             var usuario = new Usuario
@@ -130,14 +151,16 @@ namespace webapi.Controllers
                 Grado = usuarioDTO.Grado,
                 Imagen = usuarioDTO.Imagen,
                 IsAdmin = usuarioDTO.IsAdmin,
-                UniversidadId = usuarioDTO.Universidad != null ? usuarioDTO.Universidad.Id : null,
-                MunicipioId = usuarioDTO.Municipio != null ? usuarioDTO.Municipio.Id : null,
+                UniversidadId = usuarioDTO.Universidad != null && usuarioDTO.Universidad.Id != 0 ? usuarioDTO.Universidad.Id : null,
+                MunicipioId = usuarioDTO.Municipio != null && usuarioDTO.Municipio.Id != 0 ? usuarioDTO.Municipio.Id : null,
             };
 
             _context.Usuarios.Add(usuario);
             await _context.SaveChangesAsync();
 
-            usuarioDTO.Id = usuarioDTO.Id;
+            
+
+            usuarioDTO.Id = usuario.Id;
 
             return CreatedAtAction("GetUsuario", new { id = usuario.Id }, usuarioDTO);
         }
