@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CloudinaryDotNet;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using webapi.DTOs;
 using webapi.Models;
+using webapi.Settings;
 
 namespace webapi.Controllers
 {
@@ -15,10 +18,13 @@ namespace webapi.Controllers
     public class CentrosController : ControllerBase
     {
         private readonly AppDbContext _context;
+        private readonly Cloudinary _cloudinary;
 
-        public CentrosController(AppDbContext context)
+        public CentrosController(AppDbContext context, IOptions<CloudinarySettings> config)
         {
             _context = context;
+            var account = new Account(config.Value.CloudName, config.Value.ApiKey, config.Value.ApiSecret);
+            _cloudinary = new Cloudinary(account);
         }
 
         // GET: api/Centros
@@ -66,6 +72,7 @@ namespace webapi.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutCentro(int id, CentroDTO centroDTO)
         {
+
             var centro = new Centro
             {
                 Id = id,

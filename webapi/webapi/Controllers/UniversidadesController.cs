@@ -60,7 +60,8 @@ namespace webapi.Controllers
             var universidad = new Universidad
             {
                 Id = id,
-                Nombre = universidadDTO.Nombre
+                Nombre = universidadDTO.Nombre,
+                Imagen = universidadDTO.Imagen
             };
 
             _context.Entry(universidad).State = EntityState.Modified;
@@ -92,8 +93,8 @@ namespace webapi.Controllers
 
             var universidad = new Universidad
             {
-                Id = universidadDTO.Id,
-                Nombre = universidadDTO.Nombre
+                Nombre = universidadDTO.Nombre,
+                Imagen = universidadDTO.Imagen
             };
 
             _context.Universidades.Add(universidad);

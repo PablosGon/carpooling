@@ -19,7 +19,8 @@ export class AdminuniversidadesComponent {
 
   newUniversidad:Universidad = {
     id: 0,
-    nombre: ''
+    nombre: '',
+    imagen: ''
   }
 
   newCentro:Centro = {
@@ -27,7 +28,8 @@ export class AdminuniversidadesComponent {
     nombre: '',
     universidad: {
       id: 0,
-      nombre: ''
+      nombre: '',
+      imagen: ''
     },
     imagen: ''
   }

@@ -28,7 +28,8 @@
                         <button (click)="updateNucleo(nucleo.id, nucleo)">Editar</button>
                         <button (click)="deleteNucleo(nucleo.id)">Eliminar</button><br/>
                     }
-                    <input type="text" [(ngModel)]="newNucleo.nombre" name="newCentro.nombre"/>
+                    <input type="text" name="newNucleo.nombre" id="{{'nombreNucleo' + municipio.id}}" [(ngModel)]="newNucleo.nombre"/>
+                    <input type="file" id="nucFile" name="nucFile" (change)="readNucleoFile()"/>
                     <button (click)="createNucleo(municipio.id)">Crear</button>
                 </td>
             </tr>
@@ -36,6 +37,7 @@
         <tr>
             <td></td>
             <td><input type="text" [(ngModel)]="newMunicipio.nombre" name="newUniversidad.nombre"/>
+                <input type="file" id="munFile" name="munFile" (change)="readMunicipioFile()"/>
                 <button (click)="createMunicipio()">Crear</button></td>
         </tr>
     </tbody>

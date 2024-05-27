@@ -31,13 +31,15 @@ export class AdminusuariosComponent {
         if(!usuario.universidad){
           usuario.universidad = {
             id:0,
-            nombre:''
+            nombre:'',
+            imagen:''
           }
         }
         if(!usuario.municipio){
           usuario.municipio = {
             id:0,
-            nombre:''
+            nombre:'',
+            imagen:''
           }
         }
       });

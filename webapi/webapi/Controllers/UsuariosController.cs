@@ -82,6 +82,19 @@ namespace webapi.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutUsuario(int id, UsuarioDTO usuarioDTO)
         {
+            if (usuarioDTO.Imagen != null)
+            {
+                var uploadParams = new ImageUploadParams
+                {
+                    File = new FileDescription(filePath: usuarioDTO.Imagen),
+                    Transformation = new Transformation().Height(500).Width(500).Crop("fill")
+                };
+
+                var uploadResult = await _cloudinary.UploadAsync(uploadParams);
+
+                usuarioDTO.Imagen = uploadResult.PublicId;
+            }
+
             var usuario = new Usuario
             {
                 Id = id,

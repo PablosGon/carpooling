@@ -19,7 +19,8 @@ export class AdminmunicipiosComponent {
 
   newMunicipio:Municipio = {
     id: 0,
-    nombre: ''
+    nombre: '',
+    imagen: ''
   }
 
   newNucleo:Nucleo = {
@@ -28,9 +29,13 @@ export class AdminmunicipiosComponent {
     imagen: '',
     municipio: {
       id: 0,
-      nombre: ''
+      nombre: '',
+      imagen: ''
     }
   }
+
+  municipioFile : File | null = null
+  nucleoFile : File | null = null
 
   constructor(private municipioService:MunicipioService, private nucleoService:NucleoService){}
 
@@ -43,13 +48,19 @@ export class AdminmunicipiosComponent {
     return this.nucleos.filter(x => x.municipio.id == municipioId)
   }
 
-  createMunicipio(){
+  async createMunicipio(){
+    if(this.municipioFile){
+      this.newMunicipio.imagen = await this.getBase64(this.municipioFile)
+    }
     this.municipioService.createMunicipio(this.newMunicipio).subscribe()
     window.location.reload()
   }
 
-  createNucleo(universidadId:number){
-    this.newNucleo.municipio.id = universidadId
+  async createNucleo(municipioId:number){
+    if(this.nucleoFile){
+      this.newNucleo.imagen = await this.getBase64(this.nucleoFile)
+    }
+    this.newNucleo.municipio.id = municipioId
     this.nucleoService.createNucleo(this.newNucleo).subscribe()
     window.location.reload()
   }
@@ -67,11 +78,31 @@ export class AdminmunicipiosComponent {
   deleteMunicipio(id:number){
     this.municipioService.deleteMunicipio(id).subscribe()
     window.location.reload()
-}
+  }
 
   deleteNucleo(id:number){
     this.nucleoService.deleteNucleo(id).subscribe()
     window.location.reload()
-}
+  } 
+
+  async getBase64(file:File){
+    const arrayBuffer = await file.arrayBuffer();
+    const b = Buffer.from(arrayBuffer);
+    return "data:image/jpeg;base64," + b.toString('base64')
+  }
+
+  readMunicipioFile(){
+    var inputFile = (<HTMLInputElement> document.getElementById("munFile")).files?.item(0)
+    if(inputFile){
+      this.municipioFile = inputFile
+    }
+  }
+
+  readNucleoFile(){
+    var inputFile = (<HTMLInputElement> document.getElementById("nucFile")).files?.item(0)
+    if(inputFile){
+      this.municipioFile = inputFile
+    }
+  }
 
 }

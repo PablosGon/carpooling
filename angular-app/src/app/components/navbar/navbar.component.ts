@@ -21,11 +21,13 @@ export class NavbarComponent {
     imagen: '',
     universidad: {
       id: 0,
-      nombre: ''
+      nombre: '',
+      imagen: ''
     },
     municipio: {
       id: 0,
-      nombre: ''
+      nombre: '',
+      imagen: ''
     },
     valoracionMedia: 0,
     numValoraciones: 0,

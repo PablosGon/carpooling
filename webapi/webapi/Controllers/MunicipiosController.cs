@@ -60,7 +60,8 @@ namespace webapi.Controllers
             var municipio = new Municipio
             {
                 Id = id,
-                Nombre = municipioDTO.Nombre
+                Nombre = municipioDTO.Nombre,
+                Imagen = municipioDTO.Imagen
             };
 
             _context.Entry(municipio).State = EntityState.Modified;
@@ -92,7 +93,8 @@ namespace webapi.Controllers
 
             var municipio = new Municipio
             {
-                Nombre = municipioDTO.Nombre
+                Nombre = municipioDTO.Nombre,
+                Imagen = municipioDTO.Imagen
             };
 
             _context.Municipios.Add(municipio);

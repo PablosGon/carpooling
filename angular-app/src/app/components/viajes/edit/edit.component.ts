@@ -44,11 +44,13 @@ export class EditComponent {
       imagen: '',
       universidad: {
         id: 0,
-        nombre: ''
+        nombre: '',
+        imagen: ''
       },
       municipio: {
         id: 0,
-        nombre: ''
+        nombre: '',
+        imagen: ''
       },
       valoracionMedia: 0,
       numValoraciones: 0,
@@ -66,7 +68,8 @@ export class EditComponent {
       nombre: '',
       municipio: {
         id: 0,
-        nombre: ''
+        nombre: '',
+        imagen: ''
       },
       imagen: ''
     },
@@ -75,7 +78,8 @@ export class EditComponent {
       nombre: '',
       universidad: {
         id: 0,
-        nombre: ''
+        nombre: '',
+        imagen: ''
       },
       imagen: ''
     },
