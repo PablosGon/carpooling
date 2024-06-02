@@ -64,7 +64,14 @@ namespace webapi.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutMunicipio(int id, MunicipioDTO municipioDTO)
         {
-            if (!municipioDTO.Imagen.IsNullOrEmpty())
+            var m = _context.Municipios.Find(id);
+
+            if(m == null)
+            {
+                return NotFound("Municipio no encontrado");
+            }
+
+            if (!municipioDTO.Imagen.IsNullOrEmpty() && municipioDTO.Imagen != m.Imagen)
             {
                 var uploadParams = new ImageUploadParams
                 {
@@ -73,18 +80,15 @@ namespace webapi.Controllers
                 };
 
                 var uploadResult = await _cloudinary.UploadAsync(uploadParams);
+                await _cloudinary.DeleteResourcesAsync(m.Imagen);
 
                 municipioDTO.Imagen = uploadResult.PublicId;
             }
 
-            var municipio = new Municipio
-            {
-                Id = id,
-                Nombre = municipioDTO.Nombre,
-                Imagen = municipioDTO.Imagen
-            };
+            if(!municipioDTO.Nombre.IsNullOrEmpty()) m.Nombre = municipioDTO.Nombre;
+            if(!municipioDTO.Imagen.IsNullOrEmpty()) m.Imagen = municipioDTO.Imagen;
 
-            _context.Entry(municipio).State = EntityState.Modified;
+            _context.Entry(m).State = EntityState.Modified;
 
             try
             {

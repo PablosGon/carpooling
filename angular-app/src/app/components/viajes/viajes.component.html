@@ -49,6 +49,7 @@
 </form>
 
 @for (viaje of viajes; track viaje.id) {
-    <img src="{{viaje.nucleo.imagen}}" class="cropped"/> <img src="{{viaje.centro.imagen}}" class="cropped"/><br/>
+    <img src="{{'https://res.cloudinary.com/dilfzvvw4/image/upload/v1716716882/' + viaje.nucleo.imagen + '.jpg'}}" style="width: 200px; height: 200px;"/>
+    <img src="{{'https://res.cloudinary.com/dilfzvvw4/image/upload/v1716716882/' + viaje.centro.imagen + '.jpg'}}" style="width: 200px; height: 200px;"/><br/>
     <a routerLink="{{'/viaje/' + viaje.id}}"  routerLinkActive="active" ariaCurrentWhenActive="page">Viaje de {{salida(viaje)}} a {{destino(viaje)}} ({{viaje.fechaYHora}})</a><br/>
 }

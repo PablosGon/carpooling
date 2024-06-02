@@ -37,6 +37,7 @@ export class AdminmunicipiosComponent {
 
   municipioFile : File | null = null
   nucleoFile : File | null = null
+  allowedFileTypes = ["image/png", "image/jpeg"];
 
   constructor(private municipioService:MunicipioService, private nucleoService:NucleoService){}
 
@@ -53,8 +54,7 @@ export class AdminmunicipiosComponent {
     if(this.municipioFile){
       this.newMunicipio.imagen = await this.getBase64(this.municipioFile)
     }
-    this.municipioService.createMunicipio(this.newMunicipio).subscribe()
-    window.location.reload()
+    this.municipioService.createMunicipio(this.newMunicipio).subscribe(data => window.location.reload())
   }
 
   async createNucleo(municipioId:number){
@@ -62,34 +62,30 @@ export class AdminmunicipiosComponent {
       this.newNucleo.imagen = await this.getBase64(this.nucleoFile)
     }
     this.newNucleo.municipio.id = municipioId
-    this.nucleoService.createNucleo(this.newNucleo).subscribe()
-    window.location.reload()
+    this.nucleoService.createNucleo(this.newNucleo).subscribe(data => window.location.reload())
   }
 
   async updateMunicipio(id:number, municipio:Municipio){
     if(this.municipioFile){
       municipio.imagen = await this.getBase64(this.municipioFile)
     }
-    this.municipioService.updateMunicipio(id, municipio).subscribe()
-    window.location.reload()
+    this.municipioService.updateMunicipio(id, municipio).subscribe(data => window.location.reload())
   }
 
   async updateNucleo(id:number, nucleo:Nucleo){
+    console.log(this.municipioFile)
     if(this.nucleoFile){
       nucleo.imagen = await this.getBase64(this.nucleoFile)
     }
-    this.nucleoService.updateNucleo(id, nucleo).subscribe()
-    //window.location.reload()
+    this.nucleoService.updateNucleo(id, nucleo).subscribe(data => window.location.reload())
   }
 
   deleteMunicipio(id:number){
-    this.municipioService.deleteMunicipio(id).subscribe()
-    window.location.reload()
+    this.municipioService.deleteMunicipio(id).subscribe(data => window.location.reload())
   }
 
   deleteNucleo(id:number){
-    this.nucleoService.deleteNucleo(id).subscribe()
-    window.location.reload()
+    this.nucleoService.deleteNucleo(id).subscribe(data => window.location.reload())
   } 
 
   async getBase64(file:File){
@@ -101,26 +97,45 @@ export class AdminmunicipiosComponent {
   readMunicipioFile(id?:number){
 
     let inputFile;
+
+    let elementId = 'munFile'
+
     if(id){
-      inputFile = (<HTMLInputElement> document.getElementById("munFile" + id.toString())).files?.item(0)
-    } else {
-      inputFile = (<HTMLInputElement> document.getElementById("munFile")).files?.item(0)
+      elementId += id
     }
+
+    inputFile = (<HTMLInputElement> document.getElementById(elementId)).files?.item(0)
+
+
     if(inputFile){
-      this.municipioFile = inputFile
+      if(this.allowedFileTypes.includes(inputFile.type)) {
+        this.municipioFile = inputFile
+        document.getElementById("munFileWarning" + id)!.innerText = "";
+      } else {
+        document.getElementById("munFileWarning" + id)!.innerText = "Tipo de archivo no permitido";
+      }
     }
   }
 
-  readNucleoFile(id?:number){
+  readNucleoFile(munId:number, id?:number){
     
     let inputFile;
+
+    let elementId = munId + 'nucFile'
+
     if(id){
-      inputFile = (<HTMLInputElement> document.getElementById("nucFile" + id.toString())).files?.item(0)
-    } else {
-      inputFile = (<HTMLInputElement> document.getElementById("nucFile")).files?.item(0)
+      elementId += id
     }
+
+    inputFile = (<HTMLInputElement> document.getElementById(elementId)).files?.item(0)
+
     if(inputFile){
-      this.nucleoFile = inputFile
+      if(this.allowedFileTypes.includes(inputFile.type)) {
+        this.nucleoFile = inputFile
+        document.getElementById(elementId + "Warning")!.innerText = "";
+      } else {
+        document.getElementById(elementId + "Warning")!.innerText = "Tipo de archivo no permitido";
+      }
     }
 
   }

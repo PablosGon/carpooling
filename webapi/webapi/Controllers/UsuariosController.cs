@@ -11,6 +11,7 @@ using CloudinaryDotNet;
 using CloudinaryDotNet.Actions;
 using Microsoft.Extensions.Options;
 using webapi.Settings;
+using Microsoft.IdentityModel.Tokens;
 
 namespace webapi.Controllers
 {
@@ -82,8 +83,16 @@ namespace webapi.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutUsuario(int id, UsuarioDTO usuarioDTO)
         {
-            if (usuarioDTO.Imagen != null)
+            var u = _context.Usuarios.Find(id);
+
+            if(u == null)
             {
+                return NotFound("No se encontró al usuario");
+            }
+
+            if (!usuarioDTO.Imagen.IsNullOrEmpty() && u.Imagen != usuarioDTO.Imagen)
+            {
+
                 var uploadParams = new ImageUploadParams
                 {
                     File = new FileDescription(filePath: usuarioDTO.Imagen),
@@ -91,25 +100,22 @@ namespace webapi.Controllers
                 };
 
                 var uploadResult = await _cloudinary.UploadAsync(uploadParams);
+                await _cloudinary.DeleteResourcesAsync(u.Imagen);
 
                 usuarioDTO.Imagen = uploadResult.PublicId;
             }
 
-            var usuario = new Usuario
-            {
-                Id = id,
-                Nombre = usuarioDTO.Nombre,
-                Correo = usuarioDTO.Correo,
-                Pass = usuarioDTO.Pass,
-                Telefono = usuarioDTO.Telefono,
-                Grado = usuarioDTO.Grado,
-                Imagen = usuarioDTO.Imagen,
-                IsAdmin = usuarioDTO.IsAdmin,
-                UniversidadId = usuarioDTO.Universidad != null ? usuarioDTO.Universidad.Id : null,
-                MunicipioId = usuarioDTO.Municipio != null ? usuarioDTO.Municipio.Id : null,
-            };
+            if(!usuarioDTO.Nombre.IsNullOrEmpty()) u.Nombre = usuarioDTO.Nombre;
+            if(!usuarioDTO.Correo.IsNullOrEmpty()) u.Correo = usuarioDTO.Correo;
+            if(!usuarioDTO.Pass.IsNullOrEmpty()) u.Pass = usuarioDTO.Pass;
+            if(!usuarioDTO.Telefono.IsNullOrEmpty()) u.Telefono = usuarioDTO.Telefono;
+            if (!usuarioDTO.Imagen.IsNullOrEmpty()) u.Imagen = usuarioDTO.Imagen;
+            u.Grado = usuarioDTO.Grado;
+            u.IsAdmin = usuarioDTO.IsAdmin;
+            u.UniversidadId = usuarioDTO.Universidad != null ? usuarioDTO.Universidad.Id : null;
+            u.MunicipioId = usuarioDTO.Municipio != null ? usuarioDTO.Municipio.Id : null;
 
-            _context.Entry(usuario).State = EntityState.Modified;
+            _context.Entry(u).State = EntityState.Modified;
 
             try
             {

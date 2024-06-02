@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { Universidad } from '../../../entity/universidad';
 import { Centro } from '../../../entity/centro';
 import { UniversidadService } from '../../../services/universidad.service';
 import { CentroService } from '../../../services/centro.service';
 import { FormsModule } from '@angular/forms';
+import { Buffer } from 'buffer';
 
 @Component({
   selector: 'app-adminuniversidades',
@@ -34,6 +35,10 @@ export class AdminuniversidadesComponent {
     imagen: ''
   }
 
+  universidadFile : File | null = null
+  centroFile : File | null = null
+  allowedFileTypes = ["image/png", "image/jpeg"];
+
   constructor(private universidadService:UniversidadService, private centroService:CentroService){}
 
   ngOnInit(){
@@ -45,35 +50,97 @@ export class AdminuniversidadesComponent {
     return this.centros.filter(x => x.universidad.id == universidadId)
   }
 
-  createUniversidad(){
-    this.universidadService.createUniversidad(this.newUniversidad).subscribe()
-    window.location.reload()
+  async createUniversidad(){
+    if(this.universidadFile){
+      this.newUniversidad.imagen = await this.getBase64(this.universidadFile);
+    }
+    this.universidadService.createUniversidad(this.newUniversidad).subscribe(data => window.location.reload())
   }
 
-  createCentro(universidadId:number){
+  async createCentro(universidadId:number){
+    if(this.centroFile){
+      this.newCentro.imagen = await this.getBase64(this.centroFile);
+    }
+    console.log(this.newCentro)
     this.newCentro.universidad.id = universidadId
-    this.centroService.createCentro(this.newCentro).subscribe()
-    window.location.reload()
+    this.centroService.createCentro(this.newCentro).subscribe(data => window.location.reload())
   }
 
-  updateUniversidad(id:number, universidad:Universidad){
-    this.universidadService.updateUniversidad(id, universidad).subscribe()
-    window.location.reload()
+  async updateUniversidad(id:number, universidad:Universidad){
+    if(this.universidadFile){
+      universidad.imagen = await this.getBase64(this.universidadFile);
+    }
+    this.universidadService.updateUniversidad(id, universidad).subscribe(data => window.location.reload())
   }
 
-  updateCentro(id:number, centro:Centro){
-    this.centroService.updateCentro(id, centro).subscribe()
-    window.location.reload()
+  async updateCentro(id:number, centro:Centro){
+    if(this.centroFile){
+      centro.imagen = await this.getBase64(this.centroFile);
+    }
+    this.centroService.updateCentro(id, centro).subscribe(data => window.location.reload())
   }
 
   deleteUniversidad(id:number){
-    this.universidadService.deleteUniversidad(id).subscribe()
-    window.location.reload()
-}
+    this.universidadService.deleteUniversidad(id).subscribe(data => window.location.reload())
+  }
 
   deleteCentro(id:number){
-    this.centroService.deleteCentro(id).subscribe()
-    window.location.reload()
-}
+    this.centroService.deleteCentro(id).subscribe(data => window.location.reload())
+  }
+
+  async getBase64(file:File){
+    const arrayBuffer = await file.arrayBuffer();
+    const b = Buffer.from(arrayBuffer);
+    return "data:image/jpeg;base64," + b.toString('base64')
+  }
+
+  readUniversidadFile(id?:number){
+
+    let inputFile;
+    let elementId = 'uniFile'
+
+    if(id){
+      elementId += id
+    }
+
+    console.log(elementId)
+
+    inputFile = (<HTMLInputElement> document.getElementById(elementId)).files?.item(0)
+
+    if(inputFile){
+      if(this.allowedFileTypes.includes(inputFile.type)) {
+        this.universidadFile = inputFile
+        document.getElementById(elementId + 'Warning')!.innerText = "";
+      } else {
+        document.getElementById(elementId + 'Warning')!.innerText = "Tipo de archivo no permitido";
+      }
+    }
+  }
+
+  readCentroFile(uniId:number, id?:number){
+
+    let inputFile;
+    let elementId = uniId + "cenFile"
+
+    if(id){
+      elementId += id
+    }
+
+    console.log(elementId)
+
+    inputFile = (<HTMLInputElement> document.getElementById(elementId)).files?.item(0)
+
+    console.log((<HTMLInputElement> document.getElementById(elementId)))
+
+    if(inputFile){
+      if(this.allowedFileTypes.includes(inputFile.type)) {
+        this.centroFile = inputFile
+        document.getElementById(elementId + 'Warning')!.innerText = "";
+      } else {
+        document.getElementById(elementId + 'Warning')!.innerText = "Tipo de archivo no permitido";
+      }
+    }
+
+  }
 
 }

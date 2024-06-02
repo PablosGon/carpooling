@@ -15,6 +15,7 @@
                 <td>{{municipio.id}}</td>
                 <td><img src="{{'https://res.cloudinary.com/dilfzvvw4/image/upload/v1716716882/' + municipio.imagen + '.jpg'}}" style="width: 200px; height: 200px;"/>
                     <input type="file" id="{{'munFile' + municipio.id}}" name="{{'munFile' + municipio.id}}" (change)="readMunicipioFile(municipio.id)"/>
+                    <p style="color: red;" id="{{'munFileWarning' + municipio.id}}"></p>
                 </td>
                 <td><input type="text" [(ngModel)]="municipio.nombre" name="municipio.nombre"/>
                 <button (click)="updateMunicipio(municipio.id, municipio)">Editar</button>
@@ -32,14 +33,16 @@
                             <tr>
                                 <td>{{nucleo.id}}</td>
                                 <td><img src="{{'https://res.cloudinary.com/dilfzvvw4/image/upload/v1716716882/' + nucleo.imagen + '.jpg'}}" style="width: 200px; height: 200px;"/>
-                                <input type="file" id="{{'nucFile' + municipio.id}}" name="{{'nucFile' + municipio.id}}" (change)="readNucleoFile(nucleo.id)"/></td>
+                                <input type="file" id="{{municipio.id + 'nucFile' + nucleo.id}}" name="{{'nucFile' + municipio.id}}" (change)="readNucleoFile(municipio.id, nucleo.id)"/>
+                                <p style="color: red;" id="{{municipio.id + 'nucFile' + nucleo.id + 'Warning'}}"></p></td>
                                 <td><input type="text" [(ngModel)]="nucleo.nombre" name="nucleo.nombre"/>
                                     <button (click)="updateNucleo(nucleo.id, nucleo)">Editar</button>
                                     <button (click)="deleteNucleo(nucleo.id)">Eliminar</button></td>
                             </tr>
                         }
                         <input type="text" name="newNucleo.nombre" id="nombreNucleo" [(ngModel)]="newNucleo.nombre"/>
-                        <input type="file" id="nucFile" name="nucFile" (change)="readNucleoFile()"/>
+                        <input type="file" id="{{municipio.id + 'nucFile'}}" name="nucFile" (change)="readNucleoFile(municipio.id)"/>
+                        <p style="color: red;" id="{{municipio.id + 'nucFileWarning'}}"></p>
                         <button (click)="createNucleo(municipio.id)">Crear</button>
                     </table>
 
@@ -51,6 +54,7 @@
             <td></td>
             <td><input type="text" [(ngModel)]="newMunicipio.nombre" name="newUniversidad.nombre"/>
                 <input type="file" id="munFile" name="munFile" (change)="readMunicipioFile()"/>
+                <p style="color: red;" id="{{'munFileWarning'}}"></p>
                 <button (click)="createMunicipio()">Crear</button></td>
         </tr>
     </tbody>

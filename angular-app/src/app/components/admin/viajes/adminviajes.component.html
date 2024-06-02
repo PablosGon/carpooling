@@ -19,7 +19,7 @@
         @for (viaje of viajes; track viaje.id) {
             <tr>
                 <td>{{viaje.id}}</td>
-                <td><input type="datetime" [(ngModel)]="viaje.fechaYHora"/></td>
+                <td><input type="datetime-local" [(ngModel)]="viaje.fechaYHora"/></td>
                 <td><input type="number" [(ngModel)]="viaje.maxPlazas"/></td>
                 <td><input type="text" [(ngModel)]="viaje.comentarios"/></td>
                 <td><input type="text" [(ngModel)]="viaje.descripcionCoche"/></td>

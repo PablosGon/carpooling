@@ -76,7 +76,14 @@ namespace webapi.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutNucleo(int id, NucleoDTO nucleoDTO)
         {
-            if (!nucleoDTO.Imagen.IsNullOrEmpty())
+            var n = _context.Nucleos.Find(id);
+
+            if(n == null)
+            {
+                return NotFound("Núcleo no encontrado");
+            }
+
+            if (!nucleoDTO.Imagen.IsNullOrEmpty() && nucleoDTO.Imagen != n.Imagen)
             {
                 var uploadParams = new ImageUploadParams
                 {
@@ -85,19 +92,16 @@ namespace webapi.Controllers
                 };
 
                 var uploadResult = await _cloudinary.UploadAsync(uploadParams);
+                await _cloudinary.DeleteResourcesAsync(n.Imagen);
 
                 nucleoDTO.Imagen = uploadResult.PublicId;
             }
 
-            var nucleo = new Nucleo
-            {
-                Id = id,
-                Nombre = nucleoDTO.Nombre,
-                MunicipioId = nucleoDTO.Municipio.Id,
-                Imagen = nucleoDTO.Imagen
-            };
+            if(!nucleoDTO.Nombre.IsNullOrEmpty()) n.Nombre = nucleoDTO.Nombre;
+            if(nucleoDTO.Municipio.Id != 0) n.MunicipioId = nucleoDTO.Municipio.Id;
+            if(!nucleoDTO.Imagen.IsNullOrEmpty()) n.Imagen = nucleoDTO.Imagen;
 
-            _context.Entry(nucleo).State = EntityState.Modified;
+            _context.Entry(n).State = EntityState.Modified;
 
             try
             {

@@ -74,7 +74,14 @@ namespace webapi.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutCentro(int id, CentroDTO centroDTO)
         {
-            if (!centroDTO.Imagen.IsNullOrEmpty())
+            var c = _context.Centros.Find(id);
+
+            if(c == null)
+            {
+                return NotFound("Centro no encontrado");
+            }
+
+            if (!centroDTO.Imagen.IsNullOrEmpty() && centroDTO.Imagen != c.Imagen)
             {
                 var uploadParams = new ImageUploadParams
                 {
@@ -83,19 +90,16 @@ namespace webapi.Controllers
                 };
 
                 var uploadResult = await _cloudinary.UploadAsync(uploadParams);
+                await _cloudinary.DeleteResourcesAsync(c.Imagen);
 
                 centroDTO.Imagen = uploadResult.PublicId;
             }
 
-            var centro = new Centro
-            {
-                Id = id,
-                Nombre = centroDTO.Nombre,
-                UniversidadId = centroDTO.Universidad.Id,
-                Imagen = centroDTO.Imagen
-            };
+            if(!centroDTO.Nombre.IsNullOrEmpty()) c.Nombre = centroDTO.Nombre;
+            if(centroDTO.Universidad.Id != 0) c.UniversidadId = centroDTO.Universidad.Id;
+            if(!centroDTO.Imagen.IsNullOrEmpty()) c.Imagen = centroDTO.Imagen;
 
-            _context.Entry(centro).State = EntityState.Modified;
+            _context.Entry(c).State = EntityState.Modified;
 
             try
             {
