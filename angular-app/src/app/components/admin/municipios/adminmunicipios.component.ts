@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Municipio } from '../../../entity/municipio';
 import { Nucleo } from '../../../entity/nucleo';
 import { NucleoService } from '../../../services/nucleo.service';
 import { MunicipioService } from '../../../services/municipio.service';
+import { Buffer } from 'buffer';
 
 @Component({
   selector: 'app-adminmunicipios',
@@ -65,14 +66,20 @@ export class AdminmunicipiosComponent {
     window.location.reload()
   }
 
-  updateMunicipio(id:number, municipio:Municipio){
+  async updateMunicipio(id:number, municipio:Municipio){
+    if(this.municipioFile){
+      municipio.imagen = await this.getBase64(this.municipioFile)
+    }
     this.municipioService.updateMunicipio(id, municipio).subscribe()
     window.location.reload()
   }
 
-  updateNucleo(id:number, nucleo:Nucleo){
+  async updateNucleo(id:number, nucleo:Nucleo){
+    if(this.nucleoFile){
+      nucleo.imagen = await this.getBase64(this.nucleoFile)
+    }
     this.nucleoService.updateNucleo(id, nucleo).subscribe()
-    window.location.reload()
+    //window.location.reload()
   }
 
   deleteMunicipio(id:number){
@@ -91,18 +98,31 @@ export class AdminmunicipiosComponent {
     return "data:image/jpeg;base64," + b.toString('base64')
   }
 
-  readMunicipioFile(){
-    var inputFile = (<HTMLInputElement> document.getElementById("munFile")).files?.item(0)
+  readMunicipioFile(id?:number){
+
+    let inputFile;
+    if(id){
+      inputFile = (<HTMLInputElement> document.getElementById("munFile" + id.toString())).files?.item(0)
+    } else {
+      inputFile = (<HTMLInputElement> document.getElementById("munFile")).files?.item(0)
+    }
     if(inputFile){
       this.municipioFile = inputFile
     }
   }
 
-  readNucleoFile(){
-    var inputFile = (<HTMLInputElement> document.getElementById("nucFile")).files?.item(0)
-    if(inputFile){
-      this.municipioFile = inputFile
+  readNucleoFile(id?:number){
+    
+    let inputFile;
+    if(id){
+      inputFile = (<HTMLInputElement> document.getElementById("nucFile" + id.toString())).files?.item(0)
+    } else {
+      inputFile = (<HTMLInputElement> document.getElementById("nucFile")).files?.item(0)
     }
+    if(inputFile){
+      this.nucleoFile = inputFile
+    }
+
   }
 
 }

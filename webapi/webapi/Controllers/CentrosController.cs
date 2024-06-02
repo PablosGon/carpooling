@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CloudinaryDotNet;
+using CloudinaryDotNet.Actions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 using webapi.DTOs;
 using webapi.Models;
 using webapi.Settings;
@@ -72,6 +74,18 @@ namespace webapi.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutCentro(int id, CentroDTO centroDTO)
         {
+            if (!centroDTO.Imagen.IsNullOrEmpty())
+            {
+                var uploadParams = new ImageUploadParams
+                {
+                    File = new FileDescription(filePath: centroDTO.Imagen),
+                    Transformation = new Transformation().Height(500).Width(500).Crop("fill")
+                };
+
+                var uploadResult = await _cloudinary.UploadAsync(uploadParams);
+
+                centroDTO.Imagen = uploadResult.PublicId;
+            }
 
             var centro = new Centro
             {
@@ -107,6 +121,19 @@ namespace webapi.Controllers
         [HttpPost]
         public async Task<ActionResult<CentroDTO>> PostCentro(CentroDTO centroDTO)
         {
+            if (!centroDTO.Imagen.IsNullOrEmpty())
+            {
+                var uploadParams = new ImageUploadParams
+                {
+                    File = new FileDescription(filePath: centroDTO.Imagen),
+                    Transformation = new Transformation().Height(500).Width(500).Crop("fill")
+                };
+
+                var uploadResult = await _cloudinary.UploadAsync(uploadParams);
+
+                centroDTO.Imagen = uploadResult.PublicId;
+            }
+
             var centro = new Centro
             {
                 Id = centroDTO.Id,

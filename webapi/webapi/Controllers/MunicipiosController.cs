@@ -2,11 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CloudinaryDotNet;
+using CloudinaryDotNet.Actions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 using webapi.DTOs;
 using webapi.Models;
+using webapi.Settings;
 
 namespace webapi.Controllers
 {
@@ -15,10 +20,13 @@ namespace webapi.Controllers
     public class MunicipiosController : ControllerBase
     {
         private readonly AppDbContext _context;
+        private readonly Cloudinary _cloudinary;
 
-        public MunicipiosController(AppDbContext context)
+        public MunicipiosController(AppDbContext context, IOptions<CloudinarySettings> config)
         {
             _context = context;
+            var account = new Account(config.Value.CloudName, config.Value.ApiKey, config.Value.ApiSecret);
+            _cloudinary = new Cloudinary(account);
         }
 
         // GET: api/Municipios
@@ -56,6 +64,18 @@ namespace webapi.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutMunicipio(int id, MunicipioDTO municipioDTO)
         {
+            if (!municipioDTO.Imagen.IsNullOrEmpty())
+            {
+                var uploadParams = new ImageUploadParams
+                {
+                    File = new FileDescription(filePath: municipioDTO.Imagen),
+                    Transformation = new Transformation().Height(500).Width(500).Crop("fill")
+                };
+
+                var uploadResult = await _cloudinary.UploadAsync(uploadParams);
+
+                municipioDTO.Imagen = uploadResult.PublicId;
+            }
 
             var municipio = new Municipio
             {
@@ -90,6 +110,18 @@ namespace webapi.Controllers
         [HttpPost]
         public async Task<ActionResult<MunicipioDTO>> PostMunicipio(MunicipioDTO municipioDTO)
         {
+            if (!municipioDTO.Imagen.IsNullOrEmpty())
+            {
+                var uploadParams = new ImageUploadParams
+                {
+                    File = new FileDescription(filePath: municipioDTO.Imagen),
+                    Transformation = new Transformation().Height(500).Width(500).Crop("fill")
+                };
+
+                var uploadResult = await _cloudinary.UploadAsync(uploadParams);
+
+                municipioDTO.Imagen = uploadResult.PublicId;
+            }
 
             var municipio = new Municipio
             {

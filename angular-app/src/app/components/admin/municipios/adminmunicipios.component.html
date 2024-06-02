@@ -4,33 +4,46 @@
     <thead>
         <tr>
             <th>ID</th>
+            <th>Imagen</th>
             <th>Nombre</th>
-            <th>ID</th>
-            <th>Nombre</th>
+            <th>Núcleos</th>
         </tr>
     </thead>
     <tbody>
         @for (municipio of municipios; track municipio.id) {
             <tr>
                 <td>{{municipio.id}}</td>
+                <td><img src="{{'https://res.cloudinary.com/dilfzvvw4/image/upload/v1716716882/' + municipio.imagen + '.jpg'}}" style="width: 200px; height: 200px;"/>
+                    <input type="file" id="{{'munFile' + municipio.id}}" name="{{'munFile' + municipio.id}}" (change)="readMunicipioFile(municipio.id)"/>
+                </td>
                 <td><input type="text" [(ngModel)]="municipio.nombre" name="municipio.nombre"/>
                 <button (click)="updateMunicipio(municipio.id, municipio)">Editar</button>
                 <button (click)="deleteMunicipio(municipio.id)">Eliminar</button></td>
                 <td>
-                    @for (nucleo of getNucleos(municipio.id); track nucleo.id) {
-                        {{nucleo.id}}<br/>
-                    }
+                    <table border="1">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Imagen</th>
+                                <th>Nombre</th>
+                            </tr>
+                        </thead>
+                        @for (nucleo of getNucleos(municipio.id); track nucleo.id) {
+                            <tr>
+                                <td>{{nucleo.id}}</td>
+                                <td><img src="{{'https://res.cloudinary.com/dilfzvvw4/image/upload/v1716716882/' + nucleo.imagen + '.jpg'}}" style="width: 200px; height: 200px;"/>
+                                <input type="file" id="{{'nucFile' + municipio.id}}" name="{{'nucFile' + municipio.id}}" (change)="readNucleoFile(nucleo.id)"/></td>
+                                <td><input type="text" [(ngModel)]="nucleo.nombre" name="nucleo.nombre"/>
+                                    <button (click)="updateNucleo(nucleo.id, nucleo)">Editar</button>
+                                    <button (click)="deleteNucleo(nucleo.id)">Eliminar</button></td>
+                            </tr>
+                        }
+                        <input type="text" name="newNucleo.nombre" id="nombreNucleo" [(ngModel)]="newNucleo.nombre"/>
+                        <input type="file" id="nucFile" name="nucFile" (change)="readNucleoFile()"/>
+                        <button (click)="createNucleo(municipio.id)">Crear</button>
+                    </table>
+
                     <br/>
-                </td>
-                <td>
-                    @for (nucleo of getNucleos(municipio.id); track nucleo.id) {
-                        <input type="text" [(ngModel)]="nucleo.nombre" name="nucleo.nombre"/>
-                        <button (click)="updateNucleo(nucleo.id, nucleo)">Editar</button>
-                        <button (click)="deleteNucleo(nucleo.id)">Eliminar</button><br/>
-                    }
-                    <input type="text" name="newNucleo.nombre" id="{{'nombreNucleo' + municipio.id}}" [(ngModel)]="newNucleo.nombre"/>
-                    <input type="file" id="nucFile" name="nucFile" (change)="readNucleoFile()"/>
-                    <button (click)="createNucleo(municipio.id)">Crear</button>
                 </td>
             </tr>
         }

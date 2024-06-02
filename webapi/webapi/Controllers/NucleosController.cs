@@ -2,11 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CloudinaryDotNet;
+using CloudinaryDotNet.Actions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 using webapi.DTOs;
 using webapi.Models;
+using webapi.Settings;
 
 namespace webapi.Controllers
 {
@@ -15,10 +20,13 @@ namespace webapi.Controllers
     public class NucleosController : ControllerBase
     {
         private readonly AppDbContext _context;
+        private readonly Cloudinary _cloudinary;
 
-        public NucleosController(AppDbContext context)
+        public NucleosController(AppDbContext context, IOptions<CloudinarySettings> config)
         {
             _context = context;
+            var account = new Account(config.Value.CloudName, config.Value.ApiKey, config.Value.ApiSecret);
+            _cloudinary = new Cloudinary(account);
         }
 
         // GET: api/Nucleos
@@ -68,6 +76,19 @@ namespace webapi.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutNucleo(int id, NucleoDTO nucleoDTO)
         {
+            if (!nucleoDTO.Imagen.IsNullOrEmpty())
+            {
+                var uploadParams = new ImageUploadParams
+                {
+                    File = new FileDescription(filePath: nucleoDTO.Imagen),
+                    Transformation = new Transformation().Height(500).Width(500).Crop("fill")
+                };
+
+                var uploadResult = await _cloudinary.UploadAsync(uploadParams);
+
+                nucleoDTO.Imagen = uploadResult.PublicId;
+            }
+
             var nucleo = new Nucleo
             {
                 Id = id,
@@ -102,6 +123,19 @@ namespace webapi.Controllers
         [HttpPost]
         public async Task<ActionResult<NucleoDTO>> PostNucleo(NucleoDTO nucleoDTO)
         {
+            if (!nucleoDTO.Imagen.IsNullOrEmpty())
+            {
+                var uploadParams = new ImageUploadParams
+                {
+                    File = new FileDescription(filePath: nucleoDTO.Imagen),
+                    Transformation = new Transformation().Height(500).Width(500).Crop("fill")
+                };
+
+                var uploadResult = await _cloudinary.UploadAsync(uploadParams);
+
+                nucleoDTO.Imagen = uploadResult.PublicId;
+            }
+
             var nucleo = new Nucleo
             {
                 Nombre = nucleoDTO.Nombre,

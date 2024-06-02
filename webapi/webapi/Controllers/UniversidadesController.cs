@@ -2,11 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CloudinaryDotNet.Actions;
+using CloudinaryDotNet;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using webapi.DTOs;
 using webapi.Models;
+using Microsoft.Extensions.Options;
+using webapi.Settings;
+using Microsoft.IdentityModel.Tokens;
 
 namespace webapi.Controllers
 {
@@ -15,10 +20,13 @@ namespace webapi.Controllers
     public class UniversidadesController : ControllerBase
     {
         private readonly AppDbContext _context;
+        private readonly Cloudinary _cloudinary;
 
-        public UniversidadesController(AppDbContext context)
+        public UniversidadesController(AppDbContext context, IOptions<CloudinarySettings> config)
         {
             _context = context;
+            var account = new Account(config.Value.CloudName, config.Value.ApiKey, config.Value.ApiSecret);
+            _cloudinary = new Cloudinary(account);
         }
 
         // GET: api/Universidads
@@ -56,7 +64,18 @@ namespace webapi.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutUniversidad(int id, UniversidadDTO universidadDTO)
         {
+            if (!universidadDTO.Imagen.IsNullOrEmpty())
+            {
+                var uploadParams = new ImageUploadParams
+                {
+                    File = new FileDescription(filePath: universidadDTO.Imagen),
+                    Transformation = new Transformation().Height(500).Width(500).Crop("fill")
+                };
 
+                var uploadResult = await _cloudinary.UploadAsync(uploadParams);
+
+                universidadDTO.Imagen = uploadResult.PublicId;
+            }
             var universidad = new Universidad
             {
                 Id = id,
@@ -90,7 +109,18 @@ namespace webapi.Controllers
         [HttpPost]
         public async Task<ActionResult<UniversidadDTO>> PostUniversidad(UniversidadDTO universidadDTO)
         {
+            if (!universidadDTO.Imagen.IsNullOrEmpty())
+            {
+                var uploadParams = new ImageUploadParams
+                {
+                    File = new FileDescription(filePath: universidadDTO.Imagen),
+                    Transformation = new Transformation().Height(500).Width(500).Crop("fill")
+                };
 
+                var uploadResult = await _cloudinary.UploadAsync(uploadParams);
+
+                universidadDTO.Imagen = uploadResult.PublicId;
+            }
             var universidad = new Universidad
             {
                 Nombre = universidadDTO.Nombre,
