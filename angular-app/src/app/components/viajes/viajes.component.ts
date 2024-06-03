@@ -59,7 +59,7 @@ export class ViajesComponent {
 
   filtrar(){
     this.viajes = []
-    this.viajeService.getViajes(this.centroId, this.nucleoId, this.isVuelta, this.fechaYHora).subscribe(data => {console.log(data);this.viajes = data})
+    this.viajeService.getViajes(this.centroId, this.nucleoId, this.isVuelta, this.fechaYHora, this.universidadId, this.municipioId).subscribe(data => {console.log(data);this.viajes = data})
   }
 
   viajes: Viaje[] = [];
