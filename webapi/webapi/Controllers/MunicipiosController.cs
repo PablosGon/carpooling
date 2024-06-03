@@ -141,6 +141,40 @@ namespace webapi.Controllers
             return CreatedAtAction("GetMunicipio", new { id = municipio.Id }, municipioDTO);
         }
 
+        [HttpPut("{id}/deletePicture")]
+        public async Task<IActionResult> DeletePicture(int id)
+        {
+            var m = await _context.Municipios.FindAsync(id);
+
+            if (m == null)
+            {
+                return NotFound("No se ha encontrado el municipio");
+            }
+
+            await _cloudinary.DeleteResourcesAsync(m.Imagen);
+            m.Imagen = "";
+
+            _context.Entry(m).State = EntityState.Modified;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!MunicipioExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return NoContent();
+        }
+
         // DELETE: api/Municipios/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteMunicipio(int id)

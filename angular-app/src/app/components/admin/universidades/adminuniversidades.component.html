@@ -16,6 +16,9 @@
                 <td><img src="{{'https://res.cloudinary.com/dilfzvvw4/image/upload/v1716716882/' + universidad.imagen + '.jpg'}}" style="width: 200px; height: 200px;"/>
                     <input type="file" id="{{'uniFile' + universidad.id}}" name="{{'uniFile' + universidad.id}}" (change)="readUniversidadFile(universidad.id)"/>
                     <p style="color: red;" id="{{'uniFile' + universidad.id + 'Warning'}}"></p>
+                    @if (universidad.imagen) {
+                        <button (click)="deleteUniversidadPicture(universidad.id)">Borrar imagen</button>
+                    }
                 </td>
                 <td><input type="text" [(ngModel)]="universidad.nombre" name="universidad.nombre"/>
                 <button (click)="updateUniversidad(universidad.id, universidad)">Editar</button>
@@ -34,7 +37,13 @@
                                 <td>{{centro.id}}</td>
                                 <td><img src="{{'https://res.cloudinary.com/dilfzvvw4/image/upload/v1716716882/' + centro.imagen + '.jpg'}}" style="width: 200px; height: 200px;"/>
                                 <input type="file" id="{{universidad.id + 'cenFile' + centro.id}}" name="{{universidad.id + 'cenFile' + centro.id}}" (change)="readCentroFile(universidad.id, centro.id)"/>
-                                <p style="color: red;" id="{{universidad.id + 'cenFile' + centro.id + 'Warning'}}"></p></td>
+                                <p style="color: red;" id="{{universidad.id + 'cenFile' + centro.id + 'Warning'}}"></p>
+                                @if(centro.imagen){
+                                    @if (centro.imagen) {
+                                        <button (click)="deleteCentroPicture(centro.id)">Borrar imagen</button>
+                                    }
+                                }
+                            </td>
                                 <td><input type="text" [(ngModel)]="centro.nombre" name="centro.nombre"/>
                                     <button (click)="updateCentro(centro.id, centro)">Editar</button>
                                     <button (click)="deleteCentro(centro.id)">Eliminar</button></td>

@@ -28,6 +28,10 @@ export class MunicipioService {
     return this.httpClient.put<Municipio>(this.url + 'municipios/' + id, municipio)
   }
 
+  public deletePicture(id:number):Observable<Municipio>{
+    return this.httpClient.put<Municipio>(this.url + 'municipios/' + id + '/deletePicture', {})
+  }
+
   public deleteMunicipio(id:number):Observable<Municipio>{
     return this.httpClient.delete<Municipio>(this.url + 'municipios/' + id)
   }

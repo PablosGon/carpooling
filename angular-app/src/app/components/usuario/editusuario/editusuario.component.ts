@@ -27,6 +27,7 @@ export class EditusuarioComponent {
   municipios:Municipio[] = []
 
   file : File | null = null
+  allowedFileTypes = ["image/png", "image/jpeg"];
 
   usuario:Usuario = {
     id: 0,
@@ -81,9 +82,18 @@ export class EditusuarioComponent {
   readFile(){
     var inputFile = (<HTMLInputElement> document.getElementById("img")).files?.item(0)
     if(inputFile){
-      this.file = inputFile
+      if(this.allowedFileTypes.includes(inputFile.type)){
+        this.file = inputFile
+        document.getElementById('fileWarning')!.innerText = "";
+      } else {
+        document.getElementById('fileWarning')!.innerText = "Tipo de archivo no permitido";
+      }
     }
     console.log(this.file)
+  }
+
+  deleteProfilePicture(){
+    this.usuarioService.deleteProfilePicture(this.usuario.id).subscribe(data => window.location.reload())
   }
 
 }

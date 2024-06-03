@@ -20,7 +20,8 @@
             @for (usuario of usuarios; track usuario.id) {
                 <tr>
                     <td>{{usuario.id}}</td>
-                    <td><img src="{{'https://res.cloudinary.com/dilfzvvw4/image/upload/v1716716882/' + usuario.imagen + '.jpg'}}" style="width: 200px; height: 200px;"></td>
+                    <td><img src="{{'https://res.cloudinary.com/dilfzvvw4/image/upload/v1716716882/' + usuario.imagen + '.jpg'}}" style="width: 200px; height: 200px;">
+                    <button (click)="deleteProfilePicture(usuario.id)">Borrar imagen</button></td>
                     <td><input type="text" value="{{usuario.nombre}}" [(ngModel)]="usuario.nombre"/></td>
                     <td><input type="text" value="{{usuario.correo}}" [(ngModel)]="usuario.correo"/></td>
                     <td><input type="text" value="{{usuario.telefono}}" [(ngModel)]="usuario.telefono"/></td>

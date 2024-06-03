@@ -38,6 +38,10 @@ export class UsuarioService {
     return this.httpClient.put<Usuario>(this.url + 'usuarios/' + id + '/readNotifications', {})
   }
 
+  public deleteProfilePicture(id:number):Observable<Usuario>{
+    return this.httpClient.put<Usuario>(this.url + 'usuarios/' + id + '/deletePicture', {})
+  }
+
   public deleteUsuario(id:number):Observable<Usuario>{
     return this.httpClient.delete<Usuario>(this.url + 'usuarios/' + id)
   }

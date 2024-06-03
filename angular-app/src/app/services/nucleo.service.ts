@@ -32,6 +32,10 @@ export class NucleoService {
     return this.httpClient.put<Nucleo>(this.url + 'nucleos/' + id, nucleo)
   }
 
+  public deletePicture(id:number):Observable<Nucleo>{
+    return this.httpClient.put<Nucleo>(this.url + 'nucleos/' + id + '/deletePicture', {})
+  }
+
   public deleteNucleo(id:number):Observable<Nucleo>{
     return this.httpClient.delete<Nucleo>(this.url + 'nucleos/' + id)
   }

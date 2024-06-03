@@ -15,6 +15,9 @@
                 <td>{{municipio.id}}</td>
                 <td><img src="{{'https://res.cloudinary.com/dilfzvvw4/image/upload/v1716716882/' + municipio.imagen + '.jpg'}}" style="width: 200px; height: 200px;"/>
                     <input type="file" id="{{'munFile' + municipio.id}}" name="{{'munFile' + municipio.id}}" (change)="readMunicipioFile(municipio.id)"/>
+                    @if (municipio.imagen) {
+                        <br/><button (click)="deleteMunicipioPicture(municipio.id)">Borrar imagen</button>
+                    }
                     <p style="color: red;" id="{{'munFileWarning' + municipio.id}}"></p>
                 </td>
                 <td><input type="text" [(ngModel)]="municipio.nombre" name="municipio.nombre"/>
@@ -34,7 +37,11 @@
                                 <td>{{nucleo.id}}</td>
                                 <td><img src="{{'https://res.cloudinary.com/dilfzvvw4/image/upload/v1716716882/' + nucleo.imagen + '.jpg'}}" style="width: 200px; height: 200px;"/>
                                 <input type="file" id="{{municipio.id + 'nucFile' + nucleo.id}}" name="{{'nucFile' + municipio.id}}" (change)="readNucleoFile(municipio.id, nucleo.id)"/>
-                                <p style="color: red;" id="{{municipio.id + 'nucFile' + nucleo.id + 'Warning'}}"></p></td>
+                                <p style="color: red;" id="{{municipio.id + 'nucFile' + nucleo.id + 'Warning'}}"></p>
+                                @if (nucleo.imagen) {
+                                    <button (click)="deleteNucleoPicture(nucleo.id)">Borrar imagen</button>
+                                }
+                                </td>
                                 <td><input type="text" [(ngModel)]="nucleo.nombre" name="nucleo.nombre"/>
                                     <button (click)="updateNucleo(nucleo.id, nucleo)">Editar</button>
                                     <button (click)="deleteNucleo(nucleo.id)">Eliminar</button></td>

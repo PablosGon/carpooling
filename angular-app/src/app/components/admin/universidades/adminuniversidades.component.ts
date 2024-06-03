@@ -143,4 +143,12 @@ export class AdminuniversidadesComponent {
 
   }
 
+  deleteUniversidadPicture(id:number){
+    this.universidadService.deletePicture(id).subscribe(data => window.location.reload())
+  }
+
+  deleteCentroPicture(id:number){
+    this.centroService.deletePicture(id).subscribe(data => window.location.reload())
+  }
+
 }

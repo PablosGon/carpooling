@@ -221,6 +221,40 @@ namespace webapi.Controllers
             return Ok();
         }
 
+        [HttpPut("{id}/deletePicture")]
+        public async Task<IActionResult> DeletePicture(int id)
+        {
+            var u = await _context.Usuarios.FindAsync(id);
+
+            if(u == null)
+            {
+                return NotFound("No se ha encontrado al usuario");
+            }
+
+            await _cloudinary.DeleteResourcesAsync(u.Imagen);
+            u.Imagen = "";
+
+            _context.Entry(u).State = EntityState.Modified;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!UsuarioExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return NoContent();
+        }
+
         private bool UsuarioExists(int id)
         {
             return _context.Usuarios.Any(e => e.Id == id);

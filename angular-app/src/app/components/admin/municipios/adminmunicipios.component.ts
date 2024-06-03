@@ -140,4 +140,12 @@ export class AdminmunicipiosComponent {
 
   }
 
+  deleteMunicipioPicture(id:number){
+    this.municipioService.deletePicture(id).subscribe(data => window.location.reload())
+  }
+
+  deleteNucleoPicture(id:number){
+    this.nucleoService.deletePicture(id).subscribe(data => window.location.reload())
+  }
+
 }

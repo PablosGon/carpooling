@@ -33,6 +33,10 @@ export class CentroService {
     return this.httpClient.put<Centro>(this.url + 'centros/' + id, centro)
   }
 
+  public deletePicture(id:number):Observable<Centro>{
+    return this.httpClient.put<Centro>(this.url + 'centros/' + id + '/deletePicture', {})
+  }
+
   public deleteCentro(id:number):Observable<Centro>{
     return this.httpClient.delete<Centro>(this.url + 'centros/' + id)
   }

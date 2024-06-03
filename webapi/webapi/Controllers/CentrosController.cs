@@ -168,6 +168,40 @@ namespace webapi.Controllers
             return CreatedAtAction("GetCentro", new { id = centro.Id }, centroDTO);
         }
 
+        [HttpPut("{id}/deletePicture")]
+        public async Task<IActionResult> DeletePicture(int id)
+        {
+            var c = await _context.Centros.FindAsync(id);
+
+            if (c == null)
+            {
+                return NotFound("No se ha encontrado el centro");
+            }
+
+            await _cloudinary.DeleteResourcesAsync(c.Imagen);
+            c.Imagen = "";
+
+            _context.Entry(c).State = EntityState.Modified;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!CentroExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return NoContent();
+        }
+
         // DELETE: api/Centros/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteCentro(int id)

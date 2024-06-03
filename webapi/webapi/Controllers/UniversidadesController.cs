@@ -109,6 +109,40 @@ namespace webapi.Controllers
             return NoContent();
         }
 
+        [HttpPut("{id}/deletePicture")]
+        public async Task<IActionResult> DeletePicture(int id)
+        {
+            var u = await _context.Universidades.FindAsync(id);
+
+            if (u == null)
+            {
+                return NotFound("No se ha encontrado la universidad");
+            }
+
+            await _cloudinary.DeleteResourcesAsync(u.Imagen);
+            u.Imagen = "";
+
+            _context.Entry(u).State = EntityState.Modified;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!UniversidadExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return NoContent();
+        }
+
         // POST: api/Universidads
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]

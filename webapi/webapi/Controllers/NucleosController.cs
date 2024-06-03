@@ -122,6 +122,40 @@ namespace webapi.Controllers
             return NoContent();
         }
 
+        [HttpPut("{id}/deletePicture")]
+        public async Task<IActionResult> DeletePicture(int id)
+        {
+            var n = await _context.Nucleos.FindAsync(id);
+
+            if (n == null)
+            {
+                return NotFound("No se ha encontrado el núcleo");
+            }
+
+            await _cloudinary.DeleteResourcesAsync(n.Imagen);
+            n.Imagen = "";
+
+            _context.Entry(n).State = EntityState.Modified;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!NucleoExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return NoContent();
+        }
+
         // POST: api/Nucleos
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]

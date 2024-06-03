@@ -28,6 +28,10 @@ export class UniversidadService {
     return this.httpClient.put<Universidad>(this.url + 'universidades/' + id, universidad)
   }
 
+  public deletePicture(id:number):Observable<Universidad>{
+    return this.httpClient.put<Universidad>(this.url + 'universidades/' +  id + '/deletePicture', {})
+  }
+
   public deleteUniversidad(id:number):Observable<Universidad>{
     return this.httpClient.delete<Universidad>(this.url + 'universidades/' + id)
   }

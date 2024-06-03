@@ -64,5 +64,8 @@ export class AdminusuariosComponent {
     return this.usuarioId ? this.usuarios.find(x => x.id == parseInt(this.usuarioId!))?.isAdmin : false
   }
 
+  deleteProfilePicture(id:number){
+    this.usuarioService.deleteProfilePicture(id).subscribe(data => window.location.reload())
+  }
 
 }
