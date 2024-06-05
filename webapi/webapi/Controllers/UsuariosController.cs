@@ -7,6 +7,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using webapi.DTOs;
 using webapi.Models;
+using CloudinaryDotNet;
+using CloudinaryDotNet.Actions;
+using Microsoft.Extensions.Options;
+using webapi.Settings;
+using Microsoft.IdentityModel.Tokens;
 
 namespace webapi.Controllers
 {
@@ -15,17 +20,31 @@ namespace webapi.Controllers
     public class UsuariosController : ControllerBase
     {
         private readonly AppDbContext _context;
+        private readonly Cloudinary _cloudinary;
 
-        public UsuariosController(AppDbContext context)
+        public UsuariosController(AppDbContext context, IOptions<CloudinarySettings> config)
         {
             _context = context;
+
+            var account = new Account(config.Value.CloudName, config.Value.ApiKey, config.Value.ApiSecret);
+            _cloudinary = new Cloudinary(account);
         }
 
         // GET: api/Usuarios
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<UsuarioDTO>>> GetUsuarios()
+        public async Task<ActionResult<IEnumerable<UsuarioDTO>>> GetUsuarios([FromQuery] string? correo, [FromQuery] string? pass)
         {
-            var res = await _context.Usuarios.ToListAsync();
+            var res = new List<Usuario>();
+
+            if(correo != null && pass != null)
+            {
+                res = await _context.Usuarios.Where(x => x.Correo == correo && x.Pass == pass).ToListAsync();
+            }
+            else
+            {
+                res = await _context.Usuarios.ToListAsync();
+            }
+
 
             List<UsuarioDTO> list = new List<UsuarioDTO>();
 
@@ -64,19 +83,39 @@ namespace webapi.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutUsuario(int id, UsuarioDTO usuarioDTO)
         {
-            var usuario = new Usuario
-            {
-                Id = id,
-                Nombre = usuarioDTO.Nombre,
-                Correo = usuarioDTO.Correo,
-                Telefono = usuarioDTO.Telefono,
-                Grado = usuarioDTO.Grado,
-                Imagen = usuarioDTO.Imagen,
-                UniversidadId = usuarioDTO.Universidad != null ? usuarioDTO.Universidad.Id : null,
-                MunicipioId = usuarioDTO.Municipio != null ? usuarioDTO.Municipio.Id : null,
-            };
+            var u = _context.Usuarios.Find(id);
 
-            _context.Entry(usuario).State = EntityState.Modified;
+            if(u == null)
+            {
+                return NotFound("No se encontró al usuario");
+            }
+
+            if (!usuarioDTO.Imagen.IsNullOrEmpty() && u.Imagen != usuarioDTO.Imagen)
+            {
+
+                var uploadParams = new ImageUploadParams
+                {
+                    File = new FileDescription(filePath: usuarioDTO.Imagen),
+                    Transformation = new Transformation().Height(500).Width(500).Crop("fill")
+                };
+
+                var uploadResult = await _cloudinary.UploadAsync(uploadParams);
+                await _cloudinary.DeleteResourcesAsync(u.Imagen);
+
+                usuarioDTO.Imagen = uploadResult.PublicId;
+            }
+
+            if(!usuarioDTO.Nombre.IsNullOrEmpty()) u.Nombre = usuarioDTO.Nombre;
+            if(!usuarioDTO.Correo.IsNullOrEmpty()) u.Correo = usuarioDTO.Correo;
+            if(!usuarioDTO.Pass.IsNullOrEmpty()) u.Pass = usuarioDTO.Pass;
+            if(!usuarioDTO.Telefono.IsNullOrEmpty()) u.Telefono = usuarioDTO.Telefono;
+            if (!usuarioDTO.Imagen.IsNullOrEmpty()) u.Imagen = usuarioDTO.Imagen;
+            u.Grado = usuarioDTO.Grado;
+            u.IsAdmin = usuarioDTO.IsAdmin;
+            u.UniversidadId = usuarioDTO.Universidad != null ? usuarioDTO.Universidad.Id : null;
+            u.MunicipioId = usuarioDTO.Municipio != null ? usuarioDTO.Municipio.Id : null;
+
+            _context.Entry(u).State = EntityState.Modified;
 
             try
             {
@@ -102,21 +141,45 @@ namespace webapi.Controllers
         [HttpPost]
         public async Task<ActionResult<UsuarioDTO>> PostUsuario(UsuarioDTO usuarioDTO)
         {
+            var res = await _context.Usuarios.Where(x => x.Correo == usuarioDTO.Correo).ToListAsync();
+
+            if (res.Count() > 0)
+            {
+                return BadRequest("Ya existe un usuario con ese correo");
+            }
+
+            if(usuarioDTO.Imagen != null)
+            {
+                var uploadParams = new ImageUploadParams
+                {
+                    File = new FileDescription(filePath: usuarioDTO.Imagen),
+                    Transformation = new Transformation().Height(500).Width(500).Crop("fill")
+                };
+
+                var uploadResult = await _cloudinary.UploadAsync(uploadParams);
+
+                usuarioDTO.Imagen = uploadResult.PublicId;
+            }
+
             var usuario = new Usuario
             {
                 Nombre = usuarioDTO.Nombre,
                 Correo = usuarioDTO.Correo,
+                Pass = usuarioDTO.Pass,
                 Telefono = usuarioDTO.Telefono,
                 Grado = usuarioDTO.Grado,
                 Imagen = usuarioDTO.Imagen,
-                UniversidadId = usuarioDTO.Universidad != null ? usuarioDTO.Universidad.Id : null,
-                MunicipioId = usuarioDTO.Municipio != null ? usuarioDTO.Municipio.Id : null,
+                IsAdmin = usuarioDTO.IsAdmin,
+                UniversidadId = usuarioDTO.Universidad != null && usuarioDTO.Universidad.Id != 0 ? usuarioDTO.Universidad.Id : null,
+                MunicipioId = usuarioDTO.Municipio != null && usuarioDTO.Municipio.Id != 0 ? usuarioDTO.Municipio.Id : null,
             };
 
             _context.Usuarios.Add(usuario);
             await _context.SaveChangesAsync();
 
-            usuarioDTO.Id = usuarioDTO.Id;
+            
+
+            usuarioDTO.Id = usuario.Id;
 
             return CreatedAtAction("GetUsuario", new { id = usuario.Id }, usuarioDTO);
         }
@@ -156,6 +219,40 @@ namespace webapi.Controllers
 
             await _context.SaveChangesAsync();
             return Ok();
+        }
+
+        [HttpPut("{id}/deletePicture")]
+        public async Task<IActionResult> DeletePicture(int id)
+        {
+            var u = await _context.Usuarios.FindAsync(id);
+
+            if(u == null)
+            {
+                return NotFound("No se ha encontrado al usuario");
+            }
+
+            await _cloudinary.DeleteResourcesAsync(u.Imagen);
+            u.Imagen = "";
+
+            _context.Entry(u).State = EntityState.Modified;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!UsuarioExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return NoContent();
         }
 
         private bool UsuarioExists(int id)

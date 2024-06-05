@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Viaje } from '../entity/viaje';
 import { Observable } from 'rxjs';
@@ -17,22 +17,22 @@ export class ViajeService {
   //   "Access-Control-Allow-Origin": "*"
   // });
 
-  public getViajes(centroId?:number, nucleoId?:number, isVuelta?:boolean, fecha?:Date):Observable<Viaje[]> {
+  public getViajes(centroId?:number, nucleoId?:number, isVuelta?:boolean, fecha?:Date, universidadId?:number, municipioId?:number):Observable<Viaje[]> {
 
     let url = this.url + 'viajes'
+    let params:HttpParams = new HttpParams()
 
-    console.log(centroId, nucleoId)
+    if(universidadId) params.append('universidadId', universidadId);
+    if(centroId) params.append('centroId', centroId);
+    if(municipioId) params.append('municipioId', municipioId);
+    if(nucleoId) params.append('nucleoId', nucleoId);
+    if(isVuelta != null) params.append('isVuelta', isVuelta);
+    if(fecha) params.append('fechaHora', fecha.toString());
 
-    if(centroId && centroId != 0 && nucleoId && nucleoId != 0){
-      console.log("entramos chavales")
-      url = url + '?centroId=' + centroId + '&nucleoId=' + nucleoId + '&isVuelta=' + isVuelta
-    }
-    
-    if(fecha){
-      url = url + '&fechaHora=' + fecha
-    }
 
-    return this.httpClient.get<Viaje[]>(url);
+    return this.httpClient.get<Viaje[]>(url, {
+      params: params
+    });
   }
 
   public getViaje(id:number):Observable<Viaje> {

@@ -242,10 +242,17 @@ namespace webapi.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("IsAdmin")
+                        .HasColumnType("bit");
+
                     b.Property<int?>("MunicipioId")
                         .HasColumnType("int");
 
                     b.Property<string>("Nombre")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Pass")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -383,7 +390,8 @@ namespace webapi.Migrations
                 {
                     b.HasOne("webapi.Models.Usuario", "Usuario")
                         .WithMany("Plazas")
-                        .HasForeignKey("UsuarioId");
+                        .HasForeignKey("UsuarioId")
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("webapi.Models.Viaje", "Viaje")
                         .WithMany("Plazas")
@@ -400,11 +408,13 @@ namespace webapi.Migrations
                 {
                     b.HasOne("webapi.Models.Municipio", "Municipio")
                         .WithMany("Usuarios")
-                        .HasForeignKey("MunicipioId");
+                        .HasForeignKey("MunicipioId")
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("webapi.Models.Universidad", "Universidad")
                         .WithMany("Usuarios")
-                        .HasForeignKey("UniversidadId");
+                        .HasForeignKey("UniversidadId")
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.Navigation("Municipio");
 
@@ -422,7 +432,7 @@ namespace webapi.Migrations
                     b.HasOne("webapi.Models.Usuario", "Pasajero")
                         .WithMany("ValoracionesEnviadas")
                         .HasForeignKey("PasajeroId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Conductor");
@@ -435,19 +445,19 @@ namespace webapi.Migrations
                     b.HasOne("webapi.Models.Centro", "Centro")
                         .WithMany("Viajes")
                         .HasForeignKey("CentroId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("webapi.Models.Usuario", "Conductor")
                         .WithMany("ViajesCreados")
                         .HasForeignKey("ConductorId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("webapi.Models.Nucleo", "Nucleo")
                         .WithMany("Viajes")
                         .HasForeignKey("NucleoId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Centro");

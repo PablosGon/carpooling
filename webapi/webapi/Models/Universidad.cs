@@ -19,7 +19,8 @@ namespace webapi.Models
             return new UniversidadDTO
             {
                 Id = Id,
-                Nombre = Nombre
+                Nombre = Nombre,
+                Imagen = Imagen
             };
         }
     }

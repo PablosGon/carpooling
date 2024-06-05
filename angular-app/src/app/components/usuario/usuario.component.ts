@@ -1,12 +1,12 @@
 import { Component, inject } from '@angular/core';
-import { Usuario } from '../../../entity/usuario';
-import { UsuarioService } from '../../../services/usuario.service';
+import { Usuario } from '../../entity/usuario';
+import { UsuarioService } from '../../services/usuario.service';
 import { ActivatedRoute, RouterLink, RouterLinkActive } from '@angular/router';
-import { ViajeService } from '../../../services/viaje.service';
-import { Viaje } from '../../../entity/viaje';
+import { ViajeService } from '../../services/viaje.service';
+import { Viaje } from '../../entity/viaje';
 import { FormsModule } from '@angular/forms';
-import { ValoracionService } from '../../../services/valoracion.service';
-import { Valoracion } from '../../../entity/valoracion';
+import { ValoracionService } from '../../services/valoracion.service';
+import { Valoracion } from '../../entity/valoracion';
 
 @Component({
   selector: 'app-usuario',
@@ -33,15 +33,19 @@ export class UsuarioComponent {
     imagen: '',
     universidad: {
       id: 0,
-      nombre: ''
+      nombre: '',
+      imagen: ''
     },
     municipio: {
       id: 0,
-      nombre: ''
+      nombre: '',
+      imagen: ''
     },
     valoracionMedia: 0,
     numValoraciones: 0,
-    notificacionesNoLeidas: 0
+    notificacionesNoLeidas: 0,
+    pass: '',
+    isAdmin: false
   }
 
   viajes:Viaje[] = [];

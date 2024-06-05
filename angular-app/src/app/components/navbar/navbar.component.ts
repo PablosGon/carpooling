@@ -21,26 +21,32 @@ export class NavbarComponent {
     imagen: '',
     universidad: {
       id: 0,
-      nombre: ''
+      nombre: '',
+      imagen: ''
     },
     municipio: {
       id: 0,
-      nombre: ''
+      nombre: '',
+      imagen: ''
     },
     valoracionMedia: 0,
     numValoraciones: 0,
-    notificacionesNoLeidas: 0
+    notificacionesNoLeidas: 0,
+    pass: '',
+    isAdmin: false
   }
 
   usuarioId = sessionStorage.getItem('usuarioId')
 
-  constructor(private router : Router, private usuarioService : UsuarioService){}
+  constructor(private usuarioService : UsuarioService){}
 
   ngOnInit(){
     console.log(this.usuarioId)
     if(this.usuarioId){
       this.usuarioService.getUsuario(parseInt(this.usuarioId)).subscribe(data => {
         this.usuario = data
+        console.log(this.usuario)
+
       })
     }
   }

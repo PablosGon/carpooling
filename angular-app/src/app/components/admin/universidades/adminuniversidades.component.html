@@ -1,0 +1,70 @@
+<p>adminuniversidades works!</p>
+
+<table border="1">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Imagen</th>
+            <th>Nombre</th>
+            <th>Núcleos</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (universidad of universidades; track universidad.id) {
+            <tr>
+                <td>{{universidad.id}}</td>
+                <td><img src="{{'https://res.cloudinary.com/dilfzvvw4/image/upload/v1716716882/' + universidad.imagen + '.jpg'}}" style="width: 200px; height: 200px;"/>
+                    <input type="file" id="{{'uniFile' + universidad.id}}" name="{{'uniFile' + universidad.id}}" (change)="readUniversidadFile(universidad.id)"/>
+                    <p style="color: red;" id="{{'uniFile' + universidad.id + 'Warning'}}"></p>
+                    @if (universidad.imagen) {
+                        <button (click)="deleteUniversidadPicture(universidad.id)">Borrar imagen</button>
+                    }
+                </td>
+                <td><input type="text" [(ngModel)]="universidad.nombre" name="universidad.nombre"/>
+                <button (click)="updateUniversidad(universidad.id, universidad)">Editar</button>
+                <button (click)="deleteUniversidad(universidad.id)">Eliminar</button></td>
+                <td>
+                    <table border="1">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Imagen</th>
+                                <th>Nombre</th>
+                            </tr>
+                        </thead>
+                        @for (centro of getCentros(universidad.id); track centro.id) {
+                            <tr>
+                                <td>{{centro.id}}</td>
+                                <td><img src="{{'https://res.cloudinary.com/dilfzvvw4/image/upload/v1716716882/' + centro.imagen + '.jpg'}}" style="width: 200px; height: 200px;"/>
+                                <input type="file" id="{{universidad.id + 'cenFile' + centro.id}}" name="{{universidad.id + 'cenFile' + centro.id}}" (change)="readCentroFile(universidad.id, centro.id)"/>
+                                <p style="color: red;" id="{{universidad.id + 'cenFile' + centro.id + 'Warning'}}"></p>
+                                @if(centro.imagen){
+                                    @if (centro.imagen) {
+                                        <button (click)="deleteCentroPicture(centro.id)">Borrar imagen</button>
+                                    }
+                                }
+                            </td>
+                                <td><input type="text" [(ngModel)]="centro.nombre" name="centro.nombre"/>
+                                    <button (click)="updateCentro(centro.id, centro)">Editar</button>
+                                    <button (click)="deleteCentro(centro.id)">Eliminar</button></td>
+                            </tr>
+                        }
+                        <input type="text" name="newCentro.nombre" id="nombreCentro" [(ngModel)]="newCentro.nombre"/>
+                        <input type="file" id="{{universidad.id + 'cenFile'}}" name="cenFile" (change)="readCentroFile(universidad.id)"/>
+                        <p style="color: red;" id="{{universidad.id + 'cenFileWarning'}}"></p>
+                        <button (click)="createCentro(universidad.id)">Crear</button>
+                    </table>
+
+                    <br/>
+                </td>
+            </tr>
+        }
+        <tr>
+            <td></td>
+            <td><input type="text" [(ngModel)]="newUniversidad.nombre" name="newUniversidad.nombre"/>
+                <input type="file" id="uniFile" name="uniFile" (change)="readUniversidadFile()"/>
+                <p style="color: red;" id="{{'uniFileWarning'}}"></p>
+                <button (click)="createUniversidad()">Crear</button></td>
+        </tr>
+    </tbody>
+</table>

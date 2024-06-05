@@ -21,7 +21,8 @@ namespace webapi.Models
             {
                 Id = Id,
                 Nombre = Nombre,
-                Universidad = Universidad.ToDTO()
+                Universidad = Universidad.ToDTO(),
+                Imagen = Imagen
             };
         }
     }

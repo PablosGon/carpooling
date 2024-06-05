@@ -528,3 +528,5 @@ C:\Users\pablo\Documents\repos\carpooling\webapi\webapi\bin\Debug\net8.0\Microso
 C:\Users\pablo\Documents\repos\carpooling\webapi\webapi\bin\Debug\net8.0\Microsoft.Extensions.Logging.Abstractions.dll
 C:\Users\pablo\Documents\repos\carpooling\webapi\webapi\bin\Debug\net8.0\Microsoft.Extensions.Options.dll
 C:\Users\pablo\Documents\repos\carpooling\webapi\webapi\bin\Debug\net8.0\Microsoft.JSInterop.dll
+C:\Users\p.a.sanchez.gonzalez\OneDrive - Avanade\Documents\TFG\carpooling\webapi\webapi\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\pablo\Documents\repos\carpooling\webapi\webapi\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll

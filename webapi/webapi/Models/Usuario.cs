@@ -9,9 +9,11 @@ namespace webapi.Models
         public int Id { get; set; }
         public string Nombre { get; set; } = String.Empty;
         public string Correo { get; set; } = String.Empty;
+        public string Pass { get; set; } = String.Empty;
         public string Telefono { get; set; } = String.Empty;
         public string Imagen { get; set; } = String.Empty;
         public string Grado { get; set; } = String.Empty;
+        public bool IsAdmin { get; set; } = false;
         public Universidad? Universidad { get; set; }
         public int? UniversidadId { get; set; }
         public Municipio? Municipio { get; set; }
@@ -29,14 +31,16 @@ namespace webapi.Models
                 Id = Id,
                 Nombre = Nombre,
                 Correo = Correo,
+                Pass = Pass,
                 Telefono = Telefono,
                 Grado = Grado,
                 Imagen = Imagen,
+                IsAdmin = IsAdmin,
                 Municipio = this.Municipio != null ? Municipio.ToDTO() : null,
                 Universidad = this.Universidad != null ? Universidad.ToDTO() : null,
                 NumValoraciones = ValoracionesRecibidas.Count(),
                 ValoracionMedia = getValoracionMedia(),
-                NotificacionesNoLeidas = Notificaciones != null ? Notificaciones.Where(x => !x.Leida).Count() : 0,
+                NotificacionesNoLeidas = Notificaciones != null ? Notificaciones.Where(x => !x.Leida).Count() : 0
             };
         }
 

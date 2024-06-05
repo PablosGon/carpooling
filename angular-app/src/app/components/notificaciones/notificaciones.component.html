@@ -1,9 +1,14 @@
 <p>notificaciones works!</p>
 
-@for(noti of notificaciones; track noti.id){
-    <p>
-    @if(!noti.leida){
-        ¡Nueva! 
+@if(notificaciones.length > 0){
+    @for(noti of notificaciones; track noti.id){
+        <p>
+        @if(!noti.leida){
+            ¡Nueva! 
+        }
+        <a href="{{'/viaje/' + noti.viajeId}}">{{noti.mensaje}}</a>  <button (click)="deleteNotification(noti.id)">Eliminar</button>
     }
-    <a href="{{'/viaje/' + noti.viajeId}}">{{noti.mensaje}}</a>  <button (click)="deleteNotification(noti.id)">Eliminar</button>
+} @else {
+    <h1>Estás al día :)</h1>
 }
+

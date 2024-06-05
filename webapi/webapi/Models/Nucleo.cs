@@ -21,6 +21,7 @@ namespace webapi.Models
             {
                 Id = Id,
                 Nombre = Nombre,
+                Imagen = Imagen,
                 Municipio = Municipio.ToDTO()
             };
         }

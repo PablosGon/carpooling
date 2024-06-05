@@ -43,15 +43,19 @@ export class FormComponent {
       imagen: '',
       universidad: {
         id: 0,
-        nombre: ''
+        nombre: '',
+        imagen: ''
       },
       municipio: {
         id: 0,
-        nombre: ''
+        nombre: '',
+        imagen: ''
       },
       valoracionMedia: 0,
       numValoraciones: 0,
-      notificacionesNoLeidas: 0
+      notificacionesNoLeidas: 0,
+      pass: '',
+      isAdmin: false
     },
     fechaYHora: new Date(),
     maxPlazas: 0,
@@ -63,7 +67,8 @@ export class FormComponent {
       nombre: '',
       municipio: {
         id: 0,
-        nombre: ''
+        nombre: '',
+        imagen: ''
       },
       imagen: ''
     },
@@ -72,7 +77,8 @@ export class FormComponent {
       nombre: '',
       universidad: {
         id: 0,
-        nombre: ''
+        nombre: '',
+        imagen: ''
       },
       imagen: ''
     },
@@ -85,12 +91,12 @@ export class FormComponent {
     private viajeService:ViajeService,
     private universidadService:UniversidadService,
     private centroService:CentroService,
-    private municipioSerivice:MunicipioService,
+    private municipioService:MunicipioService,
     private nucleoService:NucleoService) {}
 
   ngOnInit(){
     this.universidadService.getUniversidades().subscribe(data => this.universidades = data);
-    this.municipioSerivice.getMunicipios().subscribe(data => this.municipios = data)
+    this.municipioService.getMunicipios().subscribe(data => this.municipios = data)
   }
 
   getCentrosByUniversidadId(id:number){

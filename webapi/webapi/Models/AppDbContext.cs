@@ -49,7 +49,7 @@ namespace webapi.Models
             modelBuilder.Entity<Plaza>(entity =>
             {
                 entity.HasKey(p => p.Id);
-                entity.HasOne(p => p.Usuario).WithMany(u => u.Plazas).HasForeignKey(p => p.UsuarioId);
+                entity.HasOne(p => p.Usuario).WithMany(u => u.Plazas).HasForeignKey(p => p.UsuarioId).OnDelete(DeleteBehavior.NoAction);
                 entity.HasOne(p => p.Viaje).WithMany(v => v.Plazas).HasForeignKey(p => p.ViajeId).OnDelete(DeleteBehavior.Cascade);
             });
 
@@ -61,23 +61,23 @@ namespace webapi.Models
             modelBuilder.Entity<Usuario>(entity =>
             {
                 entity.HasKey(u => u.Id);
-                entity.HasOne(u => u.Universidad).WithMany(u => u.Usuarios).HasForeignKey(u => u.UniversidadId);
-                entity.HasOne(u => u.Municipio).WithMany(m => m.Usuarios).HasForeignKey(u => u.MunicipioId);
+                entity.HasOne(u => u.Universidad).WithMany(u => u.Usuarios).HasForeignKey(u => u.UniversidadId).OnDelete(DeleteBehavior.NoAction);
+                entity.HasOne(u => u.Municipio).WithMany(m => m.Usuarios).HasForeignKey(u => u.MunicipioId).OnDelete(DeleteBehavior.NoAction);
             });
 
             modelBuilder.Entity<Valoracion>(entity =>
             {
                 entity.HasKey(v => v.Id);
                 entity.HasOne(v => v.Conductor).WithMany(u => u.ValoracionesRecibidas).HasForeignKey(v => v.ConductorId).OnDelete(DeleteBehavior.NoAction);
-                entity.HasOne(v => v.Pasajero).WithMany(u => u.ValoracionesEnviadas).HasForeignKey(v => v.PasajeroId).OnDelete(DeleteBehavior.NoAction);
+                entity.HasOne(v => v.Pasajero).WithMany(u => u.ValoracionesEnviadas).HasForeignKey(v => v.PasajeroId).OnDelete(DeleteBehavior.Cascade);
             });
 
             modelBuilder.Entity<Viaje>(entity =>
             {
                 entity.HasKey(v => v.Id);
-                entity.HasOne(v => v.Centro).WithMany(c => c.Viajes).HasForeignKey(v => v.CentroId);
-                entity.HasOne(v => v.Conductor).WithMany(u => u.ViajesCreados).HasForeignKey(v => v.ConductorId).OnDelete(DeleteBehavior.NoAction);
-                entity.HasOne(v => v.Nucleo).WithMany(n => n.Viajes).HasForeignKey(v => v.NucleoId);
+                entity.HasOne(v => v.Centro).WithMany(c => c.Viajes).HasForeignKey(v => v.CentroId).OnDelete(DeleteBehavior.NoAction);
+                entity.HasOne(v => v.Conductor).WithMany(u => u.ViajesCreados).HasForeignKey(v => v.ConductorId).OnDelete(DeleteBehavior.Cascade);
+                entity.HasOne(v => v.Nucleo).WithMany(n => n.Viajes).HasForeignKey(v => v.NucleoId).OnDelete(DeleteBehavior.NoAction);
             });
         }
         public DbSet<Notificacion> Notificaciones { get; set; } = default!;

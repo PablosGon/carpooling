@@ -36,7 +36,8 @@ export class ViajeComponent {
       nombre: '',
       universidad: {
         id: 0,
-        nombre: ''
+        nombre: '',
+        imagen: ''
       },
       imagen: ''
     },
@@ -45,7 +46,8 @@ export class ViajeComponent {
       nombre: '',
       municipio: {
         id: 0,
-        nombre: ''
+        nombre: '',
+        imagen: ''
       },
       imagen: ''
     },
@@ -58,15 +60,19 @@ export class ViajeComponent {
       imagen: '',
       universidad: {
         id: 0,
-        nombre: ''
+        nombre: '',
+        imagen: ''
       },
       municipio: {
         id: 0,
-        nombre: ''
+        nombre: '',
+        imagen: ''
       },
       valoracionMedia: 0,
       numValoraciones: 0,
-      notificacionesNoLeidas: 0
+      notificacionesNoLeidas: 0,
+      pass: '',
+      isAdmin: false
     }
   };
 

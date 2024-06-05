@@ -2,11 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CloudinaryDotNet.Actions;
+using CloudinaryDotNet;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using webapi.DTOs;
 using webapi.Models;
+using Microsoft.Extensions.Options;
+using webapi.Settings;
+using Microsoft.IdentityModel.Tokens;
 
 namespace webapi.Controllers
 {
@@ -15,10 +20,13 @@ namespace webapi.Controllers
     public class UniversidadesController : ControllerBase
     {
         private readonly AppDbContext _context;
+        private readonly Cloudinary _cloudinary;
 
-        public UniversidadesController(AppDbContext context)
+        public UniversidadesController(AppDbContext context, IOptions<CloudinarySettings> config)
         {
             _context = context;
+            var account = new Account(config.Value.CloudName, config.Value.ApiKey, config.Value.ApiSecret);
+            _cloudinary = new Cloudinary(account);
         }
 
         // GET: api/Universidads
@@ -56,14 +64,65 @@ namespace webapi.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutUniversidad(int id, UniversidadDTO universidadDTO)
         {
+            var u = _context.Universidades.Find(id);
 
-            var universidad = new Universidad
+            if(u == null)
             {
-                Id = id,
-                Nombre = universidadDTO.Nombre
-            };
+                return NotFound("Universidad no encontrada");
+            }
 
-            _context.Entry(universidad).State = EntityState.Modified;
+            if (!universidadDTO.Imagen.IsNullOrEmpty() && universidadDTO.Imagen != u.Imagen)
+            {
+                var uploadParams = new ImageUploadParams
+                {
+                    File = new FileDescription(filePath: universidadDTO.Imagen),
+                    Transformation = new Transformation().Height(500).Width(500).Crop("fill")
+                };
+
+                var uploadResult = await _cloudinary.UploadAsync(uploadParams);
+                await _cloudinary.DeleteResourcesAsync(u.Imagen);
+
+                universidadDTO.Imagen = uploadResult.PublicId;
+            }
+
+            if (!universidadDTO.Nombre.IsNullOrEmpty()) u.Nombre = universidadDTO.Nombre;
+            if (!universidadDTO.Imagen.IsNullOrEmpty()) u.Imagen = universidadDTO.Imagen;
+
+            _context.Entry(u).State = EntityState.Modified;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!UniversidadExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return NoContent();
+        }
+
+        [HttpPut("{id}/deletePicture")]
+        public async Task<IActionResult> DeletePicture(int id)
+        {
+            var u = await _context.Universidades.FindAsync(id);
+
+            if (u == null)
+            {
+                return NotFound("No se ha encontrado la universidad");
+            }
+
+            await _cloudinary.DeleteResourcesAsync(u.Imagen);
+            u.Imagen = "";
+
+            _context.Entry(u).State = EntityState.Modified;
 
             try
             {
@@ -89,11 +148,22 @@ namespace webapi.Controllers
         [HttpPost]
         public async Task<ActionResult<UniversidadDTO>> PostUniversidad(UniversidadDTO universidadDTO)
         {
+            if (!universidadDTO.Imagen.IsNullOrEmpty())
+            {
+                var uploadParams = new ImageUploadParams
+                {
+                    File = new FileDescription(filePath: universidadDTO.Imagen),
+                    Transformation = new Transformation().Height(500).Width(500).Crop("fill")
+                };
 
+                var uploadResult = await _cloudinary.UploadAsync(uploadParams);
+
+                universidadDTO.Imagen = uploadResult.PublicId;
+            }
             var universidad = new Universidad
             {
-                Id = universidadDTO.Id,
-                Nombre = universidadDTO.Nombre
+                Nombre = universidadDTO.Nombre,
+                Imagen = universidadDTO.Imagen
             };
 
             _context.Universidades.Add(universidad);

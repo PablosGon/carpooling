@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -24,7 +25,7 @@ namespace webapi.Controllers
 
         // GET: api/Viajes
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ViajeDTO>>> GetViajes([FromQuery] bool? isVuelta, [FromQuery] DateTime? fechaHora, [FromQuery] int? nucleoId, [FromQuery] int? centroId, [FromQuery] int? conductorId)
+        public async Task<ActionResult<IEnumerable<ViajeDTO>>> GetViajes([FromQuery] bool? isVuelta, [FromQuery] DateTime? fechaHora, [FromQuery] int? nucleoId, [FromQuery] int? centroId, [FromQuery] int? conductorId, [FromQuery] int? universidadId, [FromQuery] int? municipioId)
         {
             List<Viaje> res = await _context.Viajes.OrderBy(x => x.FechaYHora).ToListAsync(); ;
 
@@ -43,11 +44,17 @@ namespace webapi.Controllers
             if (nucleoId.HasValue)
             {
                 res = res.Where(x => x.NucleoId == nucleoId).ToList();
+            } else if(municipioId.HasValue)
+            {
+                res = res.Where(x => x.Nucleo.MunicipioId == municipioId).ToList();
             }
 
             if (centroId.HasValue)
             {
                 res = res.Where(x => x.CentroId == centroId).ToList();
+            } else if (universidadId.HasValue)
+            {
+                res = res.Where(x => x.Centro.UniversidadId == universidadId).ToList();
             }
 
             if(conductorId.HasValue)

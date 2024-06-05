@@ -1,0 +1,97 @@
+<p>adminviajes works!</p>
+
+<table border="1">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Fecha y hora</th>
+            <th>Plazas Máximas</th>
+            <th>Comentarios</th>
+            <th>Descripción del Coche</th>
+            <th>Dirección</th>
+            <th>Salida</th>
+            <th>Destino</th>
+            <th>Precio</th>
+            <th>Conductor</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (viaje of viajes; track viaje.id) {
+            <tr>
+                <td>{{viaje.id}}</td>
+                <td><input type="datetime-local" [(ngModel)]="viaje.fechaYHora"/></td>
+                <td><input type="number" [(ngModel)]="viaje.maxPlazas"/></td>
+                <td><input type="text" [(ngModel)]="viaje.comentarios"/></td>
+                <td><input type="text" [(ngModel)]="viaje.descripcionCoche"/></td>
+                <td>
+                    <select type="text" [(ngModel)]="viaje.isVuelta" name="isVuelta">
+                        <option value="false">Ida (dirección universidad)</option>
+                        <option value="true">Vuelta (dirección casa)</option>
+                    </select>
+                </td>
+                @if (viaje.isVuelta) {
+                    <td>
+                        <select type="text" [(ngModel)]="viaje.centro.universidad" id="universidadForm" name="universidadId" required>
+                            @for (uni of universidades; track $index) {
+                                <option value="{{uni.id}}">{{uni.nombre}}</option>
+                            }
+                        </select>
+                        <select type="text" [(ngModel)]="viaje.centro" id="centroForm" name="viaje.centro.id" required><br/>
+                            @for (centro of centros; track centro.id) {
+                                <option value="{{centro.id}}">{{centro.nombre}}</option>
+                            }
+                        </select><br/>
+                    </td>
+                    <td>
+                        <select type="text" [(ngModel)]="viaje.nucleo.municipio" id="municipioForm" name="municipioId" (change)="getNucleosByMunicipioId(viaje.nucleo.municipio.id)" required>
+                            <option value="0">---</option>
+                            @for (mun of municipios; track mun.id) {
+                                <option value="{{mun.id}}">{{mun.nombre}}</option>
+                            }
+                        </select>
+                        <select type="text" [(ngModel)]="viaje.nucleo" id="nucleoForm" name="centroId" required>
+                            <option value="0">---</option>
+                            @for (nucleo of nucleos; track nucleo.id) {
+                                <option value="{{nucleo.id}}">{{nucleo.nombre}}</option>
+                            }
+                        </select>
+                    </td>
+                } @else {
+                    <td>
+                        <select type="text" [(ngModel)]="viaje.nucleo.municipio" id="municipioForm" name="municipioId" required>
+                            <option value="0">---</option>
+                            @for (mun of municipios; track mun.id) {
+                                <option value="{{mun.id}}">{{mun.nombre}}</option>
+                            }
+                        </select>
+                        <select type="text" [(ngModel)]="viaje.nucleo" id="nucleoForm" name="centroId" required>
+                            <option value="0">---</option>
+                            @for (nucleo of nucleos; track nucleo.id) {
+                                <option value="{{nucleo.id}}">{{nucleo.nombre}}</option>
+                            }
+                        </select>
+                    </td>
+                    <td>
+                        <select type="text" [(ngModel)]="viaje.centro.universidad" id="universidadForm" name="universidadId" (change)="getCentrosByUniversidadId(viaje.centro.universidad.id)" required>
+                            @for (uni of universidades; track $index) {
+                                <option value="{{uni.id}}">{{uni.nombre}}</option>
+                            }
+                        </select>
+                        <select type="text" [(ngModel)]="viaje.centro.id" id="centroForm" name="viaje.centro.id" required><br/>
+                            @for (centro of centros; track centro.id) {
+                                <option value="{{centro.id}}">{{centro.nombre}}</option>
+                            }
+                        </select><br/>
+                    </td>
+
+                }
+                <!-- <td>{{getSalida(viaje.id)}}</td>
+                <td>{{getDestino(viaje.id)}}</td> -->
+                <td><input type="number" [(ngModel)]="viaje.precio"/></td>
+                <td><a href="{{'usuario/' + viaje.conductor.id}}"> {{viaje.conductor.nombre}}</a></td>
+                <td><button (click)="updateViaje(viaje.id, viaje)">Editar</button></td>
+                <td><button (click)="deleteViaje(viaje.id)">Eliminar</button></td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -2,9 +2,28 @@
 
 <h1>{{usuario.nombre}}</h1>
 
+<img src="{{'https://res.cloudinary.com/dilfzvvw4/image/upload/v1716716882/' + usuario.imagen + '.jpg'}}"/>
+
 <h2>{{usuario.valoracionMedia}} estrellas ({{usuario.numValoraciones}} valoraciones)</h2>
 
-@if(!isMyself()){
+<p>Correo: {{usuario.correo}}</p>
+<p>Teléfono: {{usuario.telefono}}</p>
+
+@if(usuario.municipio){
+    <p>Vive en {{usuario.municipio.nombre}}</p>
+}
+
+@if (usuario.grado) {
+    <p>Estudiante de {{usuario.grado}} </p>
+}
+
+@if(usuario.universidad){
+    <p>{{usuario.universidad.nombre}}</p>
+}
+
+@if(isMyself()){
+    <a href="{{'/usuario/' + usuario.id + '/editar'}}">Editar información</a>
+} @else {
 
     @if (!this.userId) {
         <p>Inicia sesión para añadir una valoración</p>
