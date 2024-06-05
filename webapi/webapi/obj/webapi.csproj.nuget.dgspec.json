@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\p.a.sanchez.gonzalez\\OneDrive - Avanade\\Documents\\TFG\\carpooling\\webapi\\webapi\\webapi.csproj": {}
+    "C:\\Users\\pablo\\Documents\\repos\\carpooling\\webapi\\webapi\\webapi.csproj": {}
   },
   "projects": {
-    "C:\\Users\\p.a.sanchez.gonzalez\\OneDrive - Avanade\\Documents\\TFG\\carpooling\\webapi\\webapi\\webapi.csproj": {
+    "C:\\Users\\pablo\\Documents\\repos\\carpooling\\webapi\\webapi\\webapi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\p.a.sanchez.gonzalez\\OneDrive - Avanade\\Documents\\TFG\\carpooling\\webapi\\webapi\\webapi.csproj",
+        "projectUniqueName": "C:\\Users\\pablo\\Documents\\repos\\carpooling\\webapi\\webapi\\webapi.csproj",
         "projectName": "webapi",
-        "projectPath": "C:\\Users\\p.a.sanchez.gonzalez\\OneDrive - Avanade\\Documents\\TFG\\carpooling\\webapi\\webapi\\webapi.csproj",
-        "packagesPath": "C:\\Users\\p.a.sanchez.gonzalez\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\p.a.sanchez.gonzalez\\OneDrive - Avanade\\Documents\\TFG\\carpooling\\webapi\\webapi\\obj\\",
+        "projectPath": "C:\\Users\\pablo\\Documents\\repos\\carpooling\\webapi\\webapi\\webapi.csproj",
+        "packagesPath": "C:\\Users\\pablo\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\pablo\\Documents\\repos\\carpooling\\webapi\\webapi\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\p.a.sanchez.gonzalez\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\pablo\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -34,6 +34,11 @@
           "warnAsError": [
             "NU1605"
           ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -82,7 +87,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.200/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

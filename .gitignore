@@ -1,0 +1,8 @@
+﻿################################################################################
+# Este archivo .gitignore ha sido creado automáticamente por Microsoft(R) Visual Studio.
+################################################################################
+
+/angular-app/node_modules
+/webapi/.vs/webapi/FileContentIndex
+/webapi/webapi/obj/Debug/net8.0
+/angular-app/.angular/cache/17.3.2/vite/deps
