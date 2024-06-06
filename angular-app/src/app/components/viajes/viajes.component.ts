@@ -35,7 +35,7 @@ export class ViajesComponent {
   isVuelta = false
   nucleoId = 0
   centroId = 0
-  fechaYHora = new Date()
+  fechaYHora : Date | undefined = undefined
 
   nucleos:Nucleo[] = []
   centros:Centro[] = []
@@ -59,6 +59,7 @@ export class ViajesComponent {
 
   filtrar(){
     this.viajes = []
+    console.log(this.centroId, this.nucleoId, this.isVuelta, this.fechaYHora, this.universidadId, this.municipioId)
     this.viajeService.getViajes(this.centroId, this.nucleoId, this.isVuelta, this.fechaYHora, this.universidadId, this.municipioId).subscribe(data => {console.log(data);this.viajes = data})
   }
 

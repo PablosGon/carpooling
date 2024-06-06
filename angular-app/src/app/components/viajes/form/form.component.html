@@ -36,9 +36,9 @@
         </select><br/>
 
         <label>Dirección</label>
-        <select type="bool" [(ngModel)]="viaje.isVuelta" name="viaje.isVuelta">
-            <option value=false>Ida (dirección universidad)</option>
-            <option value=true>Vuelta (dirección casa)</option>
+        <select type="text" [(ngModel)]="isVuelta" name="viaje.isVuelta" (change)="consolelog(isVuelta)">
+            <option value="false">Ida (dirección universidad)</option>
+            <option value="true">Vuelta (dirección casa)</option>
         </select> <br/>
 
         <label>Fecha y Hora</label>

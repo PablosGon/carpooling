@@ -46,7 +46,8 @@ namespace webapi.Controllers
                 res = res.Where(x => x.NucleoId == nucleoId).ToList();
             } else if(municipioId.HasValue)
             {
-                res = res.Where(x => x.Nucleo.MunicipioId == municipioId).ToList();
+                var nucleos = await _context.Nucleos.Where(c => c.MunicipioId == municipioId).ToListAsync();
+                res = res.Where(x => nucleos.Exists(n => n.Id == x.NucleoId)).ToList();
             }
 
             if (centroId.HasValue)
@@ -54,7 +55,8 @@ namespace webapi.Controllers
                 res = res.Where(x => x.CentroId == centroId).ToList();
             } else if (universidadId.HasValue)
             {
-                res = res.Where(x => x.Centro.UniversidadId == universidadId).ToList();
+                var centros = await _context.Centros.Where(c => c.UniversidadId == universidadId).ToListAsync();
+                res = res.Where(x => centros.Exists(c => c.Id == x.CentroId)).ToList();
             }
 
             if(conductorId.HasValue)

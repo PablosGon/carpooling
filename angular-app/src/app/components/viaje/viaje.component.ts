@@ -124,6 +124,14 @@ export class ViajeComponent {
 
   deleteViaje(){
     this.viajeService.deleteViaje(this.viaje.id).subscribe()
-    //window.location.href="/viajes"
+    window.location.href="/viajes"
+  }
+
+  getDestino(){
+    return !this.viaje.isVuelta ? this.viaje.centro.nombre : this.viaje.nucleo.nombre
+  }
+
+  getOrigen(){
+    return this.viaje.isVuelta ? this.viaje.centro.nombre : this.viaje.nucleo.nombre
   }
 }

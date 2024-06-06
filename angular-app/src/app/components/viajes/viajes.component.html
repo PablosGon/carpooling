@@ -5,17 +5,17 @@
 <form>
     <label>Universidad</label>
     <select type="text" [(ngModel)]="universidadId" id="universidadForm" name="universidadId" (change)="getCentrosByUniversidadId(universidadId)" required>
-        <option value="0">---</option>
+        <option [ngValue]="0">---</option>
         @for (uni of universidades; track $index) {
-            <option value="{{uni.id}}">{{uni.nombre}}</option>
+            <option [ngValue]="uni.id">{{uni.nombre}}</option>
         }
     </select>
 
     <label>Centro</label>
     <select type="text" [(ngModel)]="centroId" id="centroForm" name="centroId" required><br/>
-        <option value="0">---</option>
+        <option [ngValue]="0">---</option>
         @for (centro of centros; track centro.id) {
-            <option value="{{centro.id}}">{{centro.nombre}}</option>
+            <option [ngValue]="centro.id">{{centro.nombre}}</option>
         }
     </select>
 
@@ -23,22 +23,22 @@
     <select type="text" [(ngModel)]="municipioId" id="municipioForm" name="municipioId" (change)="getNucleosByMunicipioId(municipioId)" required>
         <option value="0">---</option>
         @for (mun of municipios; track municipioId) {
-            <option value="{{mun.id}}">{{mun.nombre}}</option>
+            <option [ngValue]="mun.id">{{mun.nombre}}</option>
         }
     </select>
 
     <label>Núcleo</label>
     <select type="text" [(ngModel)]="nucleoId" id="nucleoForm" name="centroId" required>
-        <option value="0">---</option>
+        <option [ngValue]="0">---</option>
         @for (nucleo of nucleos; track nucleo.id) {
-            <option value="{{nucleo.id}}">{{nucleo.nombre}}</option>
+            <option [ngValue]="nucleo.id">{{nucleo.nombre}}</option>
         }
     </select>
 
     <label>Dirección</label>
     <select type="text" [(ngModel)]="isVuelta" name="isVuelta">
-        <option value="false">Ida (dirección universidad)</option>
-        <option value="true">Vuelta (dirección casa)</option>
+        <option [ngValue]="false">Ida (dirección universidad)</option>
+        <option [ngValue]="true">Vuelta (dirección casa)</option>
     </select> 
 
 

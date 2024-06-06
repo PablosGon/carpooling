@@ -22,13 +22,14 @@ export class ViajeService {
     let url = this.url + 'viajes'
     let params:HttpParams = new HttpParams()
 
-    if(universidadId) params.append('universidadId', universidadId);
-    if(centroId) params.append('centroId', centroId);
-    if(municipioId) params.append('municipioId', municipioId);
-    if(nucleoId) params.append('nucleoId', nucleoId);
-    if(isVuelta != null) params.append('isVuelta', isVuelta);
-    if(fecha) params.append('fechaHora', fecha.toString());
+    if(universidadId) params = params.set('universidadId', universidadId);
+    if(centroId) params = params.set('centroId', centroId);
+    if(municipioId) params = params.set('municipioId', municipioId);
+    if(nucleoId) params = params.set('nucleoId', nucleoId);
+    if(isVuelta != null) params = params.set('isVuelta', isVuelta);
+    if(fecha) params = params.set('fechaHora', fecha.toISOString());
 
+    console.log(params)
 
     return this.httpClient.get<Viaje[]>(url, {
       params: params

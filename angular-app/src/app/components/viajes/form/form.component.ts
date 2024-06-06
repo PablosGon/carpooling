@@ -31,6 +31,7 @@ export class FormComponent {
   municipioId = 0
 
   usuarioId = sessionStorage.getItem('usuarioId')
+  isVuelta = "false";
 
   viaje:Viaje = {
     id: 0,
@@ -115,16 +116,16 @@ export class FormComponent {
   }
 
   consolelog(item:any){
-    console.log(item)
+    console.log(item == "true")
   }
 
   newViaje(){
+    this.viaje.isVuelta = this.isVuelta == "true"
     this.viaje.conductor.id = parseInt(this.usuarioId!)
     console.log(this.viaje)
     this.viajeService.postViaje(this.viaje).subscribe(data => {
       window.location.href='/viaje/' + data.id
     })
-
   }
 
 }

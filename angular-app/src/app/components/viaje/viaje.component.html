@@ -1,7 +1,7 @@
 <p>viaje works!</p>
 <h1>Detalles del viaje</h1>
-<p>Origen: {{viaje.nucleo.nombre}}</p>
-<p>Destino: {{viaje.centro.nombre}}</p>
+<p>Salida desde: {{getOrigen()}}</p>
+<p>Destino: {{getDestino()}}</p>
 <p>Hora: {{viaje.fechaYHora.getHours()}}:{{viaje.fechaYHora.getMinutes()}}</p>
 <p>Conductor: <a routerLink="{{'/usuario/' + viaje.conductor.id}}"  routerLinkActive="active" ariaCurrentWhenActive="page">{{viaje.conductor.nombre}} ({{viaje.conductor.valoracionMedia}} estrellas)</a></p>
 <p>Coche: {{viaje.descripcionCoche}}</p>
