@@ -1,12 +1,15 @@
 import { Component } from '@angular/core';
-import { Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 import { UsuarioService } from '../../services/usuario.service';
 import { Usuario } from '../../entity/usuario';
+
+import { NgbNav, NgbNavItem, NgbNavLink, NgbNavOutlet } from '@ng-bootstrap/ng-bootstrap';
+
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [RouterLink, RouterLinkActive],
+  imports: [RouterLink, RouterLinkActive, NgbNav, NgbNavItem, NgbNavLink, NgbNavOutlet],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css'
 })

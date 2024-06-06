@@ -1,14 +1,29 @@
 <p>navbar works!</p>
 
-<h1 routerLink="/viajes">UniCar (nombre en decadencia)</h1>
+
 
 @if(usuarioId){
-    <p><a routerLink="{{'/usuario/' + usuarioId}}"  routerLinkActive="active" ariaCurrentWhenActive="page">Perfil de {{usuario.nombre}}</a></p>
-    <p><a routerLink="{{'/notificaciones'}}"  routerLinkActive="active" ariaCurrentWhenActive="page">Notificaciones ({{usuario.notificacionesNoLeidas}})</a></p>
-    @if(usuario.isAdmin){
-        <p><a routerLink="{{'/admin'}}"  routerLinkActive="active" ariaCurrentWhenActive="page">Portal de administrador</a></p><br/>
-    }
-    <button (click)="logout()">Cerrar sesión</button>
+    <ul ngbNav #nav="ngbNav" class="nav nav-tabs">
+        <li>
+            <h1 ngbNavItem routerLink="/viajes" class="justify-content-">UniCar (nombre en decadencia)</h1>
+        </li>
+        <li>
+            <a routerLink="{{'/notificaciones'}}"  routerLinkActive="active" ariaCurrentWhenActive="page">Notificaciones ({{usuario.notificacionesNoLeidas}})</a>
+        </li>
+
+        @if(usuario.isAdmin){
+            <li ngbNavItem>
+                <a routerLink="{{'/admin'}}"  routerLinkActive="active" ariaCurrentWhenActive="page">Portal de administrador</a>
+            </li>
+        }
+        <li ngbNavLink>
+            <a routerLink="{{'/usuario/' + usuarioId}}"  routerLinkActive="active" ariaCurrentWhenActive="page">Perfil de {{usuario.nombre}}</a>
+        </li>
+        <li ngbNavItem>
+            <button (click)="logout()">Cerrar sesión</button>
+        </li>
+        
+    </ul>
 } @else {
     <button (click)="login()">Iniciar sesión</button>
 }
