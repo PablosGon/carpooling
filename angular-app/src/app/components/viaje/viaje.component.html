@@ -1,9 +1,8 @@
 <p>viaje works!</p>
-<h1>Detalles del viaje</h1>
+<h2>Detalles del viaje</h2>
 <p>Salida desde: {{getOrigen()}}</p>
 <p>Destino: {{getDestino()}}</p>
 <p>Hora: {{viaje.fechaYHora.getHours()}}:{{viaje.fechaYHora.getMinutes()}}</p>
-<p>Conductor: <a routerLink="{{'/usuario/' + viaje.conductor.id}}"  routerLinkActive="active" ariaCurrentWhenActive="page">{{viaje.conductor.nombre}} ({{viaje.conductor.valoracionMedia}} estrellas)</a></p>
 <p>Coche: {{viaje.descripcionCoche}}</p>
 
 @if(!isMyself()){
@@ -14,7 +13,23 @@
     }
 }
 
-<h2>Plazas</h2>
+<h3>Conductor</h3>
+
+<div class="card bg-light" style="width: 200px;">
+    <div class="card-body">
+        <div class="row">
+            <div class="col">
+                <img style="width: 50px;" src="{{'https://res.cloudinary.com/dilfzvvw4/image/upload/v1716716882/' + viaje.conductor.imagen + '.jpg'}}"/>
+            </div>
+            <div class="col">
+                <p class="card-title">{{viaje.conductor.nombre}}</p>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<h3>Pasajeros</h3>
 
 @for (plaza of plazas; track $index) {
     <p>{{plaza.nombre}}

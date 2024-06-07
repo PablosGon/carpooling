@@ -1,55 +1,80 @@
-<p>viajes works!</p>
+<div>
+    <a class="btn btn-primary" routerLink="/viajes/crear"  routerLinkActive="active" ariaCurrentWhenActive="page">Crear un viaje</a>
+</div>
 
-<p><a routerLink="/viajes/crear"  routerLinkActive="active" ariaCurrentWhenActive="page">Crear un viaje</a></p>
+<form class="form">
+    <div class="row">
+        <div class="col">
+            <label>Universidad</label>
+            <select class="form-select" style="width: 200px;" type="text" [(ngModel)]="universidadId" id="universidadForm" name="universidadId" (change)="getCentrosByUniversidadId(universidadId)" required>
+                <option [ngValue]="0">---</option>
+                @for (uni of universidades; track $index) {
+                    <option [ngValue]="uni.id">{{uni.nombre}}</option>
+                }
+            </select>
+        </div>
+        <div class="col">
+            <label>Centro</label>
+            <select class="form-select" type="text" [(ngModel)]="centroId" id="centroForm" name="centroId" required><br/>
+                <option [ngValue]="0">---</option>
+                @for (centro of centros; track centro.id) {
+                    <option [ngValue]="centro.id">{{centro.nombre}}</option>
+                }
+            </select>
+        </div>
+        <div class="col">
+            <label>Municipio</label>
+            <select class="form-select" type="text" [(ngModel)]="municipioId" id="municipioForm" name="municipioId" (change)="getNucleosByMunicipioId(municipioId)" required>
+                <option value="0">---</option>
+                @for (mun of municipios; track municipioId) {
+                    <option [ngValue]="mun.id">{{mun.nombre}}</option>
+                }
+            </select>
+        </div>
+        <div class="col">
+            <label>Núcleo</label>
+            <select class="form-select" type="text" [(ngModel)]="nucleoId" id="nucleoForm" name="centroId" required>
+                <option [ngValue]="0">---</option>
+                @for (nucleo of nucleos; track nucleo.id) {
+                    <option [ngValue]="nucleo.id">{{nucleo.nombre}}</option>
+                }
+            </select>
+        </div>
+        <div class="col">
+            <label>Dirección</label>
+            <select class="form-select" type="text" [(ngModel)]="isVuelta" name="isVuelta">
+                <option [ngValue]="false">Ida (dirección universidad)</option>
+                <option [ngValue]="true">Vuelta (dirección casa)</option>
+            </select> 
+        </div>
+        <div class="col">
+            <label>Fecha</label>
+            <input class="datepicker" type="date" [(ngModel)]="fechaYHora" id="horaForm" name="fechaYHora" required>
+        </div>
+        <div>
+            <button class="btn btn-secondary" (click)="filtrar()">Buscar</button>
+        </div>
+    </div>
 
-<form>
-    <label>Universidad</label>
-    <select type="text" [(ngModel)]="universidadId" id="universidadForm" name="universidadId" (change)="getCentrosByUniversidadId(universidadId)" required>
-        <option [ngValue]="0">---</option>
-        @for (uni of universidades; track $index) {
-            <option [ngValue]="uni.id">{{uni.nombre}}</option>
-        }
-    </select>
-
-    <label>Centro</label>
-    <select type="text" [(ngModel)]="centroId" id="centroForm" name="centroId" required><br/>
-        <option [ngValue]="0">---</option>
-        @for (centro of centros; track centro.id) {
-            <option [ngValue]="centro.id">{{centro.nombre}}</option>
-        }
-    </select>
-
-    <label>Municipio</label>
-    <select type="text" [(ngModel)]="municipioId" id="municipioForm" name="municipioId" (change)="getNucleosByMunicipioId(municipioId)" required>
-        <option value="0">---</option>
-        @for (mun of municipios; track municipioId) {
-            <option [ngValue]="mun.id">{{mun.nombre}}</option>
-        }
-    </select>
-
-    <label>Núcleo</label>
-    <select type="text" [(ngModel)]="nucleoId" id="nucleoForm" name="centroId" required>
-        <option [ngValue]="0">---</option>
-        @for (nucleo of nucleos; track nucleo.id) {
-            <option [ngValue]="nucleo.id">{{nucleo.nombre}}</option>
-        }
-    </select>
-
-    <label>Dirección</label>
-    <select type="text" [(ngModel)]="isVuelta" name="isVuelta">
-        <option [ngValue]="false">Ida (dirección universidad)</option>
-        <option [ngValue]="true">Vuelta (dirección casa)</option>
-    </select> 
-
-
-    <label>Fecha</label>
-    <input type="date" [(ngModel)]="fechaYHora" id="horaForm" name="fechaYHora" required><br/>
-
-    <button (click)="filtrar()">Buscar</button>
 </form>
 
+<div class="row">
+
 @for (viaje of viajes; track viaje.id) {
-    <img src="{{'https://res.cloudinary.com/dilfzvvw4/image/upload/v1716716882/' + viaje.nucleo.imagen + '.jpg'}}" style="width: 200px; height: 200px;"/>
-    <img src="{{'https://res.cloudinary.com/dilfzvvw4/image/upload/v1716716882/' + viaje.centro.imagen + '.jpg'}}" style="width: 200px; height: 200px;"/><br/>
-    <a routerLink="{{'/viaje/' + viaje.id}}"  routerLinkActive="active" ariaCurrentWhenActive="page">Viaje de {{salida(viaje)}} a {{destino(viaje)}} ({{viaje.fechaYHora}})</a><br/>
+    <div class="col">
+      <div class="card" style="width: 302px; height: 300px;" routerLink="{{'/viaje/' + viaje.id}}"  routerLinkActive="active">
+        <div class="row">
+            <div class="col">
+                <img style="width: 150px;" src="{{'https://res.cloudinary.com/dilfzvvw4/image/upload/v1716716882/' + viaje.nucleo.imagen + '.jpg'}}" alt="{{viaje.nucleo.nombre}} ({{viaje.nucleo.municipio.nombre}})">
+                <img style="width: 150px;" src="{{'https://res.cloudinary.com/dilfzvvw4/image/upload/v1716716882/' + viaje.centro.imagen + '.jpg'}}" alt="{{viaje.centro.nombre}} ({{viaje.centro.universidad.nombre}})">
+            </div>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">{{salida(viaje)}} -> {{destino(viaje)}}</h5>
+          <p class="card-text">Viaje trepidante</p>
+        </div>
+      </div>
+    </div>
 }
+
+</div>
