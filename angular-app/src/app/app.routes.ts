@@ -1,13 +1,11 @@
 import { Routes } from '@angular/router';
-import { ViajesComponent } from './pages/viajes/viajes.component';
+import { ViajesComponent } from './pages/viajes/components/viajes.component';
 import { UsuarioComponent } from './components/usuario/usuario.component';
-import { ViajeComponent } from './components/viaje/viaje.component';
-import { CreateComponent } from './components/viajes/create/create.component';
+import { ViajeComponent } from './pages/viajes/components/viaje-details/viaje.component';
 import { NotificacionesComponent } from './components/notificaciones/notificaciones.component';
 import { SolicitudformComponent } from './components/viaje/solicitudform/solicitudform.component';
 import { LoginComponent } from './components/usuarios/login/login.component';
 import { RegisterComponent } from './components/usuarios/register/register.component';
-import { EditComponent } from './components/viajes/edit/edit.component';
 import { EditusuarioComponent } from './components/usuario/editusuario/editusuario.component';
 import { AdminloginComponent } from './components/admin/login/adminlogin.component';
 import { AdminviajesComponent } from './components/admin/viajes/adminviajes.component';
@@ -15,6 +13,8 @@ import { AdminusuariosComponent } from './components/admin/usuarios/adminusuario
 import { AdminmunicipiosComponent } from './components/admin/municipios/adminmunicipios.component';
 import { AdminuniversidadesComponent } from './components/admin/universidades/adminuniversidades.component';
 import { AdminComponent } from './components/admin/admin.component';
+import { EditComponent } from './pages/viajes/components/viaje-edit/edit.component';
+import { CreateComponent } from './pages/viajes/components/viaje-create/create.component';
 
 export const routes: Routes = [
     {

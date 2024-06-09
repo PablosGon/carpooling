@@ -1,0 +1,55 @@
+<form class="form">
+    <div class="row">
+        <div class="col">
+            <label>Universidad</label>
+            <select class="form-select" style="width: 200px;" type="text" [(ngModel)]="viajeFilter.universidadId" id="universidadForm" name="universidadId" (change)="getCentrosByUniversidadId(viajeFilter.universidadId)" required>
+                <option [ngValue]="0">---</option>
+                @for (uni of universidades; track uni.nombre) {
+                    <option [ngValue]="uni.id">{{uni.nombre}}</option>
+                }
+            </select>
+        </div>
+        <div class="col">
+            <label>Centro</label>
+            <select class="form-select" type="text" [(ngModel)]="viajeFilter.centroId" id="centroForm" name="centroId" required><br/>
+                <option [ngValue]="0">---</option>
+                @for (centro of centros; track centro.id) {
+                    <option [ngValue]="centro.id">{{centro.nombre}}</option>
+                }
+            </select>
+        </div>
+        <div class="col">
+            <label>Municipio</label>
+            <select class="form-select" type="text" [(ngModel)]="viajeFilter.municipioId" id="municipioForm" name="municipioId" (change)="getNucleosByMunicipioId(viajeFilter.municipioId)" required>
+                <option value="0">---</option>
+                @for (mun of municipios; track mun.id) {
+                    <option [ngValue]="mun.id">{{mun.nombre}}</option>
+                }
+            </select>
+        </div>
+        <div class="col">
+            <label>Núcleo</label>
+            <select class="form-select" type="text" [(ngModel)]="viajeFilter.nucleoId" id="nucleoForm" name="centroId" required>
+                <option [ngValue]="0">---</option>
+                @for (nucleo of nucleos; track nucleo.id) {
+                    <option [ngValue]="nucleo.id">{{nucleo.nombre}}</option>
+                }
+            </select>
+        </div>
+        <div class="col">
+            <label>Dirección</label>
+            <select class="form-select" type="text" [(ngModel)]="viajeFilter.isVuelta" name="isVuelta">
+                <option [ngValue]="false">Ida (dirección universidad)</option>
+                <option [ngValue]="true">Vuelta (dirección casa)</option>
+            </select> 
+        </div>
+        <div class="col">
+            <label>Fecha</label>
+            <input class="datepicker" type="date" [(ngModel)]="viajeFilter.fechaYHora" id="horaForm" name="fechaYHora" required>
+        </div>
+        <div>
+            <button class="btn btn-secondary" (click)="submit()">Buscar</button>
+        </div>
+    </div>
+
+</form>

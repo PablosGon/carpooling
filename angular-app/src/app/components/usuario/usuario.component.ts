@@ -65,7 +65,7 @@ export class UsuarioComponent {
     this.usuarioService.getUsuario(this.id!).subscribe(data => {
       this.usuario = data
     });
-    this.viajeService.getViajes().subscribe(data => {
+    this.viajeService.getViajes({}).subscribe(data => {
       data.forEach((viaje) => {
         if(viaje.conductor.id == this.id){
           this.viajes.push(viaje);

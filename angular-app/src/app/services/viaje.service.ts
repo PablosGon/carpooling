@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Viaje } from '../entity/viaje';
 import { Observable } from 'rxjs';
+import { ViajeFilter } from '../pages/viajes/interfaces/viaje-filter';
 
 @Injectable({
   providedIn: 'root'
@@ -17,19 +18,17 @@ export class ViajeService {
   //   "Access-Control-Allow-Origin": "*"
   // });
 
-  public getViajes(centroId?:number, nucleoId?:number, isVuelta?:boolean, fecha?:Date, universidadId?:number, municipioId?:number):Observable<Viaje[]> {
+  public getViajes(filter:ViajeFilter):Observable<Viaje[]> {
 
     let url = this.url + 'viajes'
     let params:HttpParams = new HttpParams()
 
-    if(universidadId) params = params.set('universidadId', universidadId);
-    if(centroId) params = params.set('centroId', centroId);
-    if(municipioId) params = params.set('municipioId', municipioId);
-    if(nucleoId) params = params.set('nucleoId', nucleoId);
-    if(isVuelta != null) params = params.set('isVuelta', isVuelta);
-    if(fecha) params = params.set('fechaHora', fecha.toISOString());
-
-    console.log(params)
+    if(filter.universidadId) params = params.set('universidadId', filter.universidadId);
+    if(filter.centroId) params = params.set('centroId', filter.centroId);
+    if(filter.municipioId) params = params.set('municipioId', filter.municipioId);
+    if(filter.nucleoId) params = params.set('nucleoId', filter.nucleoId);
+    if(filter.isVuelta != null) params = params.set('isVuelta', filter.isVuelta);
+    if(filter.fechaYHora) params = params.set('fechaHora', filter.fechaYHora.toISOString());
 
     return this.httpClient.get<Viaje[]>(url, {
       params: params

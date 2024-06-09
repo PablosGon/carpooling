@@ -22,3 +22,6 @@ webapi/webapi/obj/Debug/net8.0/webapi.AssemblyInfoInputs.cache
 webapi/webapi/obj/Debug/net8.0/webapi.assets.cache
 webapi/webapi/obj/Debug/net8.0/webapi.csproj.AssemblyReference.cache
 webapi/webapi/obj/Debug/net8.0/webapi.GeneratedMSBuildEditorConfig.editorconfig
+/webapi/webapi/bin/Release/net8.0
+/webapi/webapi/obj/Release/net8.0
+/webapi/webapi/Properties

@@ -1,0 +1,49 @@
+<div ngbAccordion>
+    <div ngbAccordionItem>
+        <button ngbAccordionButton>
+            <div>
+                <div class="row">
+                    <div class="col">
+                        <img style="width: 50px;" src="{{'https://res.cloudinary.com/dilfzvvw4/image/upload/v1716716882/' + plaza?.imagen}}"/>
+                    </div>
+                    <div class="col">
+                        <h5 class="accordion-title">{{plaza?.nombre}}</h5>
+                    </div>
+                </div>
+            </div>
+        </button>
+      <div ngbAccordionCollapse>
+        <div ngbAccordionBody>
+            <div class="row">
+                <div class="col">
+                    <img src="{{'https://res.cloudinary.com/dilfzvvw4/image/upload/v1716716882/' + plaza?.imagen}}" class="card-image">
+                </div>
+                <div class="col">
+                    <p><strong>Nombre:</strong> {{plaza?.nombre}}</p>
+                    <p><strong>Correo:</strong> {{plaza?.correo}}</p>
+                    <p><strong>Teléfono:</strong> {{plaza?.telefono}}</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <p><strong>Comentarios:</strong> {{plaza?.comentariosPasajero}}</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    @if (false) {
+            
+                    } @else if (plaza?.aceptada) {
+                        <button class="btn btn-danger" (click)="remove()">Eliminar</button>
+                    } @else {
+                        <button class="btn btn-primary" (click)="accept()">Aceptar</button>
+                        <button class="btn btn-secondary" (click)="reject()">Rechazar</button>
+                    }
+                </div>
+            </div>
+
+      </div>
+
+    </div>
+
+</div>
