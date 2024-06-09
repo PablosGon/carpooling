@@ -11,11 +11,12 @@ import { Universidad } from '../../entity/universidad';
 import { Municipio } from '../../entity/municipio';
 import { UniversidadService } from '../../services/universidad.service';
 import { MunicipioService } from '../../services/municipio.service';
+import { ViajeListComponent } from './viaje-list/viaje-list.component';
 
 @Component({
   selector: 'app-viajes',
   standalone: true,
-  imports: [RouterLink, RouterLinkActive, FormsModule],
+  imports: [RouterLink, RouterLinkActive, FormsModule, ViajeListComponent],
   templateUrl: './viajes.component.html',
   styleUrl: './viajes.component.css'
 })
@@ -69,14 +70,6 @@ export class ViajesComponent {
     this.viajeService.getViajes().subscribe(data => {this.viajes = data})
     this.universidadService.getUniversidades().subscribe(data => this.universidades = data);
     this.municipioSerivice.getMunicipios().subscribe(data => this.municipios = data)
-  }
-
-  destino(viaje:Viaje){
-    return viaje.isVuelta ? viaje.nucleo.nombre : viaje.centro.nombre
-  }
-
-  salida(viaje:Viaje){
-    return viaje.isVuelta ? viaje.centro.nombre : viaje.nucleo.nombre
   }
 
 }

@@ -58,23 +58,6 @@
 
 </form>
 
-<div class="row">
-
-@for (viaje of viajes; track viaje.id) {
-    <div class="col">
-      <div class="card" style="width: 302px; height: 300px;" routerLink="{{'/viaje/' + viaje.id}}"  routerLinkActive="active">
-        <div class="row">
-            <div class="col">
-                <img style="width: 150px;" src="{{'https://res.cloudinary.com/dilfzvvw4/image/upload/v1716716882/' + viaje.nucleo.imagen + '.jpg'}}" alt="{{viaje.nucleo.nombre}} ({{viaje.nucleo.municipio.nombre}})">
-                <img style="width: 150px;" src="{{'https://res.cloudinary.com/dilfzvvw4/image/upload/v1716716882/' + viaje.centro.imagen + '.jpg'}}" alt="{{viaje.centro.nombre}} ({{viaje.centro.universidad.nombre}})">
-            </div>
-        </div>
-        <div class="card-body">
-          <h5 class="card-title">{{salida(viaje)}} -> {{destino(viaje)}}</h5>
-          <p class="card-text">Viaje trepidante</p>
-        </div>
-      </div>
-    </div>
-}
-
-</div>
+<app-viaje-list
+    [viajes]="viajes"
+/>
