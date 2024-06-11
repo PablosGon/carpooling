@@ -1,17 +1,18 @@
-import { Component, inject } from '@angular/core';
-import { Usuario } from '../../entity/usuario';
-import { UsuarioService } from '../../services/usuario.service';
+import { Component, inject, numberAttribute } from '@angular/core';
+import { Usuario } from '../../../../entity/usuario';
+import { UsuarioService } from '../../../../services/usuario.service';
 import { ActivatedRoute, RouterLink, RouterLinkActive } from '@angular/router';
-import { ViajeService } from '../../services/viaje.service';
-import { Viaje } from '../../entity/viaje';
+import { ViajeService } from '../../../../services/viaje.service';
+import { Viaje } from '../../../../entity/viaje';
 import { FormsModule } from '@angular/forms';
-import { ValoracionService } from '../../services/valoracion.service';
-import { Valoracion } from '../../entity/valoracion';
+import { ValoracionService } from '../../../../services/valoracion.service';
+import { Valoracion } from '../../../../entity/valoracion';
+import { ViajeListComponent } from '../../../viajes/components/viaje-list/viaje-list.component';
 
 @Component({
   selector: 'app-usuario',
   standalone: true,
-  imports: [RouterLink, RouterLinkActive, FormsModule],
+  imports: [RouterLink, RouterLinkActive, FormsModule, ViajeListComponent],
   templateUrl: './usuario.component.html',
   styleUrl: './usuario.component.css'
 })

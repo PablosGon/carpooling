@@ -115,6 +115,7 @@ export class FormComponent {
   }
 
   submit(){
+    this.viaje.conductor.id = parseInt(this.usuarioId!)
     this.onSubmit.emit(this.viaje)
   }
 

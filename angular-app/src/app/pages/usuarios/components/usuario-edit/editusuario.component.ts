@@ -1,12 +1,12 @@
 import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Usuario } from '../../../entity/usuario';
+import { Usuario } from '../../../../entity/usuario';
 import { ActivatedRoute } from '@angular/router';
-import { UsuarioService } from '../../../services/usuario.service';
-import { UniversidadService } from '../../../services/universidad.service';
-import { MunicipioService } from '../../../services/municipio.service';
-import { Universidad } from '../../../entity/universidad';
-import { Municipio } from '../../../entity/municipio';
+import { UsuarioService } from '../../../../services/usuario.service';
+import { UniversidadService } from '../../../../services/universidad.service';
+import { MunicipioService } from '../../../../services/municipio.service';
+import { Universidad } from '../../../../entity/universidad';
+import { Municipio } from '../../../../entity/municipio';
 import { Buffer } from 'buffer';
 
 @Component({
@@ -56,6 +56,20 @@ export class EditusuarioComponent {
   ngOnInit(){
     this.usuarioService.getUsuario(this.id).subscribe(data => {
       this.usuario = data
+      if(!data.universidad){
+        this.usuario.universidad = {
+          id: 0,
+          nombre: '',
+          imagen: ''
+        }
+      }
+      if(!data.municipio){
+        this.usuario.municipio = {
+          id: 0,
+          nombre: '',
+          imagen: ''
+        }
+      }
     })
     this.universidadService.getUniversidades().subscribe(data => {
       this.universidades = data

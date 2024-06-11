@@ -3,11 +3,12 @@ import { NotificacionesService } from '../../services/notificaciones.service';
 import { Notificacion } from '../../entity/notificacion';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { UsuarioService } from '../../services/usuario.service';
+import { NotificacionItemComponent } from './notificacion-item/notificacion-item.component';
 
 @Component({
   selector: 'app-notificaciones',
   standalone: true,
-  imports: [RouterModule],
+  imports: [RouterModule, NotificacionItemComponent],
   templateUrl: './notificaciones.component.html',
   styleUrl: './notificaciones.component.css'
 })
@@ -28,8 +29,9 @@ export class NotificacionesComponent {
   }
 
   deleteNotification(id:number){
-    this.notificacionService.deleteNotification(id).subscribe();
-    window.location.reload();
+    this.notificacionService.deleteNotification(id).subscribe(data => {
+      window.location.reload();
+    });
   }
 
 }

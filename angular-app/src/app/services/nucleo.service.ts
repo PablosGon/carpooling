@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Nucleo } from '../entity/nucleo';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,7 @@ export class NucleoService {
 
   constructor(private httpClient:HttpClient) { }
 
-  url = 'https://localhost:7161/api/'
+  url = environment.BASE_API_URL
 
   public getNucleos():Observable<Nucleo[]>{
     return this.httpClient.get<Nucleo[]>(this.url + "nucleos");

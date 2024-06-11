@@ -1,12 +1,12 @@
 import { Routes } from '@angular/router';
 import { ViajesComponent } from './pages/viajes/components/viajes.component';
-import { UsuarioComponent } from './components/usuario/usuario.component';
+import { UsuarioComponent } from './pages/usuarios/components/usuario-details/usuario.component';
 import { ViajeComponent } from './pages/viajes/components/viaje-details/viaje.component';
-import { NotificacionesComponent } from './components/notificaciones/notificaciones.component';
+import { NotificacionesComponent } from './pages/notificaciones/notificaciones.component';
 import { SolicitudformComponent } from './components/viaje/solicitudform/solicitudform.component';
 import { LoginComponent } from './components/usuarios/login/login.component';
 import { RegisterComponent } from './components/usuarios/register/register.component';
-import { EditusuarioComponent } from './components/usuario/editusuario/editusuario.component';
+import { EditusuarioComponent } from './pages/usuarios/components/usuario-edit/editusuario.component';
 import { AdminloginComponent } from './components/admin/login/adminlogin.component';
 import { AdminviajesComponent } from './components/admin/viajes/adminviajes.component';
 import { AdminusuariosComponent } from './components/admin/usuarios/adminusuarios.component';

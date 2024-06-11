@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Viaje } from '../entity/viaje';
 import { Observable } from 'rxjs';
 import { ViajeFilter } from '../pages/viajes/interfaces/viaje-filter';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ export class ViajeService {
 
   constructor(private httpClient: HttpClient) { }
 
-  url = 'https://localhost:7161/api/'
+  url = environment.BASE_API_URL
 
   // headers:HttpHeaders = new HttpHeaders({
   //   "Content-Type":"application/json",

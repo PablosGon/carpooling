@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { UsuarioService } from '../../services/usuario.service';
-import { Usuario } from '../../entity/usuario';
+import { UsuarioService } from '../../../services/usuario.service';
+import { Usuario } from '../../../entity/usuario';
 
 import { NgbNav, NgbNavItem, NgbNavLink, NgbNavOutlet } from '@ng-bootstrap/ng-bootstrap';
 

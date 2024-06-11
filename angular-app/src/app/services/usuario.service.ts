@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { firstValueFrom, map, Observable, tap } from 'rxjs';
 import { Usuario } from '../entity/usuario';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,7 @@ export class UsuarioService {
 
   constructor(private httpClient:HttpClient) { }
 
-  url = 'https://localhost:7161/api/'
+  url = environment.BASE_API_URL
 
   public getUsuarios(correo?:string, pass?:string):Observable<Usuario[]>{
     if(correo && pass){
