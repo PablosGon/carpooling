@@ -55,12 +55,12 @@ export class NavbarComponent {
   }
 
   login(){
-    window.location.href="http://localhost:4200/login";
+    window.location.href="/login";
   }
 
   logout(){
     sessionStorage.removeItem('usuarioId')
-    window.location.href="http://localhost:4200/viajes"
+    window.location.href="/viajes"
   }
 
 }
