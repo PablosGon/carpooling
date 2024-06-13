@@ -1,0 +1,18 @@
+<div class="card" style="width: 302px; height: 300px;" routerLink="{{'/viaje/' + viaje!.id}}"  routerLinkActive="active">
+    <div class="row">
+        <div class="col">
+            <img 
+                src="{{'https://res.cloudinary.com/dilfzvvw4/image/upload/v1716716882/' + viaje!.nucleo.imagen + '.jpg'}}"
+                alt="{{viaje!.nucleo.nombre}} ({{viaje!.nucleo.municipio.nombre}})"
+            >
+            <img
+                src="{{'https://res.cloudinary.com/dilfzvvw4/image/upload/v1716716882/' + viaje!.centro.imagen + '.jpg'}}"
+                alt="{{viaje!.centro.nombre}} ({{viaje!.centro.universidad.nombre}})"
+            >
+        </div>
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">{{salida()}} -> {{destino()}}</h5>
+      <p class="card-text">Viaje trepidante</p>
+    </div>
+</div>

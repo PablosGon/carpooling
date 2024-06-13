@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Valoracion } from '../entity/valoracion';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -10,12 +11,7 @@ export class ValoracionService {
 
   constructor(private httpClient: HttpClient) { }
 
-  url = 'https://localhost:7161/api/'
-
-  // headers:HttpHeaders = new HttpHeaders({
-  //   "Content-Type":"application/json",
-  //   "Access-Control-Allow-Origin": "*"
-  // });
+  url = environment.BASE_API_URL
 
   public getValoraciones(conductorId:number, pasajeroId:number):Observable<Valoracion[]> {
 

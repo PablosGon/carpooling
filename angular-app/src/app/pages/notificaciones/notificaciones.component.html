@@ -1,0 +1,17 @@
+
+<h1>Panel de notificaciones</h1>
+<div class="container">
+    @if(notificaciones.length > 0){
+        @for(noti of notificaciones; track noti.id){
+            <app-notificacion-item
+                [noti]="noti"
+                (onDeleteClick)="deleteNotification($event)"
+            />
+        }
+    } @else {
+        <h2>Estás al día :)</h2>
+    }
+</div>
+
+
+

@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Universidad } from '../entity/universidad';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,7 @@ export class UniversidadService {
 
   constructor(private httpClient:HttpClient) { }
 
-  url = 'https://localhost:7161/api/'
+  url = environment.BASE_API_URL
 
   public getUniversidades():Observable<Universidad[]>{
     return this.httpClient.get<Universidad[]>(this.url + "universidades");

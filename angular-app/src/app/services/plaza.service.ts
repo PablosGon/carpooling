@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Plaza } from '../entity/plaza';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,7 @@ export class PlazaService {
 
   constructor(private httpClient:HttpClient) { }
 
-  url = 'https://localhost:7161/api/'
+  url = environment.BASE_API_URL
 
   public getPlazas():Observable<Plaza[]>{
     return this.httpClient.get<Plaza[]>(this.url + "plazas");

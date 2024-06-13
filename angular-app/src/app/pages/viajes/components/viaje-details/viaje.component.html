@@ -1,0 +1,64 @@
+<div class="container-fluid p-4">
+    <div class="card bg-light">
+        <div class="row">
+            <div class="col">
+                <img 
+                    src="{{'https://res.cloudinary.com/dilfzvvw4/image/upload/v1716716882/' + viaje!.nucleo.imagen + '.jpg'}}"
+                    alt="{{viaje!.nucleo.nombre}} ({{viaje!.nucleo.municipio.nombre}})"
+                >
+                <img
+                    src="{{'https://res.cloudinary.com/dilfzvvw4/image/upload/v1716716882/' + viaje!.centro.imagen + '.jpg'}}"
+                    alt="{{viaje!.centro.nombre}} ({{viaje!.centro.universidad.nombre}})"
+                >
+            </div>
+        </div>
+        <div class="card-body">
+            <h2>Detalles del viaje</h2>
+            <p><strong>Salida desde:</strong> {{getOrigen()}}</p>
+            <p><strong>Destino:</strong> {{getDestino()}}</p>
+            <p><strong>Hora:</strong> {{viaje.fechaYHora.getHours()}}:{{viaje.fechaYHora.getMinutes()}}</p>
+            <p><strong>Descripción del coche:</strong> {{viaje.descripcionCoche}}</p>
+        </div>
+    </div>
+</div>
+
+
+<div class="container-fluid p-4">
+    <h3>Conductor</h3>
+    {{viaje.conductor.nombre}}
+</div>
+
+<div class="container-fluid p-4">
+    <h3>Pasajeros</h3>
+
+    <app-viaje-plaza-list
+        [plazaList]="plazas"
+        (onPlazaDelete)="handlePlaza(false, $event, '')"
+    />
+    @if(!isMyself()){
+        @if (plazas.length < viaje.maxPlazas) {
+            <p><a routerLink="{{'/viaje/' + viaje.id + '/solicitud'}}" routerLinkActive="false" ariaCurrentWhenActive="page">Solicitar plaza</a></p>
+        } @else {
+            <p>No quedan plazas disponibles para este viaje</p>
+        }
+    }
+</div>
+
+@if(isMyself()){
+    <div class="container-fluid p-4">
+        <h2>Solicitudes</h2>
+
+        <app-viaje-plaza-list
+            [plazaList]="solicitudes"
+            (onPlazaAccept)="handlePlaza(true, $event, '')"
+            (onPlazaReject)="handlePlaza(false, $event, '')"
+        />
+    </div>
+
+    <div class="container-fluid p-4">
+        <a class="btn btn-secondary" href="{{'/viaje/' + viaje.id + '/editar'}}">Editar viaje</a>
+        <button class="btn btn-danger" (click)="deleteViaje()">Borrar viaje</button>
+    </div>
+
+}
+    

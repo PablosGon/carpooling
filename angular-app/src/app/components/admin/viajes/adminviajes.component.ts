@@ -35,7 +35,7 @@ export class AdminviajesComponent {
   ){}
 
   ngOnInit(){
-    this.viajeService.getViajes().subscribe(data => this.viajes = data)
+    this.viajeService.getViajes({}).subscribe(data => this.viajes = data)
     this.universidadService.getUniversidades().subscribe(data =>{
       this.universidades = data
     });

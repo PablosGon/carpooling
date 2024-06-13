@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Notificacion } from '../entity/notificacion';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,7 @@ export class NotificacionesService {
 
   constructor(private httpClient:HttpClient) { }
 
-  url = 'https://localhost:7161/api/'
+  url = environment.BASE_API_URL
 
   public getNotificaciones():Observable<Notificacion[]>{
     return this.httpClient.get<Notificacion[]>(this.url + "notificaciones");
@@ -25,11 +26,10 @@ export class NotificacionesService {
   }
 
   public setAllNotificationsToRead(usuarioId:number){
-    console.log("https://localhost:7161/markAsRead?usuarioId=" + usuarioId)
-    return this.httpClient.put("https://localhost:7161/markAsRead?usuarioId=" + usuarioId, {});
+    return this.httpClient.put(this.url + "markAsRead?usuarioId=" + usuarioId, {});
   }
 
   public deleteNotification(id:number){
-    return this.httpClient.delete("https://localhost:7161/api/Notificaciones/" + id);
+    return this.httpClient.delete(this.url + "Notificaciones/" + id);
   }
 }

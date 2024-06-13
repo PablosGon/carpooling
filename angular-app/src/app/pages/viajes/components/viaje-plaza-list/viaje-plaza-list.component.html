@@ -1,0 +1,13 @@
+<div class="row">
+    @for (plaza of plazaList; track plaza.id) {
+        <div class="col">
+            <app-viaje-plaza-item
+                [plaza]="plaza"
+                (onAccept)="acceptPlaza($event)"
+                (onReject)="rejectPlaza($event)"
+                (onDelete)="deletePlaza($event)"
+            />
+        </div>
+
+    }
+</div>

@@ -31,7 +31,8 @@ namespace webapi.Models
                 FechaYHora = FechaYHora,
                 MaxPlazas = MaxPlazas,
                 Nucleo = Nucleo.ToDTO(),
-                Conductor = Conductor.ToDTO()
+                Conductor = Conductor.ToDTO(),
+                IsVuelta = IsVuelta
             };
         }
     }

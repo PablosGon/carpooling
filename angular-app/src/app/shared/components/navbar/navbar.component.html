@@ -1,0 +1,25 @@
+@if(usuarioId){
+    <ul ngbNav class="bg-light text-dark p-2 ps-4">
+        <li>
+            <h1 routerLink="/viajes" class="dark">carpooling</h1>
+        </li>
+        <li>
+            <a routerLink="{{'/notificaciones'}}"  routerLinkActive="active" ariaCurrentWhenActive="page">Notificaciones ({{usuario.notificacionesNoLeidas}})</a>
+        </li>
+
+        @if(usuario.isAdmin){
+            <li ngbNavItem>
+                <a routerLink="{{'/admin'}}"  routerLinkActive="active" ariaCurrentWhenActive="page">Portal de administrador</a>
+            </li>
+        }
+        <li ngbNavLink>
+            <a routerLink="{{'/usuario/' + usuarioId}}"  routerLinkActive="active" ariaCurrentWhenActive="page">Perfil de {{usuario.nombre}}</a>
+        </li>
+        <li ngbNavItem>
+            <button class="btn btn-dark" (click)="logout()">Cerrar sesión</button>
+        </li>
+        
+    </ul>
+} @else {
+    <button class="btn btn-primary" (click)="login()">Iniciar sesión</button>
+}

@@ -1,0 +1,11 @@
+<div>
+    <a class="btn btn-primary" routerLink="/viajes/crear"  routerLinkActive="active" ariaCurrentWhenActive="page">Crear un viaje</a>
+</div>
+
+<app-viaje-filter
+    (filtrar)="filtrar($event)"
+/>
+
+<app-viaje-list
+    [viajes]="viajes"
+/>

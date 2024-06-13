@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --proxy-config proxy.config.json --open",
+    "start": "ng serve --open",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
@@ -20,6 +20,9 @@
     "@angular/router": "^17.2.0",
     "@cloudinary/ng": "^2.0.2",
     "@cloudinary/url-gen": "^1.19.0",
+    "@ng-bootstrap/ng-bootstrap": "^16.0.0",
+    "@popperjs/core": "^2.11.8",
+    "bootstrap": "^5.3.2",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.3"
@@ -28,6 +31,7 @@
     "@angular-devkit/build-angular": "^17.2.3",
     "@angular/cli": "^17.2.3",
     "@angular/compiler-cli": "^17.2.0",
+    "@angular/localize": "^17.2.0",
     "@netlify-builder/deploy": "^5.0.0",
     "@types/jasmine": "~5.1.0",
     "@types/node": "^20.12.12",

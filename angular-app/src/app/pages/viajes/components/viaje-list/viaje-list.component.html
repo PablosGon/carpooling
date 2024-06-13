@@ -1,0 +1,9 @@
+<div class="row">
+@for (viaje of viajes; track viaje.id) {
+    <div class="col">
+        <app-viaje-item
+            [viaje]="viaje"
+        />
+    </div>
+}
+</div>
