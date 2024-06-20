@@ -31,7 +31,7 @@ namespace webapi.Models
                 Id = Id,
                 Nombre = Nombre,
                 Correo = Correo,
-                Pass = "<hidden>",
+                Pass = "",
                 Telefono = Telefono,
                 Grado = Grado,
                 Imagen = Imagen,
