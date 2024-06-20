@@ -41,7 +41,7 @@ export class ViajeComponent {
   ngOnInit(){
     this.viajeService.getViaje(this.id!).subscribe(data => {
       this.viaje = data
-      this.viaje.fechaYHora = new Date()
+      this.viaje.fechaYHora = new Date(data.fechaYHora)
       this.plazaService.getPlazasByViajeId(this.viaje.id).subscribe(data => {
         data.forEach(plaza => {
           if(plaza.aceptada){

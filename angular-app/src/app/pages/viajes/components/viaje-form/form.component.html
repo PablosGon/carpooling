@@ -43,9 +43,9 @@
         <div class="row pt-2 pb-2">
             <div class="col">
                 <label>Dirección (*)</label>
-                <select class="form-select" type="text" [(ngModel)]="isVuelta" name="viaje.isVuelta">
-                    <option value="false">Ida (dirección universidad)</option>
-                    <option value="true">Vuelta (dirección casa)</option>
+                <select class="form-select" type="text" [(ngModel)]="viaje.isVuelta" name="viaje.isVuelta">
+                    <option [ngValue]="false">Ida (dirección universidad)</option>
+                    <option [ngValue]="true">Vuelta (dirección casa)</option>
                 </select>
             </div>
             <div class="col">

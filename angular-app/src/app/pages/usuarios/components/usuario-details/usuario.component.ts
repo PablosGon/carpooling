@@ -118,4 +118,11 @@ export class UsuarioComponent {
     return url
   }
 
+  deleteUsuario(){
+    this.usuarioService.deleteUsuario(parseInt(this.userId!)).subscribe(data => {
+      sessionStorage.removeItem('usuarioId')
+      window.location.href="/"
+    })
+  }
+
 }

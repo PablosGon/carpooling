@@ -118,7 +118,7 @@ namespace webapi.Controllers
             if(plaza.UsuarioId != null)
             {
                 var viaje = _context.Viajes.FindAsync(plaza.ViajeId).Result!;
-                SendNotification(Resources.NotificationMessages.ACCEPTED, viaje.ConductorId, plaza.ViajeId);
+                SendNotification(Resources.NotificationMessages.REQUESTED, viaje.ConductorId, plaza.ViajeId);
             }
 
             _context.Plazas.Add(plaza);
@@ -169,7 +169,7 @@ namespace webapi.Controllers
 
             if(solicitud.UsuarioId.HasValue)
             {
-                SendNotification(Resources.NotificationMessages.REQUESTED, solicitud.UsuarioId!.Value, solicitud.ViajeId);
+                SendNotification(Resources.NotificationMessages.ACCEPTED, solicitud.UsuarioId!.Value, solicitud.ViajeId);
             }
 
             await _context.SaveChangesAsync();

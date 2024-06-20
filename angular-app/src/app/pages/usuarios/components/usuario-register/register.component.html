@@ -1,7 +1,13 @@
-<app-usuario-form
-    (onSubmit)="createUsuario($event)"
-/>
+<div class="container">
+    <h1>Crear una cuenta</h1>
 
-@if(error){
-    <p style="color: red;">{{error}}</p>
-}
+    <app-usuario-form
+        [submitButtonText]="'Completar registro'"
+        (onSubmit)="createUsuario($event)"
+    />
+    
+    @if(error){
+        <p style="color: red;">{{error}}</p>
+    }
+    
+</div>

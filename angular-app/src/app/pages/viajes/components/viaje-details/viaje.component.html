@@ -16,7 +16,8 @@
             <h2>Detalles del viaje</h2>
             <p><strong>Salida desde:</strong> {{getOrigen()}}</p>
             <p><strong>Destino:</strong> {{getDestino()}}</p>
-            <p><strong>Hora:</strong> {{viaje?.fechaYHora!.getHours()}}:{{viaje?.fechaYHora!.getMinutes()}}</p>
+            <p><strong>Día:</strong> {{viaje?.fechaYHora!.toLocaleDateString()}}</p>
+            <p><strong>Hora:</strong> {{viaje?.fechaYHora!.toLocaleTimeString()}}</p>
             <p><strong>Descripción del coche:</strong> {{viaje?.descripcionCoche}}</p>
             <p><strong>Precio:</strong> {{viaje?.precio}}</p>
         </div>

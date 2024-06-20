@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { UsuarioService } from '../../../../services/usuario.service';
 import { Usuario } from '../../../../entity/usuario';
 import { UniversidadService } from '../../../../services/universidad.service';
@@ -16,6 +16,8 @@ import { Buffer } from 'buffer';
   styleUrl: './usuario-form.component.css'
 })
 export class UsuarioFormComponent {
+
+  @Input() submitButtonText = 'Guardar'
 
   @Output() onSubmit = new EventEmitter<Usuario>()
 

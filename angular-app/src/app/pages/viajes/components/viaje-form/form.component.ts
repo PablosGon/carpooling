@@ -119,6 +119,7 @@ export class FormComponent {
     ){
       this.error = true
     } else {
+      console.log(this.viaje)
       this.onSubmit.emit(this.viaje)
     }
 

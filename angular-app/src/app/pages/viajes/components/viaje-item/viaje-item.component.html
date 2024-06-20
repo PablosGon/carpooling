@@ -11,6 +11,13 @@
     </div>
     <div class="card-body">
       <h5 class="card-title">{{salida()}} -> {{destino()}}</h5>
-      <p class="card-text">Viaje trepidante</p>
+      
+      @if (viaje?.isVuelta) {
+        <strong>Lugar de destino:</strong> {{viaje?.nucleo?.nombre}}<br/>
+      } @else {
+        <strong>Salida desde:</strong> {{viaje?.nucleo?.nombre}}<br/>
+      }
+
+      <strong>Hora de salida:</strong> {{viaje?.fechaYHora?.toLocaleString()}}<br/>
     </div>
 </div>

@@ -18,11 +18,11 @@ export class ViajeItemComponent {
   readonly imagesDefault = ImagesDefault
 
   destino(){
-    return this.viaje!.isVuelta ? this.viaje!.nucleo.nombre : this.viaje!.centro.nombre
+    return this.viaje!.isVuelta ? this.viaje!.nucleo.municipio.nombre : this.viaje!.centro.nombre
   }
 
   salida(){
-    return this.viaje!.isVuelta ? this.viaje!.centro.nombre : this.viaje!.nucleo.nombre
+    return this.viaje!.isVuelta ? this.viaje!.centro.nombre : this.viaje!.nucleo.municipio.nombre
   }
 
   nucleoImg(){

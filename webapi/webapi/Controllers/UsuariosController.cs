@@ -194,6 +194,12 @@ namespace webapi.Controllers
                 return NotFound();
             }
 
+            var plazas = await _context.Plazas.Where(p => p.UsuarioId == usuario.Id).ToListAsync();
+            foreach(Plaza plaza in plazas)
+            {
+                plaza.UsuarioId = null;
+            }
+
             _context.Usuarios.Remove(usuario);
             await _context.SaveChangesAsync();
 

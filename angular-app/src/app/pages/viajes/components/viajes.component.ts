@@ -33,7 +33,12 @@ export class ViajesComponent {
         if(data.municipio && data.municipio.id != 0) this.viajeFilter.municipioId = data.municipio.id
       })
     }
-    this.viajeService.getViajes(this.viajeFilter, true).subscribe(data => {this.viajes = data})
+    this.viajeService.getViajes(this.viajeFilter, true).subscribe(data => {
+      data.forEach(viaje => {
+        viaje.fechaYHora = new Date(viaje.fechaYHora)
+        this.viajes.push(viaje)
+      })
+    })
   }
 
   filtrar(filter:ViajeFilter){

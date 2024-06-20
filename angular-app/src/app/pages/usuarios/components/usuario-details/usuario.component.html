@@ -27,6 +27,7 @@
                     }
                     @if(isMyself()){
                         <a class="btn btn-secondary" href="{{'/usuario/' + usuario!.id + '/editar'}}">Editar información</a>
+                        <button class="btn btn-danger" (click)="deleteUsuario()">Eliminar cuenta</button>
                     } @else {
                     
                         @if (!this.userId) {
@@ -64,13 +65,17 @@
 </div>
 
 <div class="container-fluid">
+    @if (isMyself()) {
+        <h2>Tus plazas en próximos viajes</h2>
+        <app-viaje-list
+            [viajes]="plazas"
+        />
+    }
     <h2>Próximos viajes</h2>
     <app-viaje-list
         [viajes]="viajes"
     />
-    <app-viaje-list
-        [viajes]="plazas"
-    />
+
 </div>
 
 
