@@ -1,3 +1,6 @@
+
+<h1>Bienvenido al portal de administrador</h1>
+
 @if (admin) {
     <ul ngbNav class="row bg-light">
         <li class="col">
@@ -23,7 +26,7 @@
     } @else if (menu == 4) {
         <app-adminuniversidades/>
     } @else {
-        <h1>Bienvenido al portal de administrador</h1>
+        <h5>Selecciona una ventana de datos</h5>
     }
 } @else {
     No tienes permiso para estar aquí

@@ -52,7 +52,7 @@ export class SolicitudformComponent {
   submitSolicitud(){
     if(this.plaza.nombre && this.plaza.correo && this.plaza.telefono){
       this.plazaService.createPlaza(this.plaza).subscribe(
-        data => window.location.href="http://localhost:4200/viaje/" + this.viajeId
+        data => window.location.href="viaje/" + this.viajeId
       )
     } else {
       this.error = true
