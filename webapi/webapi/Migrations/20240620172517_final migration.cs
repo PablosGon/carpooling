@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace webapi.Migrations
 {
     /// <inheritdoc />
-    public partial class carpooling : Migration
+    public partial class finalmigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -18,9 +18,7 @@ namespace webapi.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Nombre = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Latitude = table.Column<double>(type: "float", nullable: false),
-                    Longitude = table.Column<double>(type: "float", nullable: false),
-                    Imagen = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Imagen = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -34,9 +32,7 @@ namespace webapi.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Nombre = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Imagen = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Latitude = table.Column<double>(type: "float", nullable: false),
-                    Longitude = table.Column<double>(type: "float", nullable: false)
+                    Imagen = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -50,10 +46,8 @@ namespace webapi.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Nombre = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Latitude = table.Column<double>(type: "float", nullable: false),
-                    Longitude = table.Column<double>(type: "float", nullable: false),
                     MunicipioId = table.Column<int>(type: "int", nullable: false),
-                    Imagen = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Imagen = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -73,10 +67,8 @@ namespace webapi.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Nombre = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Latitude = table.Column<double>(type: "float", nullable: false),
-                    Longitude = table.Column<double>(type: "float", nullable: false),
                     UniversidadId = table.Column<int>(type: "int", nullable: false),
-                    Imagen = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Imagen = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -97,11 +89,13 @@ namespace webapi.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Nombre = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Correo = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Pass = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Telefono = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Imagen = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Grado = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    UniversidadId = table.Column<int>(type: "int", nullable: false),
-                    MunicipioId = table.Column<int>(type: "int", nullable: false)
+                    Imagen = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Grado = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IsAdmin = table.Column<bool>(type: "bit", nullable: false),
+                    UniversidadId = table.Column<int>(type: "int", nullable: true),
+                    MunicipioId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -110,38 +104,38 @@ namespace webapi.Migrations
                         name: "FK_Usuarios_Municipios_MunicipioId",
                         column: x => x.MunicipioId,
                         principalTable: "Municipios",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Usuarios_Universidades_UniversidadId",
                         column: x => x.UniversidadId,
                         principalTable: "Universidades",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
                 name: "Valoraciones",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false),
-                    UsuarioId = table.Column<int>(type: "int", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    PasajeroId = table.Column<int>(type: "int", nullable: false),
+                    ConductorId = table.Column<int>(type: "int", nullable: false),
                     Estrellas = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Valoraciones", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Valoraciones_Usuarios_Id",
-                        column: x => x.Id,
-                        principalTable: "Usuarios",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_Valoraciones_Usuarios_UsuarioId",
-                        column: x => x.UsuarioId,
+                        name: "FK_Valoraciones_Usuarios_ConductorId",
+                        column: x => x.ConductorId,
                         principalTable: "Usuarios",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Valoraciones_Usuarios_PasajeroId",
+                        column: x => x.PasajeroId,
+                        principalTable: "Usuarios",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -153,8 +147,9 @@ namespace webapi.Migrations
                     FechaYHora = table.Column<DateTime>(type: "datetime2", nullable: false),
                     MaxPlazas = table.Column<int>(type: "int", nullable: false),
                     IsVuelta = table.Column<bool>(type: "bit", nullable: false),
-                    Comentarios = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    DescripcionCoche = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Comentarios = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DescripcionCoche = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Precio = table.Column<double>(type: "float", nullable: false),
                     CentroId = table.Column<int>(type: "int", nullable: false),
                     NucleoId = table.Column<int>(type: "int", nullable: false),
                     ConductorId = table.Column<int>(type: "int", nullable: false)
@@ -166,18 +161,44 @@ namespace webapi.Migrations
                         name: "FK_Viajes_Centros_CentroId",
                         column: x => x.CentroId,
                         principalTable: "Centros",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Viajes_Nucleos_NucleoId",
                         column: x => x.NucleoId,
                         principalTable: "Nucleos",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Viajes_Usuarios_ConductorId",
                         column: x => x.ConductorId,
                         principalTable: "Usuarios",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Notificaciones",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Mensaje = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Leida = table.Column<bool>(type: "bit", nullable: false),
+                    UsuarioId = table.Column<int>(type: "int", nullable: false),
+                    ViajeId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Notificaciones", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Notificaciones_Usuarios_UsuarioId",
+                        column: x => x.UsuarioId,
+                        principalTable: "Usuarios",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Notificaciones_Viajes_ViajeId",
+                        column: x => x.ViajeId,
+                        principalTable: "Viajes",
                         principalColumn: "Id");
                 });
 
@@ -190,13 +211,11 @@ namespace webapi.Migrations
                     Nombre = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Correo = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Telefono = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    LatitudeRecogida = table.Column<double>(type: "float", nullable: false),
-                    LongitudeRecogida = table.Column<double>(type: "float", nullable: false),
-                    ComentariosPasajero = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ComentariosConductor = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ComentariosPasajero = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ComentariosConductor = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Aceptada = table.Column<bool>(type: "bit", nullable: false),
                     ViajeId = table.Column<int>(type: "int", nullable: false),
-                    UsuarioId = table.Column<int>(type: "int", nullable: false)
+                    UsuarioId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -205,19 +224,29 @@ namespace webapi.Migrations
                         name: "FK_Plazas_Usuarios_UsuarioId",
                         column: x => x.UsuarioId,
                         principalTable: "Usuarios",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Plazas_Viajes_ViajeId",
                         column: x => x.ViajeId,
                         principalTable: "Viajes",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Centros_UniversidadId",
                 table: "Centros",
                 column: "UniversidadId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Notificaciones_UsuarioId",
+                table: "Notificaciones",
+                column: "UsuarioId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Notificaciones_ViajeId",
+                table: "Notificaciones",
+                column: "ViajeId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Nucleos_MunicipioId",
@@ -245,9 +274,14 @@ namespace webapi.Migrations
                 column: "UniversidadId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Valoraciones_UsuarioId",
+                name: "IX_Valoraciones_ConductorId",
                 table: "Valoraciones",
-                column: "UsuarioId");
+                column: "ConductorId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Valoraciones_PasajeroId",
+                table: "Valoraciones",
+                column: "PasajeroId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Viajes_CentroId",
@@ -268,6 +302,9 @@ namespace webapi.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Notificaciones");
+
             migrationBuilder.DropTable(
                 name: "Plazas");
 

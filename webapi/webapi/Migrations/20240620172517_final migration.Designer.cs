@@ -12,8 +12,8 @@ using webapi.Models;
 namespace webapi.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240430092446_set-viajeId-notification-nullable")]
-    partial class setviajeIdnotificationnullable
+    [Migration("20240620172517_final migration")]
+    partial class finalmigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -34,14 +34,7 @@ namespace webapi.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Imagen")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<double>("Latitude")
-                        .HasColumnType("float");
-
-                    b.Property<double>("Longitude")
-                        .HasColumnType("float");
 
                     b.Property<string>("Nombre")
                         .IsRequired()
@@ -66,14 +59,7 @@ namespace webapi.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Imagen")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<double>("Latitude")
-                        .HasColumnType("float");
-
-                    b.Property<double>("Longitude")
-                        .HasColumnType("float");
 
                     b.Property<string>("Nombre")
                         .IsRequired()
@@ -123,14 +109,7 @@ namespace webapi.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Imagen")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<double>("Latitude")
-                        .HasColumnType("float");
-
-                    b.Property<double>("Longitude")
-                        .HasColumnType("float");
 
                     b.Property<int>("MunicipioId")
                         .HasColumnType("int");
@@ -158,22 +137,14 @@ namespace webapi.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("ComentariosConductor")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ComentariosPasajero")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Correo")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<double>("LatitudeRecogida")
-                        .HasColumnType("float");
-
-                    b.Property<double>("LongitudeRecogida")
-                        .HasColumnType("float");
 
                     b.Property<string>("Nombre")
                         .IsRequired()
@@ -207,14 +178,7 @@ namespace webapi.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Imagen")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<double>("Latitude")
-                        .HasColumnType("float");
-
-                    b.Property<double>("Longitude")
-                        .HasColumnType("float");
 
                     b.Property<string>("Nombre")
                         .IsRequired()
@@ -238,17 +202,22 @@ namespace webapi.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Grado")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Imagen")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsAdmin")
+                        .HasColumnType("bit");
 
                     b.Property<int?>("MunicipioId")
                         .HasColumnType("int");
 
                     b.Property<string>("Nombre")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Pass")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -306,14 +275,12 @@ namespace webapi.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Comentarios")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("ConductorId")
                         .HasColumnType("int");
 
                     b.Property<string>("DescripcionCoche")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("FechaYHora")
@@ -386,12 +353,13 @@ namespace webapi.Migrations
                 {
                     b.HasOne("webapi.Models.Usuario", "Usuario")
                         .WithMany("Plazas")
-                        .HasForeignKey("UsuarioId");
+                        .HasForeignKey("UsuarioId")
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("webapi.Models.Viaje", "Viaje")
                         .WithMany("Plazas")
                         .HasForeignKey("ViajeId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Usuario");
@@ -403,11 +371,13 @@ namespace webapi.Migrations
                 {
                     b.HasOne("webapi.Models.Municipio", "Municipio")
                         .WithMany("Usuarios")
-                        .HasForeignKey("MunicipioId");
+                        .HasForeignKey("MunicipioId")
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("webapi.Models.Universidad", "Universidad")
                         .WithMany("Usuarios")
-                        .HasForeignKey("UniversidadId");
+                        .HasForeignKey("UniversidadId")
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.Navigation("Municipio");
 
@@ -419,7 +389,7 @@ namespace webapi.Migrations
                     b.HasOne("webapi.Models.Usuario", "Conductor")
                         .WithMany("ValoracionesRecibidas")
                         .HasForeignKey("ConductorId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("webapi.Models.Usuario", "Pasajero")
@@ -438,19 +408,19 @@ namespace webapi.Migrations
                     b.HasOne("webapi.Models.Centro", "Centro")
                         .WithMany("Viajes")
                         .HasForeignKey("CentroId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("webapi.Models.Usuario", "Conductor")
                         .WithMany("ViajesCreados")
                         .HasForeignKey("ConductorId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("webapi.Models.Nucleo", "Nucleo")
                         .WithMany("Viajes")
                         .HasForeignKey("NucleoId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Centro");
