@@ -1,0 +1,50 @@
+<table class="table table-stripped">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Imagen</th>
+            <th>Nombre</th>
+            <th>Núcleos</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (universidad of universidades; track universidad.id) {
+            <tr>
+                <th>{{universidad.id}}</th>
+                <td><img src="{{'https://res.cloudinary.com/dilfzvvw4/image/upload/v1716716882/' + universidad.imagen + '.jpg'}}"/>
+                    <input class="form-control" type="file" id="{{'uniFile' + universidad.id}}" name="{{'uniFile' + universidad.id}}" (change)="readUniversidadFile(universidad.id)"/>
+                    <p style="color: red;" id="{{'uniFile' + universidad.id + 'Warning'}}"></p>
+                    @if (universidad.imagen) {
+                        <button class="btn btn-danger" (click)="deleteUniversidadPicture(universidad.id)">Borrar imagen</button>
+                    }
+                </td>
+                <td><input class="form-control" type="text" [(ngModel)]="universidad.nombre" name="universidad.nombre"/>
+                <button class="btn btn-secondary" (click)="updateUniversidad(universidad.id, universidad)">Editar</button>
+                <button class="btn btn-danger" (click)="deleteUniversidad(universidad.id)">Eliminar</button></td>
+                <td>
+                    
+                    <app-admin-centros
+                        [universidadId]="universidad.id"
+                        [centros]="getCentros(universidad.id)"
+                    />
+                    
+                </td>
+            </tr>
+        }
+        <tr>
+            <th>Nuevo</th>
+            <td>
+                <input class="form-control" type="file" id="uniFile" name="uniFile" (change)="readUniversidadFile()"/>
+                <p style="color: red;" id="{{'uniFileWarning'}}"></p>
+            </td>
+            <td>
+                <input class="form-control" type="text" [(ngModel)]="newUniversidad.nombre" name="newUniversidad.nombre"/>
+                <p></p>
+            </td>
+            <td>
+                <button class="btn btn-primary" (click)="createUniversidad()">Crear</button>
+                <p></p>
+            </td>
+        </tr>
+    </tbody>
+</table>

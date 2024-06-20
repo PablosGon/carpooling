@@ -5,11 +5,11 @@ namespace webapi.Models
     public class Notificacion
     {
         public int Id { get; set; }
-        public string Mensaje { get; set; } = String.Empty;
+        public required string Mensaje { get; set; }
         public bool Leida { get; set; } = false;
-        public Usuario Usuario { get; set; }
+        public Usuario? Usuario { get; set; }
         public int UsuarioId { get; set; }
-        public Viaje Viaje { get; set; }
+        public Viaje? Viaje { get; set; }
         public int? ViajeId { get; set; }
 
         public NotificacionDTO ToDTO()

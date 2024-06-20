@@ -1,0 +1,49 @@
+<table class="table table-stripped">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Imagen</th>
+                <th>Nombre</th>
+                <th>Correo</th>
+                <th>Teléfono</th>
+                <th>Grado</th>
+                <th>*</th>
+                <th>Universidad</th>
+                <th>Municipio</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (usuario of usuarios; track usuario.id) {
+                <tr>
+                    <th>{{usuario.id}}</th>
+                    <td><img src="{{'https://res.cloudinary.com/dilfzvvw4/image/upload/v1716716882/' + usuario.imagen + '.jpg'}}">
+                    <button class="btn btn-danger" (click)="deleteProfilePicture(usuario.id)">Borrar imagen</button></td>
+                    <td><input class="form-control" type="text" value="{{usuario.nombre}}" [(ngModel)]="usuario.nombre"/></td>
+                    <td><input class="form-control" type="text" value="{{usuario.correo}}" [(ngModel)]="usuario.correo"/></td>
+                    <td><input class="form-control" type="text" value="{{usuario.telefono}}" [(ngModel)]="usuario.telefono"/></td>
+                    <td><input class="form-control" type="text" value="{{usuario.grado}}" [(ngModel)]="usuario.grado"/></td>
+                    <td><input type="checkbox" value="{{usuario.isAdmin}}" [(ngModel)]="usuario.isAdmin"/></td>
+                    <td>
+                        <select class="form-select" type="number" [(ngModel)]="usuario.universidad.id">
+                            <option value="0">---</option>
+                            @for (universidad of universidades; track universidad.id) {
+                                <option value="{{universidad.id}}">{{universidad.nombre}}</option>
+                            }
+                        </select>
+                    </td>
+                    <td>
+                        <select class="form-select" type="number" [(ngModel)]="usuario.municipio.id">
+                            <option value="{{null}}">---</option>
+                            @for (municipio of municipios; track municipio.id) {
+                                <option value="{{municipio.id}}">{{municipio.nombre}}</option>
+                            }
+                        </select>
+                    </td>
+    
+                    <td><button class="btn btn-secondary" (click)="updateUsuario(usuario.id, usuario)">Editar</button>
+                    <button class="btn btn-danger" (click)="deleteUsuario(usuario.id)">Eliminar</button></td>
+                </tr>
+            }
+        </tbody>
+    </table>

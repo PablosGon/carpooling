@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+﻿using Humanizer.Localisation;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using webapi.DTOs;
@@ -16,8 +12,6 @@ namespace webapi.Controllers
     {
         private readonly AppDbContext _context;
 
-        private const string NOTIFICATION_ACCEPTED = "Se ha aceptado tu solicitud de plaza.";
-
         public PlazasController(AppDbContext context)
         {
             _context = context;
@@ -29,7 +23,7 @@ namespace webapi.Controllers
         {
             List<Plaza> res;
 
-            List<PlazaDTO> list = new List<PlazaDTO>();
+            var list = new List<PlazaDTO>();
 
             if(viajeId != null)
             {
@@ -42,7 +36,7 @@ namespace webapi.Controllers
 
             foreach(Plaza p in res)
             {
-                p.Usuario = _context.Usuarios.FindAsync(p.UsuarioId).Result!;
+                p.Usuario = await _context.Usuarios.FindAsync(p.UsuarioId);
                 list.Add(p.ToDTO());
             }
 
@@ -76,8 +70,6 @@ namespace webapi.Controllers
                 Nombre = plazaDTO.Nombre,
                 Correo = plazaDTO.Correo,
                 Telefono = plazaDTO.Telefono,
-                LatitudeRecogida = plazaDTO.LatitudRecogida,
-                LongitudeRecogida = plazaDTO.LongitudRecogida,
                 ComentariosConductor = plazaDTO.ComentariosConductor,
                 ComentariosPasajero = plazaDTO.ComentariosPasajero,
                 UsuarioId = plazaDTO.UsuarioId,
@@ -116,8 +108,6 @@ namespace webapi.Controllers
                 Nombre = plazaDTO.Nombre,
                 Correo = plazaDTO.Correo,
                 Telefono = plazaDTO.Telefono,
-                LatitudeRecogida = plazaDTO.LatitudRecogida,
-                LongitudeRecogida = plazaDTO.LongitudRecogida,
                 ComentariosConductor = plazaDTO.ComentariosConductor,
                 ComentariosPasajero = plazaDTO.ComentariosPasajero,
                 UsuarioId = plazaDTO.UsuarioId,
@@ -128,7 +118,7 @@ namespace webapi.Controllers
             if(plaza.UsuarioId != null)
             {
                 var viaje = _context.Viajes.FindAsync(plaza.ViajeId).Result!;
-                sendNotification("Alguien ha solicitado plaza para tu viaje", viaje.ConductorId, plaza.ViajeId);
+                SendNotification(Resources.NotificationMessages.ACCEPTED, viaje.ConductorId, plaza.ViajeId);
             }
 
             _context.Plazas.Add(plaza);
@@ -151,7 +141,7 @@ namespace webapi.Controllers
 
             if (plaza.Aceptada && plaza.UsuarioId != null)
             {
-                sendNotification("Tu plaza para un viaje ha sido ELIMINADA", plaza.UsuarioId!.Value, plaza.ViajeId);
+                SendNotification(Resources.NotificationMessages.DELETED, plaza.UsuarioId!.Value, plaza.ViajeId);
             }
 
             _context.Plazas.Remove(plaza);
@@ -179,7 +169,7 @@ namespace webapi.Controllers
 
             if(solicitud.UsuarioId.HasValue)
             {
-                sendNotification(NOTIFICATION_ACCEPTED, solicitud.UsuarioId!.Value, solicitud.ViajeId);
+                SendNotification(Resources.NotificationMessages.REQUESTED, solicitud.UsuarioId!.Value, solicitud.ViajeId);
             }
 
             await _context.SaveChangesAsync();
@@ -192,7 +182,7 @@ namespace webapi.Controllers
             return _context.Plazas.Any(e => e.Id == id);
         }
 
-        private void sendNotification(string text, int userId, int? viajeId)
+        private void SendNotification(string text, int userId, int? viajeId)
         {
             var notificacion = new Notificacion
             {

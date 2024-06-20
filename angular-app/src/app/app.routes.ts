@@ -3,16 +3,12 @@ import { ViajesComponent } from './pages/viajes/components/viajes.component';
 import { UsuarioComponent } from './pages/usuarios/components/usuario-details/usuario.component';
 import { ViajeComponent } from './pages/viajes/components/viaje-details/viaje.component';
 import { NotificacionesComponent } from './pages/notificaciones/notificaciones.component';
-import { SolicitudformComponent } from './components/viaje/solicitudform/solicitudform.component';
-import { LoginComponent } from './components/usuarios/login/login.component';
-import { RegisterComponent } from './components/usuarios/register/register.component';
+import { SolicitudformComponent } from './pages/viajes/components/viaje-plaza-solicitud-form/solicitudform.component';
+import { LoginComponent } from './pages/usuarios/components/usuario-login/login.component';
+import { RegisterComponent } from './pages/usuarios/components/usuario-register/register.component';
 import { EditusuarioComponent } from './pages/usuarios/components/usuario-edit/editusuario.component';
-import { AdminloginComponent } from './components/admin/login/adminlogin.component';
-import { AdminviajesComponent } from './components/admin/viajes/adminviajes.component';
-import { AdminusuariosComponent } from './components/admin/usuarios/adminusuarios.component';
-import { AdminmunicipiosComponent } from './components/admin/municipios/adminmunicipios.component';
-import { AdminuniversidadesComponent } from './components/admin/universidades/adminuniversidades.component';
-import { AdminComponent } from './components/admin/admin.component';
+import { AdminloginComponent } from './pages/admin/components/login/adminlogin.component';
+import { AdminComponent } from './pages/admin/components/admin.component';
 import { EditComponent } from './pages/viajes/components/viaje-edit/edit.component';
 import { CreateComponent } from './pages/viajes/components/viaje-create/create.component';
 
@@ -22,7 +18,7 @@ export const routes: Routes = [
         component:ViajeComponent
     },
     {
-        path:'viajes',
+        path:'',
         component:ViajesComponent
     },
     {
@@ -62,23 +58,7 @@ export const routes: Routes = [
         component:AdminloginComponent
     },
     {
-        path:'admin',
+        path:'admin/:menu',
         component:AdminComponent
-    },
-    {
-        path:'admin/viajes',
-        component:AdminviajesComponent
-    },
-    {
-        path:'admin/usuarios',
-        component:AdminusuariosComponent
-    },
-    {
-        path:'admin/municipios',
-        component:AdminmunicipiosComponent
-    },
-    {
-        path:'admin/universidades',
-        component:AdminuniversidadesComponent
     }
 ];

@@ -17,6 +17,8 @@ namespace webapi.Models
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<Valoracion> Valoraciones { get; set; }
         public DbSet<Viaje> Viajes { get; set; }
+        public DbSet<Notificacion> Notificaciones { get; set; } = default!;
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -64,7 +66,7 @@ namespace webapi.Models
                 entity.HasOne(u => u.Universidad).WithMany(u => u.Usuarios).HasForeignKey(u => u.UniversidadId).OnDelete(DeleteBehavior.NoAction);
                 entity.HasOne(u => u.Municipio).WithMany(m => m.Usuarios).HasForeignKey(u => u.MunicipioId).OnDelete(DeleteBehavior.NoAction);
             });
-
+            
             modelBuilder.Entity<Valoracion>(entity =>
             {
                 entity.HasKey(v => v.Id);
@@ -80,6 +82,5 @@ namespace webapi.Models
                 entity.HasOne(v => v.Nucleo).WithMany(n => n.Viajes).HasForeignKey(v => v.NucleoId).OnDelete(DeleteBehavior.NoAction);
             });
         }
-        public DbSet<Notificacion> Notificaciones { get; set; } = default!;
     }
 }

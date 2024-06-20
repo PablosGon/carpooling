@@ -1,0 +1,7 @@
+<app-usuario-form
+    (onSubmit)="createUsuario($event)"
+/>
+
+@if(error){
+    <p style="color: red;">{{error}}</p>
+}

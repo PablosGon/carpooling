@@ -14,16 +14,18 @@ export class CentroService {
 
   url = environment.BASE_API_URL
 
-  public getCentros():Observable<Centro[]>{
-    return this.httpClient.get<Centro[]>(this.url + "centros");
+  public getCentros(universidadId?:number):Observable<Centro[]>{
+
+    if(universidadId){
+      return this.httpClient.get<Centro[]>(this.url + "centros?universidadId=" + universidadId)
+    } else {
+      return this.httpClient.get<Centro[]>(this.url + "centros");
+    }
+
   }
 
   public getCentro(id:number):Observable<Centro>{
     return this.httpClient.get<Centro>(this.url + 'centros/' + id);
-  }
-
-  public getCentrosByUniversidadID(id:number):Observable<Centro[]>{
-    return this.httpClient.get<Centro[]>(this.url + "centros?universidadId=" + id)
   }
 
   public createCentro(centro:Centro):Observable<Centro>{

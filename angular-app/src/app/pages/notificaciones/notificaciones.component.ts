@@ -16,7 +16,7 @@ export class NotificacionesComponent {
 
   private route = inject(ActivatedRoute);
 
-  constructor(private notificacionService:NotificacionesService, private router:Router, private usuarioService:UsuarioService){ }
+  constructor(private notificacionService:NotificacionesService, private usuarioService:UsuarioService){ }
 
   usuarioId = sessionStorage.getItem("usuarioId")
   notificaciones : Notificacion[] = []

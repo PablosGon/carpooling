@@ -1,9 +1,16 @@
-<div class="row">
-@for (viaje of viajes; track viaje.id) {
-    <div class="col">
-        <app-viaje-item
-            [viaje]="viaje"
-        />
+@if (viajes!.length > 0) {
+    <div class="row">
+        @for (viaje of viajes; track viaje.id) {
+            <div class="col">
+                <app-viaje-item class="p-1"
+                    [viaje]="viaje"
+                />
+            </div>
+        }
     </div>
+} @else {
+    <h3>
+        No se han encontrado viajes con los criterios seleccionados :(
+    </h3>
 }
-</div>
+

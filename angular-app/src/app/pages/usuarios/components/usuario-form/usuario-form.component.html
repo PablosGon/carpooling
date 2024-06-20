@@ -1,0 +1,66 @@
+<form>
+
+    <div class="row pt-2 pb-2">
+        <div class="col">
+            <label>Nombre (*)</label>
+            <input class="form-control" type="text" [(ngModel)]="usuario.nombre" name="usuario.nombre"/>        
+        </div>
+        <div class="col">
+            <label>Contraseña (*)</label>
+            <input class="form-control" type="password" [(ngModel)]="usuario.pass" name="usuario.pass" />        
+        </div>
+    </div>
+    <div class="row pt-2 pb-2">
+        <div class="col">
+            <label>Correo (*)</label>
+            <input class="form-control" type="text" [(ngModel)]="usuario.correo" name="usuario.correo"/>
+        </div>
+        <div class="col">
+            <label>Teléfono (*)</label>
+            <input class="form-control" type="text" [(ngModel)]="usuario.telefono" name="usuario.telefono"/>    
+        </div>
+    </div>
+
+
+    <div class="row pt-2 pb-2">
+        <label>Imagen</label>
+        <div class="col">
+            <input class="form-control" type="file" name="usuario.imagen" (change)="readFile()" id="img"/>
+            <p style="color: red;" id="fileWarning"></p>
+        </div>
+        <div class="col">
+            <button class="btn btn-danger" (click)="deleteProfilePicture()">Borrar imagen</button>
+
+        </div>
+    </div>
+
+    <div class="row pt-2 pb-2">
+        <div class="col">
+            <label>Grado</label>
+            <input class="form-control" type="text" [(ngModel)]="usuario.grado" name="usuario.grado"/>
+        </div>
+        <div class="col">
+            <label>Universidad</label>
+            <select class="form-select" type="text" [(ngModel)]="usuario.universidad.id" name="usuario.universidad.id">
+                <option>---</option>
+                @for(universidad of universidades; track universidad.id){
+                    <option value="{{universidad.id}}">{{universidad.nombre}}</option>
+                }
+            </select>
+        </div>
+        <div class="col">
+            <label>Municipio</label>
+            <select class="form-select" type="text" [(ngModel)]="usuario.municipio.id" name="usuario.municipio.id">
+                <option>---</option>
+                @for(municipio of municipios; track municipio.id){
+                    <option value="{{municipio.id}}">{{municipio.nombre}}</option>
+                }
+            </select>
+        </div>
+    </div>
+    <div class="row pt-2 pb-2">
+        <div class="col">
+            <button class="btn btn-primary" (click)="submitUsuario()">Guardar</button>
+        </div>
+    </div>
+</form>

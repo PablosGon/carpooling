@@ -2,12 +2,8 @@ img{
     border-radius: 50%;
 }
 
-.card{
-    width: 400px;
-}
-
 .accordion{
-    width: 400px;
+    max-width: 400px;
 }
 
 .card-image{

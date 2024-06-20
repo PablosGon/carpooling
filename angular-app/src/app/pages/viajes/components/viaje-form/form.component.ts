@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Viaje } from '../../../../entity/viaje';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Universidad } from '../../../../entity/universidad';
@@ -23,6 +23,8 @@ import { UsuarioService } from '../../../../services/usuario.service';
 export class FormComponent {
 
   @Output() onSubmit = new EventEmitter<Viaje>()
+  @Input() idViaje? : number
+  @Input() submitButtonText? : string
 
   universidades: Universidad[] = []
   centros: Centro[] = []
@@ -35,46 +37,16 @@ export class FormComponent {
   usuarioId = sessionStorage.getItem('usuarioId')
   isVuelta = "false";
 
+  error: boolean = false
+
   viaje:Viaje = {
     id: 0,
-    conductor: {
-      id: 0,
-      nombre: '',
-      correo: '',
-      telefono: '',
-      grado: '',
-      imagen: '',
-      universidad: {
-        id: 0,
-        nombre: '',
-        imagen: ''
-      },
-      municipio: {
-        id: 0,
-        nombre: '',
-        imagen: ''
-      },
-      valoracionMedia: 0,
-      numValoraciones: 0,
-      notificacionesNoLeidas: 0,
-      pass: '',
-      isAdmin: false
-    },
     fechaYHora: new Date(),
     maxPlazas: 0,
-    isVuelta: false,
     comentarios: '',
     descripcionCoche: '',
-    nucleo: {
-      id: 0,
-      nombre: '',
-      municipio: {
-        id: 0,
-        nombre: '',
-        imagen: ''
-      },
-      imagen: ''
-    },
+    isVuelta: false,
+    precio: 0,
     centro: {
       id: 0,
       nombre: '',
@@ -85,10 +57,21 @@ export class FormComponent {
       },
       imagen: ''
     },
-    precio: 0
-  }
+    nucleo: {
+      id: 0,
+      nombre: '',
+      municipio: {
+        id: 0,
+        nombre: '',
+        imagen: ''
+      },
+      imagen: ''
+    },
+    conductorId: 0
+  } 
   
   constructor(
+    private viajeService:ViajeService,
     private universidadService:UniversidadService,
     private centroService:CentroService,
     private municipioService:MunicipioService,
@@ -97,11 +80,21 @@ export class FormComponent {
   ngOnInit(){
     this.universidadService.getUniversidades().subscribe(data => this.universidades = data);
     this.municipioService.getMunicipios().subscribe(data => this.municipios = data)
+    if(this.idViaje){
+      this.viajeService.getViaje(this.idViaje).subscribe(data => {
+        this.universidadId = data.centro.universidad.id
+        this.getCentrosByUniversidadId(this.universidadId)
+        this.municipioId = data.nucleo.municipio.id
+        this.getNucleosByMunicipioId(this.municipioId)
+        this.viaje = data
+        console.log()
+      })
+    }
   }
 
   getCentrosByUniversidadId(id:number){
     console.log(id)
-    return this.centroService.getCentrosByUniversidadID(id).subscribe(data => {
+    return this.centroService.getCentros(id).subscribe(data => {
       this.centros = [];
       data.forEach(centro => this.centros.push(centro))
     })
@@ -115,8 +108,20 @@ export class FormComponent {
   }
 
   submit(){
-    this.viaje.conductor.id = parseInt(this.usuarioId!)
-    this.onSubmit.emit(this.viaje)
+    this.viaje!.conductorId = parseInt(this.usuarioId!)
+
+    if(
+      !this.viaje!.centro
+      || !this.viaje!.nucleo
+      || !this.viaje!.fechaYHora
+      || this.viaje!.maxPlazas <= 0
+      || this.viaje!.precio < 0
+    ){
+      this.error = true
+    } else {
+      this.onSubmit.emit(this.viaje)
+    }
+
   }
 
 }

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Viaje } from '../../../../entity/viaje';
 import { Universidad } from '../../../../entity/universidad';
@@ -46,10 +46,12 @@ export class ViajeFilterComponent {
 
   getCentrosByUniversidadId(id?:number){
     
+    console.log(id)
+
     this.centros = [];
 
     if(id){
-      this.centroService.getCentrosByUniversidadID(id).subscribe(data => {
+      this.centroService.getCentros(id).subscribe(data => {
         data.forEach(centro => this.centros.push(centro))
       })
     }

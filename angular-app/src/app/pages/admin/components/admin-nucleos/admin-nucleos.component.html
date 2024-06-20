@@ -1,0 +1,41 @@
+<table class="table table-stripped">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Imagen</th>
+            <th>Nombre</th>
+            <th></th>
+        </tr>
+    </thead>
+    @for (nucleo of nucleos; track nucleo.id) {
+        <tr>
+            <th>{{nucleo.id}}</th>
+            <td><img src="{{'https://res.cloudinary.com/dilfzvvw4/image/upload/v1716716882/' + nucleo.imagen + '.jpg'}}"/>
+            <input class="form-control" type="file" id="{{municipioId + 'nucFile' + nucleo.id}}" name="{{'nucFile' + municipioId}}" (change)="readNucleoFile(municipioId!, nucleo.id)"/>
+            <p style="color: red;" id="{{municipioId + 'nucFile' + nucleo.id + 'Warning'}}"></p>
+            @if (nucleo.imagen) {
+                <button class="btn btn-danger" (click)="deleteNucleoPicture(nucleo.id)">Borrar imagen</button>
+            }
+            </td>
+            <td><input class="form-control" type="text" [(ngModel)]="nucleo.nombre" name="nucleo.nombre"/>
+                <button class="btn btn-secondary" (click)="updateNucleo(nucleo.id, nucleo)">Editar</button>
+                <button class="btn btn-danger" (click)="deleteNucleo(nucleo.id)">Eliminar</button></td>
+        </tr>
+    }
+    <tr>
+        <th>Nuevo <p></p> </th>
+        <td>
+            <input class="form-control" type="file" id="{{municipioId + 'nucFile'}}" name="nucFile" (change)="readNucleoFile(municipioId!)"/>
+            <p style="color: red;" id="{{municipioId + 'nucFileWarning'}}"></p>
+        </td>
+        <td>
+            <input class="form-control" type="text" name="newNucleo.nombre" id="nombreNucleo" [(ngModel)]="newNucleo.nombre"/>
+            <p></p>
+        </td>
+        <td>
+            <button class="btn btn-primary" (click)="createNucleo(municipioId!)">Crear</button>
+            <p></p>
+        </td>
+    </tr>
+
+</table>

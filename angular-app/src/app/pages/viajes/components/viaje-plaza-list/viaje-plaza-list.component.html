@@ -3,6 +3,7 @@
         <div class="col">
             <app-viaje-plaza-item
                 [plaza]="plaza"
+                [hideButtons]="hideButtons"
                 (onAccept)="acceptPlaza($event)"
                 (onReject)="rejectPlaza($event)"
                 (onDelete)="deletePlaza($event)"

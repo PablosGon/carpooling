@@ -1,0 +1,43 @@
+<h1>
+    Crear solicitud de plaza
+</h1>
+
+<form>
+    <div class="row pb-2 pt-2">
+        <div class="col">
+            <label>Nombre</label>
+            <input class="form-control" type="text" [(ngModel)]="plaza.nombre" name="plaza.nombre"/>
+        </div>
+    </div>
+    <div class="row pb-2 pt-2">
+        <div class="col">
+            <label>Correo</label>
+            <input class="form-control" type="text" [(ngModel)]="plaza.correo" name="plaza.correo"/>        
+        </div>
+    </div>    
+    <div class="row pb-2 pt-2">
+        <div class="col">
+            <label>Teléfono</label>
+            <input class="form-control" type="text" [(ngModel)]="plaza.telefono" name="plaza.telefono"/>        
+        </div>
+    </div>    
+    <div class="row pb-2 pt-2">
+        <div class="col">
+            <label>Comentarios</label>
+            <input class="form-control" type="text" [(ngModel)]="plaza.comentariosPasajero" name="plaza.comentariosPasajero"/>        
+        </div>
+    </div>
+    <div class="row pb-2 pt-2">
+        <div class="col">
+            <button class="btn btn-primary" (click)="submitSolicitud()">Solicitar</button>
+            @if (error) {
+                <p style="color: red;">Faltan campos obligatorios</p>
+            }
+        </div>
+    </div>
+    
+
+
+
+
+</form>

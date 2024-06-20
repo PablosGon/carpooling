@@ -148,7 +148,7 @@ namespace webapi.Controllers
                 return BadRequest("Ya existe un usuario con ese correo");
             }
 
-            if(usuarioDTO.Imagen != null)
+            if(!usuarioDTO.Imagen.IsNullOrEmpty())
             {
                 var uploadParams = new ImageUploadParams
                 {

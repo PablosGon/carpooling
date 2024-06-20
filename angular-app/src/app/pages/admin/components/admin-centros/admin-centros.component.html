@@ -1,0 +1,41 @@
+    <table class="table table-stripped">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Imagen</th>
+                <th>Nombre</th>
+            </tr>
+        </thead>
+        @for (centro of centros; track centro.id) {
+            <tr>
+                <th>{{centro.id}}</th>
+                <td><img src="{{'https://res.cloudinary.com/dilfzvvw4/image/upload/v1716716882/' + centro.imagen + '.jpg'}}"/>
+                <input class="form-control" type="file" id="{{universidadId + 'cenFile' + centro.id}}" name="{{universidadId + 'cenFile' + centro.id}}" (change)="readCentroFile(universidadId, centro.id)"/>
+                <p style="color: red;" id="{{universidadId + 'cenFile' + centro.id + 'Warning'}}"></p>
+                @if(centro.imagen){
+                    @if (centro.imagen) {
+                        <button class="btn btn-danger" (click)="deleteCentroPicture(centro.id)">Borrar imagen</button>
+                    }
+                }
+            </td>
+                <td><input class="form-control" type="text" [(ngModel)]="centro.nombre" name="centro.nombre"/>
+                    <button class="btn btn-secondary" (click)="updateCentro(centro.id, centro)">Editar</button>
+                    <button class="btn btn-danger" (click)="deleteCentro(centro.id)">Eliminar</button></td>
+            </tr>
+        }
+        <tr>
+            <th>Nuevo</th>
+            <td>
+                <input class="form-control" type="file" id="{{universidadId + 'cenFile'}}" name="cenFile" (change)="readCentroFile(universidadId)"/>
+                <p style="color: red;" id="{{universidadId + 'cenFileWarning'}}"></p>
+            </td>
+            <td>
+                <input class="form-control" type="text" name="newCentro.nombre" id="nombreCentro" [(ngModel)]="newCentro.nombre"/>
+                <p></p>
+            </td>
+            <td>
+                <button class="btn btn-primary" (click)="createCentro(universidadId)">Crear</button>
+                <p></p>
+            </td>
+        </tr>
+    </table>

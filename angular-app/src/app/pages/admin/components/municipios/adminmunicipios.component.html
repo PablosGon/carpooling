@@ -1,0 +1,50 @@
+<table class="table table stripped">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Imagen</th>
+            <th>Nombre</th>
+            <th>Núcleos</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (municipio of municipios; track municipio.id) {
+            <tr>
+                <th>{{municipio.id}}</th>
+                <td><img src="{{'https://res.cloudinary.com/dilfzvvw4/image/upload/v1716716882/' + municipio.imagen + '.jpg'}}"/>
+                    <input class="form-control" type="file" id="{{'munFile' + municipio.id}}" name="{{'munFile' + municipio.id}}" (change)="readMunicipioFile(municipio.id)"/>
+                    @if (municipio.imagen) {
+                        <br/><button class="btn btn-danger" (click)="deleteMunicipioPicture(municipio.id)">Borrar imagen</button>
+                    }
+                    <p style="color: red;" id="{{'munFileWarning' + municipio.id}}"></p>
+                </td>
+                <td>
+                    <input class="form-control" type="text" [(ngModel)]="municipio.nombre" name="municipio.nombre"/>
+                    <button class="btn btn-secondary" (click)="updateMunicipio(municipio.id, municipio)">Editar</button>
+                    <button class="btn btn-danger" (click)="deleteMunicipio(municipio.id)">Eliminar</button>
+                </td>
+                <td>
+                    <h5>Núcleos de {{municipio.nombre}}</h5>
+                    <app-admin-nucleos
+                        [nucleos]="getNucleos(municipio.id)"
+                        [municipioId]="municipio.id"
+                    />
+
+                </td>
+            </tr>
+        }
+        <tr>
+            <th>Nuevo</th>
+            <td>
+                <input class="form-control image-input" type="file" id="munFile" name="munFile" (change)="readMunicipioFile()"/>
+                <p style="color: red;" id="{{'munFileWarning'}}"></p>
+            </td>
+            <td>
+                <input class="form-control" type="text" [(ngModel)]="newMunicipio.nombre" name="newUniversidad.nombre"/>
+            </td>
+            <td>
+                <button class="btn btn-primary" (click)="createMunicipio()">Crear</button>
+            </td>
+        </tr>
+    </tbody>
+</table>

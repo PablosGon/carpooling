@@ -7,16 +7,13 @@ namespace webapi.DTOs
         public int Id { get; set; }
         public DateTime FechaYHora { get; set; }
         public int MaxPlazas { get; set; }
-        public string Comentarios { get; set; } = String.Empty;
-        public string DescripcionCoche { get; set; } = String.Empty;
+        public string? Comentarios { get; set; }
+        public string? DescripcionCoche { get; set; }
         public bool IsVuelta { get; set; }
         public double Precio { get; set; }
-        [AllowNull]
-        public CentroDTO Centro { get; set; }
-        [AllowNull]
-        public NucleoDTO Nucleo { get; set; }
-        [AllowNull]
-        public UsuarioDTO Conductor { get; set; }
+        public required CentroDTO Centro { get; set; }
+        public required NucleoDTO Nucleo { get; set; }
+        public int ConductorId { get; set; }
 
     }
 }

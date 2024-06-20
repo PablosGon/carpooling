@@ -31,14 +31,7 @@ namespace webapi.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Imagen")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<double>("Latitude")
-                        .HasColumnType("float");
-
-                    b.Property<double>("Longitude")
-                        .HasColumnType("float");
 
                     b.Property<string>("Nombre")
                         .IsRequired()
@@ -63,14 +56,7 @@ namespace webapi.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Imagen")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<double>("Latitude")
-                        .HasColumnType("float");
-
-                    b.Property<double>("Longitude")
-                        .HasColumnType("float");
 
                     b.Property<string>("Nombre")
                         .IsRequired()
@@ -120,14 +106,7 @@ namespace webapi.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Imagen")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<double>("Latitude")
-                        .HasColumnType("float");
-
-                    b.Property<double>("Longitude")
-                        .HasColumnType("float");
 
                     b.Property<int>("MunicipioId")
                         .HasColumnType("int");
@@ -155,22 +134,14 @@ namespace webapi.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("ComentariosConductor")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ComentariosPasajero")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Correo")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<double>("LatitudeRecogida")
-                        .HasColumnType("float");
-
-                    b.Property<double>("LongitudeRecogida")
-                        .HasColumnType("float");
 
                     b.Property<string>("Nombre")
                         .IsRequired()
@@ -204,14 +175,7 @@ namespace webapi.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Imagen")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<double>("Latitude")
-                        .HasColumnType("float");
-
-                    b.Property<double>("Longitude")
-                        .HasColumnType("float");
 
                     b.Property<string>("Nombre")
                         .IsRequired()
@@ -235,11 +199,9 @@ namespace webapi.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Grado")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Imagen")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsAdmin")
@@ -310,14 +272,12 @@ namespace webapi.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Comentarios")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("ConductorId")
                         .HasColumnType("int");
 
                     b.Property<string>("DescripcionCoche")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("FechaYHora")

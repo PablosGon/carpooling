@@ -1,1 +1,15 @@
-<p>viaje-conductor works!</p>
+<div class="card">
+    <div class="card-body">
+        <div class="row">
+            <div class="col">
+                <img src="{{usuarioImg()}}"/>
+            </div>
+            <div class="col">
+                <h4>{{usuario?.nombre}}</h4>
+                <p><strong>Correo:</strong> {{usuario?.correo}}</p>
+                <p><strong>Teléfono:</strong> {{usuario?.telefono}}</p>
+                <a class="btn btn-secondary" href="{{'/usuario/' + usuario?.id}}">Ver perfil</a>
+            </div>
+        </div>
+    </div>
+</div>

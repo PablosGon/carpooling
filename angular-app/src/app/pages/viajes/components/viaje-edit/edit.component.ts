@@ -22,12 +22,15 @@ import { FormComponent } from '../viaje-form/form.component';
 })
 export class EditComponent {
 
+  private route = inject(ActivatedRoute);
+  id = parseInt(this.route.snapshot.paramMap.get('id')!);
+
   constructor(private viajeService:ViajeService){}
 
   updateViaje(viaje:Viaje){
-    this.viajeService.updateViaje(viaje.id, viaje).subscribe(data => {
+    this.viajeService.updateViaje(this.id, viaje).subscribe(data => {
       window.location.href='/viaje/' + viaje.id
     })
-
   }
+
 }

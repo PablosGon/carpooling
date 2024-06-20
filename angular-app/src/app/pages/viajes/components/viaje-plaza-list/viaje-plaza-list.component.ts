@@ -12,6 +12,7 @@ import { Plaza } from '../../../../entity/plaza';
 export class ViajePlazaListComponent {
 
   @Input() public plazaList:Plaza[] = []
+  @Input() public hideButtons:boolean = false
 
   @Output() onPlazaAccept = new EventEmitter<number>()
   @Output() onPlazaReject = new EventEmitter<number>()

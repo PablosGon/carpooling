@@ -1,38 +1,60 @@
-<h1>Tu perfil</h1>
 
 <div class="container">
+
+    <h1>Datos del perfil</h1>
+
     <div class="card bg-light">
         <div class="card-body">
             <div class="row">
                 <div class="col">
-                    <img style="border-radius: 50%;" src="{{'https://res.cloudinary.com/dilfzvvw4/image/upload/v1716716882/' + usuario.imagen + '.jpg'}}"/>
+                    <img style="border-radius: 50%;" src="{{usuarioImg()}}"/>
                 </div>
                 <div class="col">
-                    <h1>{{usuario.nombre}}</h1>
-                    <h2>{{usuario.valoracionMedia}} estrellas ({{usuario.numValoraciones}} valoraciones)</h2>
-                    <p>Correo: {{usuario.correo}}</p>
-                    <p>Teléfono: {{usuario.telefono}}</p>
-                    @if(usuario.municipio){
-                        <p>Vive en {{usuario.municipio.nombre}}</p>
+                    <h1>{{usuario!.nombre}}</h1>
+                    <h2>{{usuario!.valoracionMedia}} estrellas ({{usuario!.numValoraciones}} valoraciones)</h2>
+                    <p>Correo: {{usuario!.correo}}</p>
+                    <p>Teléfono: {{usuario!.telefono}}</p>
+                    @if(usuario!.municipio){
+                        <p>Vive en {{usuario!.municipio.nombre}}</p>
                     }
                     
-                    @if (usuario.grado) {
-                        <p>Estudiante de {{usuario.grado}} </p>
+                    @if (usuario!.grado) {
+                        <p>Estudiante de {{usuario!.grado}} </p>
                     }
                     
-                    @if(usuario.universidad){
-                        <p>{{usuario.universidad.nombre}}</p>
+                    @if(usuario!.universidad){
+                        <p>{{usuario!.universidad.nombre}}</p>
                     }
                     @if(isMyself()){
-                        <a class="btn btn-secondary" href="{{'/usuario/' + usuario.id + '/editar'}}">Editar información</a>
+                        <a class="btn btn-secondary" href="{{'/usuario/' + usuario!.id + '/editar'}}">Editar información</a>
                     } @else {
                     
                         @if (!this.userId) {
                             <p>Inicia sesión para añadir una valoración</p>
-                        } @else if (prevRated) {
-                            Tu valoración: <input type="number" [(ngModel)]="valoracion.estrellas" [max]="5" [min]="0"/> <button (click)="updateValoracion()">Modificar</button><button (click)="deleteValoracion()">Borrar valoración</button>
                         } @else {
-                            Valorar: <input type="number" [(ngModel)]="valoracion.estrellas" [max]="5" [min]="0"/> <button (click)="createValoracion()">Enviar</button>
+                            
+                            @if(prevRated){
+                                Tu valoración: 
+                            } @else {
+                                Valorar:
+                            }
+
+                            <div class="row">
+                                <div class="col">
+                                    <input class="form-control" type="number" [(ngModel)]="valoracion.estrellas" [max]="5" [min]="0"/>
+                                </div>
+                                <div class="col">
+                                    @if (prevRated) {
+                                        <button class="btn btn-secondary" (click)="updateValoracion()">Modificar</button>
+                                        <button class="btn btn-danger" (click)="deleteValoracion()">Borrar valoración</button>
+                                    } @else {
+                                        <button class="btn btn-primary" (click)="createValoracion()">Enviar</button>
+                                    }
+                                </div>
+                            </div>
+                            @if (this.valoracionError) {
+                                <p style="color: red;">Introduce un valor entre 0 y 5</p>
+                            }
                         }
                     }
                 </div>
@@ -45,6 +67,9 @@
     <h2>Próximos viajes</h2>
     <app-viaje-list
         [viajes]="viajes"
+    />
+    <app-viaje-list
+        [viajes]="plazas"
     />
 </div>
 

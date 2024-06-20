@@ -19,7 +19,7 @@ export class ViajeService {
   //   "Access-Control-Allow-Origin": "*"
   // });
 
-  public getViajes(filter:ViajeFilter):Observable<Viaje[]> {
+  public getViajes(filter:ViajeFilter, onlyUpcoming?:boolean, conductorId?:number, pasajeroId?:number):Observable<Viaje[]> {
 
     let url = this.url + 'viajes'
     let params:HttpParams = new HttpParams()
@@ -30,6 +30,9 @@ export class ViajeService {
     if(filter.nucleoId) params = params.set('nucleoId', filter.nucleoId);
     if(filter.isVuelta != null) params = params.set('isVuelta', filter.isVuelta);
     if(filter.fechaYHora) params = params.set('fechaHora', filter.fechaYHora.toISOString());
+    if(onlyUpcoming) params = params.set('onlyUpcoming', onlyUpcoming);
+    if(conductorId) params = params.set('conductorId', conductorId);
+    if(pasajeroId) params = params.set('pasajeroId', pasajeroId);
 
     return this.httpClient.get<Viaje[]>(url, {
       params: params

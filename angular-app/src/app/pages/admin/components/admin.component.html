@@ -1,0 +1,31 @@
+@if (admin) {
+    <ul ngbNav class="row bg-light">
+        <li class="col">
+            <a href="/admin/1">Ver viajes</a><br/>
+        </li>
+        <li class="col">
+            <a href="/admin/2">Ver usuarios</a><br/>
+        </li>
+        <li class="col">
+            <a href="/admin/3">Ver municipios</a><br/>
+        </li>
+        <li class="col">
+            <a href="/admin/4">Ver universidades</a><br/>
+        </li>            
+    </ul>
+
+    @if (menu === 1) {
+        <app-adminviajes/>
+    } @else if (menu == 2) {
+        <app-adminusuarios/>
+    } @else if (menu == 3){
+        <app-adminmunicipios/>
+    } @else if (menu == 4) {
+        <app-adminuniversidades/>
+    } @else {
+        <h1>Bienvenido al portal de administrador</h1>
+    }
+} @else {
+    No tienes permiso para estar aquí
+}
+

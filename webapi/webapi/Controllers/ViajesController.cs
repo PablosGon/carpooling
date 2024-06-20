@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using webapi.DTOs;
 using webapi.Models;
 
@@ -25,7 +26,17 @@ namespace webapi.Controllers
 
         // GET: api/Viajes
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ViajeDTO>>> GetViajes([FromQuery] bool? isVuelta, [FromQuery] DateTime? fechaHora, [FromQuery] int? nucleoId, [FromQuery] int? centroId, [FromQuery] int? conductorId, [FromQuery] int? universidadId, [FromQuery] int? municipioId)
+        public async Task<ActionResult<IEnumerable<ViajeDTO>>> GetViajes(
+            [FromQuery] bool? isVuelta, 
+            [FromQuery] DateTime? fechaHora, 
+            [FromQuery] int? nucleoId, 
+            [FromQuery] int? centroId, 
+            [FromQuery] int? conductorId, 
+            [FromQuery] int? universidadId, 
+            [FromQuery] int? municipioId,
+            [FromQuery] bool? onlyUpcoming,
+            [FromQuery] int? pasajeroId
+        )
         {
             List<Viaje> res = await _context.Viajes.OrderBy(x => x.FechaYHora).ToListAsync(); ;
 
@@ -64,6 +75,17 @@ namespace webapi.Controllers
                 res = res.Where(x => x.ConductorId == conductorId).ToList();
             }
 
+            if (onlyUpcoming.HasValue && onlyUpcoming.Value)
+            {
+                res = res.Where(x => x.FechaYHora > DateTime.UtcNow).ToList();
+            }
+
+            if (pasajeroId.HasValue)
+            {
+                var plazas = _context.Plazas.ToList();
+                res = res.Where(x => !plazas.Where(y => y.ViajeId == x.Id && y.UsuarioId == pasajeroId.Value).IsNullOrEmpty()).ToList();
+            }
+
             foreach (Viaje viaje in res)
             {
                 viaje.Centro = _context.Centros.FindAsync(viaje.CentroId).Result!;
@@ -72,6 +94,7 @@ namespace webapi.Controllers
                 viaje.Nucleo.Municipio = _context.Municipios.FindAsync(viaje.Nucleo.MunicipioId).Result!;
                 viaje.Conductor = _context.Usuarios.FindAsync(viaje.ConductorId).Result!;
                 viaje.Conductor.ValoracionesRecibidas = _context.Valoraciones.Where(x => x.ConductorId == viaje.ConductorId).ToList();
+                viaje.Plazas = _context.Plazas.Where(x => x.ViajeId == viaje.Id).ToList();
                 list.Add(viaje.ToDTO());
             }
 
@@ -113,14 +136,14 @@ namespace webapi.Controllers
                 DescripcionCoche = viajeDTO.DescripcionCoche,
                 CentroId = viajeDTO.Centro.Id,
                 NucleoId = viajeDTO.Nucleo.Id,
-                ConductorId = viajeDTO.Conductor.Id,
+                ConductorId = viajeDTO.ConductorId,
                 IsVuelta = viajeDTO.IsVuelta,
                 Precio = viajeDTO.Precio,
             };
 
             _context.Entry(viaje).State = EntityState.Modified;
 
-            sendNotifications("Un viaje en el que tenías plaza ha sido MODIFICADO (click para ver)", id, true);
+            SendNotifications("Un viaje en el que tenías plaza ha sido MODIFICADO (click para ver)", id, true);
 
             try
             {
@@ -154,7 +177,7 @@ namespace webapi.Controllers
                 DescripcionCoche = viajeDTO.DescripcionCoche,
                 CentroId = viajeDTO.Centro.Id,
                 NucleoId = viajeDTO.Nucleo.Id,
-                ConductorId = viajeDTO.Conductor.Id,
+                ConductorId = viajeDTO.ConductorId,
                 IsVuelta = viajeDTO.IsVuelta,
                 Precio = viajeDTO.Precio
             };
@@ -178,7 +201,7 @@ namespace webapi.Controllers
             }
 
 
-            sendNotifications("Un viaje en el que tenías plaza ha sido ELIMINADO", id, false);
+            SendNotifications("Un viaje en el que tenías plaza ha sido ELIMINADO", id, false);
 
             _context.Viajes.Remove(viaje);
 
@@ -192,7 +215,7 @@ namespace webapi.Controllers
             return _context.Viajes.Any(e => e.Id == id);
         }
 
-        private void sendNotifications(string text, int id, bool includeViaje)
+        private void SendNotifications(string text, int id, bool includeViaje)
         {
             var pasajeros = _context.Plazas.Where(x => x.ViajeId == id && x.Aceptada);
 

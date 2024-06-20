@@ -4,7 +4,7 @@
             <div>
                 <div class="row">
                     <div class="col">
-                        <img style="width: 50px;" src="{{'https://res.cloudinary.com/dilfzvvw4/image/upload/v1716716882/' + plaza?.imagen}}"/>
+                        <img style="width: 50px;" src="{{usuarioImg()}}"/>
                     </div>
                     <div class="col">
                         <h5 class="accordion-title">{{plaza?.nombre}}</h5>
@@ -16,7 +16,7 @@
         <div ngbAccordionBody>
             <div class="row">
                 <div class="col">
-                    <img src="{{'https://res.cloudinary.com/dilfzvvw4/image/upload/v1716716882/' + plaza?.imagen}}" class="card-image">
+                    <img src="{{usuarioImg()}}" class="card-image">
                 </div>
                 <div class="col">
                     <p><strong>Nombre:</strong> {{plaza?.nombre}}</p>
@@ -31,7 +31,7 @@
             </div>
             <div class="row">
                 <div class="col">
-                    @if (false) {
+                    @if (hideButtons) {
             
                     } @else if (plaza?.aceptada) {
                         <button class="btn btn-danger" (click)="remove()">Eliminar</button>

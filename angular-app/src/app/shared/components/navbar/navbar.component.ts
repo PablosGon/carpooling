@@ -15,41 +15,15 @@ import { NgbNav, NgbNavItem, NgbNavLink, NgbNavOutlet } from '@ng-bootstrap/ng-b
 })
 export class NavbarComponent {
 
-  usuario : Usuario = {
-    id: 0,
-    nombre: '',
-    correo: '',
-    telefono: '',
-    grado: '',
-    imagen: '',
-    universidad: {
-      id: 0,
-      nombre: '',
-      imagen: ''
-    },
-    municipio: {
-      id: 0,
-      nombre: '',
-      imagen: ''
-    },
-    valoracionMedia: 0,
-    numValoraciones: 0,
-    notificacionesNoLeidas: 0,
-    pass: '',
-    isAdmin: false
-  }
-
+  usuario? : Usuario
   usuarioId = sessionStorage.getItem('usuarioId')
 
   constructor(private usuarioService : UsuarioService){}
 
   ngOnInit(){
-    console.log(this.usuarioId)
     if(this.usuarioId){
       this.usuarioService.getUsuario(parseInt(this.usuarioId)).subscribe(data => {
         this.usuario = data
-        console.log(this.usuario)
-
       })
     }
   }
@@ -60,7 +34,7 @@ export class NavbarComponent {
 
   logout(){
     sessionStorage.removeItem('usuarioId')
-    window.location.href="/viajes"
+    window.location.href="/"
   }
 
 }

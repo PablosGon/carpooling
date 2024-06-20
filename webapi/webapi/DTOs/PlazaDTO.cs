@@ -5,15 +5,13 @@ namespace webapi.DTOs
     public class PlazaDTO
     {
         public int Id { get; set; }
-        public string Nombre { get; set; } = String.Empty;
-        public string Correo { get; set; } = String.Empty;
-        public string Telefono { get; set; } = String.Empty;
-        public double LatitudRecogida { get; set; }
-        public double LongitudRecogida { get; set; }
-        public string ComentariosConductor { get; set; } = String.Empty;
-        public string ComentariosPasajero { get; set; } = String.Empty;
+        public required string Nombre { get; set; }
+        public required string Correo { get; set; }
+        public required string Telefono { get; set; }
+        public string? ComentariosConductor { get; set; }
+        public string? ComentariosPasajero { get; set; }
         public bool Aceptada { get; set; }
-        public string Imagen { get; set; } = String.Empty;
+        public string? Imagen { get; set; }
         public int? UsuarioId { get; set; }
         public int ViajeId { get; set; }
 

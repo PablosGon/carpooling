@@ -1,0 +1,12 @@
+<form>
+    @if (notFound) {
+        <p style="color: red;">Correo o contraseña incorrectos</p>
+    }
+    <h5 class="form-label" for="correoInput">Correo</h5>
+    <input class="form-control" type="text" [(ngModel)]="correo" name="correo" id="correoInput"/><br/>
+    <h5 class="form-label" for="passInput">Contraseña</h5>
+    <input class="form-control" type="password" [(ngModel)]="pass" name="pass" id="passInput"/><br/>
+    <button class="btn btn-primary" (click)="login()">Iniciar Sesión</button>
+</form>
+
+¿No eres usuario aún? <a href="/register">¡Regístrate!</a>

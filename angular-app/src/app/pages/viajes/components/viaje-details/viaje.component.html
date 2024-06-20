@@ -3,12 +3,12 @@
         <div class="row">
             <div class="col">
                 <img 
-                    src="{{'https://res.cloudinary.com/dilfzvvw4/image/upload/v1716716882/' + viaje!.nucleo.imagen + '.jpg'}}"
-                    alt="{{viaje!.nucleo.nombre}} ({{viaje!.nucleo.municipio.nombre}})"
+                    src="{{salidaImg()}}"
+                    alt="{{viaje?.nucleo!.nombre}} ({{viaje?.nucleo!.municipio.nombre}})"
                 >
                 <img
-                    src="{{'https://res.cloudinary.com/dilfzvvw4/image/upload/v1716716882/' + viaje!.centro.imagen + '.jpg'}}"
-                    alt="{{viaje!.centro.nombre}} ({{viaje!.centro.universidad.nombre}})"
+                    src="{{destinoImg()}}"
+                    alt="{{viaje?.centro!.nombre}} ({{viaje?.centro!.universidad.nombre}})"
                 >
             </div>
         </div>
@@ -16,32 +16,49 @@
             <h2>Detalles del viaje</h2>
             <p><strong>Salida desde:</strong> {{getOrigen()}}</p>
             <p><strong>Destino:</strong> {{getDestino()}}</p>
-            <p><strong>Hora:</strong> {{viaje.fechaYHora.getHours()}}:{{viaje.fechaYHora.getMinutes()}}</p>
-            <p><strong>Descripción del coche:</strong> {{viaje.descripcionCoche}}</p>
+            <p><strong>Hora:</strong> {{viaje?.fechaYHora!.getHours()}}:{{viaje?.fechaYHora!.getMinutes()}}</p>
+            <p><strong>Descripción del coche:</strong> {{viaje?.descripcionCoche}}</p>
+            <p><strong>Precio:</strong> {{viaje?.precio}}</p>
         </div>
     </div>
 </div>
 
+<div class="container-fluid p-">
 
-<div class="container-fluid p-4">
-    <h3>Conductor</h3>
-    {{viaje.conductor.nombre}}
+
+    <div class="container">
+        <h3>Conductor</h3>
+
+        <app-viaje-conductor
+            [idUsuario]="viaje!.conductorId"
+        />
+    </div>
+
 </div>
 
-<div class="container-fluid p-4">
-    <h3>Pasajeros</h3>
 
-    <app-viaje-plaza-list
+<div class="container-fluid p-4">
+    <h3>Pasajeros ({{plazas.length}}/{{viaje?.maxPlazas}})</h3>
+
+    <div class="pb-4">
+        <app-viaje-plaza-list
         [plazaList]="plazas"
+        [hideButtons]="!isMyself()"
         (onPlazaDelete)="handlePlaza(false, $event, '')"
     />
-    @if(!isMyself()){
-        @if (plazas.length < viaje.maxPlazas) {
-            <p><a routerLink="{{'/viaje/' + viaje.id + '/solicitud'}}" routerLinkActive="false" ariaCurrentWhenActive="page">Solicitar plaza</a></p>
-        } @else {
-            <p>No quedan plazas disponibles para este viaje</p>
+    </div>
+
+    <div>
+        @if(!isMyself()){
+            @if (plazaAvailable()) {
+                <p><a class="btn btn-primary" href="{{'/viaje/' + viaje!.id + '/solicitud'}}" ariaCurrentWhenActive="page">Solicitar plaza</a></p>
+            } @else {
+                <p>No quedan plazas disponibles para este viaje</p>
+            }
         }
-    }
+    </div>
+
+
 </div>
 
 @if(isMyself()){
@@ -50,13 +67,14 @@
 
         <app-viaje-plaza-list
             [plazaList]="solicitudes"
+            [hideButtons]="!plazaAvailable()"
             (onPlazaAccept)="handlePlaza(true, $event, '')"
             (onPlazaReject)="handlePlaza(false, $event, '')"
         />
     </div>
 
     <div class="container-fluid p-4">
-        <a class="btn btn-secondary" href="{{'/viaje/' + viaje.id + '/editar'}}">Editar viaje</a>
+        <a class="btn btn-secondary" href="{{'/viaje/' + viaje!.id + '/editar'}}">Editar viaje</a>
         <button class="btn btn-danger" (click)="deleteViaje()">Borrar viaje</button>
     </div>
 

@@ -3,8 +3,8 @@
     public class NucleoDTO
     {
         public int Id { get; set; }
-        public string Nombre { get; set; } = String.Empty;
-        public string Imagen { get; set; } = String.Empty;
-        public MunicipioDTO Municipio { get; set; }
+        public required string Nombre { get; set; }
+        public string? Imagen { get; set; }
+        public required MunicipioDTO Municipio { get; set; }
     }
 }

@@ -6,9 +6,8 @@ namespace webapi.DTOs
     public class CentroDTO
     {
         public int Id { get; set; }
-        public string Nombre { get; set; } = String.Empty;
-        public string Imagen { get; set; } = String.Empty;
-        [AllowNull]
-        public UniversidadDTO Universidad { get; set; }
+        public required string Nombre { get; set; }
+        public string? Imagen { get; set; }
+        public required UniversidadDTO Universidad { get; set; }
     }
 }

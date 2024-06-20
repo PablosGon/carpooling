@@ -8,15 +8,20 @@ import { FormsModule } from '@angular/forms';
 import { ValoracionService } from '../../../../services/valoracion.service';
 import { Valoracion } from '../../../../entity/valoracion';
 import { ViajeListComponent } from '../../../viajes/components/viaje-list/viaje-list.component';
+import { NgbRating } from '@ng-bootstrap/ng-bootstrap';
+import { environment } from '../../../../../environments/environment';
+import { ImagesDefault } from '../../../../shared/constants/images-default.constant';
 
 @Component({
   selector: 'app-usuario',
   standalone: true,
-  imports: [RouterLink, RouterLinkActive, FormsModule, ViajeListComponent],
+  imports: [RouterLink, RouterLinkActive, FormsModule, ViajeListComponent, NgbRating],
   templateUrl: './usuario.component.html',
   styleUrl: './usuario.component.css'
 })
 export class UsuarioComponent {
+
+  readonly imagesDefault = ImagesDefault
 
   private route = inject(ActivatedRoute);
 
@@ -25,31 +30,14 @@ export class UsuarioComponent {
   id = parseInt(this.route.snapshot.paramMap.get('id')!);
   userId = sessionStorage.getItem('usuarioId')
 
-  usuario:Usuario = {
-    id: 0,
-    nombre: '',
-    correo: '',
-    telefono: '',
-    grado: '',
-    imagen: '',
-    universidad: {
-      id: 0,
-      nombre: '',
-      imagen: ''
-    },
-    municipio: {
-      id: 0,
-      nombre: '',
-      imagen: ''
-    },
-    valoracionMedia: 0,
-    numValoraciones: 0,
-    notificacionesNoLeidas: 0,
-    pass: '',
-    isAdmin: false
-  }
+  valoracionError : boolean = false
+
+  usuario?:Usuario
 
   viajes:Viaje[] = [];
+
+  plazas:Viaje[] = []
+
   valoracion: Valoracion = {
     id: 0,
     estrellas: 0,
@@ -66,11 +54,14 @@ export class UsuarioComponent {
     this.usuarioService.getUsuario(this.id!).subscribe(data => {
       this.usuario = data
     });
-    this.viajeService.getViajes({}).subscribe(data => {
+    this.viajeService.getViajes({}, true, this.id).subscribe(data => {
       data.forEach((viaje) => {
-        if(viaje.conductor.id == this.id){
-          this.viajes.push(viaje);
-        }
+        this.viajes.push(viaje)
+      })
+    })
+    this.viajeService.getViajes({}, true, undefined, this.id).subscribe(data => {
+      data.forEach((viaje) => {
+        this.plazas.push(viaje)
       })
     })
     if(this.userId){
@@ -87,25 +78,44 @@ export class UsuarioComponent {
 
   isMyself(){
     if(this.userId){
-      return parseInt(this.userId) == this.usuario.id
+      return parseInt(this.userId) == this.usuario!.id
     } else {
       return false
     }
   }
 
   updateValoracion(){
-    this.valoracionService.updateValoracion(this.id, this.valoracion).subscribe(data => window.location.reload());
+    if(this.valoracion.estrellas < 0 || this.valoracion.estrellas > 5){
+      this.valoracionError = true
+    } else {
+      this.valoracionService.updateValoracion(this.valoracion.id, this.valoracion).subscribe(data => window.location.reload());
+    }
   }
 
   createValoracion(){
-    this.valoracion.conductorId = this.id
-    this.valoracion.pasajeroId = parseInt(this.userId!)
-    console.log(this.valoracion)
-    this.valoracionService.postValoracion(this.valoracion).subscribe(data => window.location.reload());
+    if(this.valoracion.estrellas < 0 || this.valoracion.estrellas > 5){
+      this.valoracionError = true
+    } else {
+      this.valoracion.conductorId = this.id
+      this.valoracion.pasajeroId = parseInt(this.userId!)
+      this.valoracionService.postValoracion(this.valoracion).subscribe(data => window.location.reload());
+    }
   }
 
   deleteValoracion(){
-    this.valoracionService.deleteValoracion(this.id).subscribe(data => window.location.reload())
+    this.valoracionService.deleteValoracion(this.valoracion.id).subscribe(data => window.location.reload())
+  }
+
+  usuarioImg(){
+
+    let url = environment.BASE_CLOUDINARY_IMAGE_URL;
+
+    if(this.usuario?.imagen) url += this.usuario.imagen
+    else url += this.imagesDefault.usuarioDefault
+
+    url += '.jpg'
+
+    return url
   }
 
 }

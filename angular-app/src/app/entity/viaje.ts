@@ -13,5 +13,5 @@ export interface Viaje {
     precio: number,
     centro: Centro,
     nucleo: Nucleo,
-    conductor: Usuario
+    conductorId: number
 }

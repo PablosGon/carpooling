@@ -1,3 +1,9 @@
-<app-form
-    (onSubmit)="newViaje($event)"
-/>
+<div class="container">
+    <h1>Crear un viaje</h1>
+
+    <app-form
+        [submitButtonText]="'Crear'"
+        (onSubmit)="newViaje($event)"
+    />
+</div>
+
