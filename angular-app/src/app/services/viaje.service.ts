@@ -29,7 +29,7 @@ export class ViajeService {
     if(filter.municipioId) params = params.set('municipioId', filter.municipioId);
     if(filter.nucleoId) params = params.set('nucleoId', filter.nucleoId);
     if(filter.isVuelta != null) params = params.set('isVuelta', filter.isVuelta);
-    if(filter.fechaYHora) params = params.set('fechaHora', filter.fechaYHora.toISOString());
+    if(filter.fechaYHora) params = params.set('fechaHora', filter.fechaYHora.toString());
     if(onlyUpcoming) params = params.set('onlyUpcoming', onlyUpcoming);
     if(conductorId) params = params.set('conductorId', conductorId);
     if(pasajeroId) params = params.set('pasajeroId', pasajeroId);

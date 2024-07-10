@@ -75,7 +75,7 @@ export class UsuarioFormComponent {
   }
 
   async submitUsuario(){
-    if(this.usuario.correo && this.usuario.pass && this.usuario.telefono && this.usuario.nombre){
+    if(this.usuario.correo && (this.usuario.pass || this.usuarioId) && this.usuario.telefono && this.usuario.nombre){
       if(this.file){
         var f = await this.getBase64(this.file)
         this.usuario.imagen = f
