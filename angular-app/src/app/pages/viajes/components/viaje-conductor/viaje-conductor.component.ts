@@ -14,6 +14,7 @@ import { environment } from '../../../../../environments/environment';
 export class ViajeConductorComponent {
 
   @Input() idUsuario? : number
+  @Input() comentarios? : string
 
   readonly imagesDefault = ImagesDefault
 

@@ -8,6 +8,9 @@
                 <h4>{{usuario?.nombre}}</h4>
                 <p><strong>Correo:</strong> {{usuario?.correo}}</p>
                 <p><strong>Teléfono:</strong> {{usuario?.telefono}}</p>
+                @if (comentarios) {
+                    <p><strong>Comentarios:</strong> {{comentarios}}</p>
+                }
                 <a class="btn btn-secondary" href="{{'/usuario/' + usuario?.id}}">Ver perfil</a>
             </div>
         </div>
